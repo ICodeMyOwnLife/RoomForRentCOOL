@@ -3,7 +3,7 @@
     public interface IBuildingDataAccessSync
     {
         #region Abstract
-        void DeleteBuilding(Building building);
+        void DeleteBuilding(int buildingId);
         Building GetBuilding(int id);
         Building[] GetBuildings();
         Building SaveBuilding(Building building);

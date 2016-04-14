@@ -3,7 +3,7 @@
     public interface IOwnerDataAccessSync
     {
         #region Abstract
-        void DeleteOwner(Owner owner);
+        void DeleteOwner(int ownerId);
         Owner GetOwner(int id);
         Owner[] GetOwners();
         Owner SaveOwner(Owner owner);

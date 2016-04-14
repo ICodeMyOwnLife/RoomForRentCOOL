@@ -10,6 +10,8 @@ namespace RoomForRentXmlDataAccess
         #region Methods
         public static T Load<T>(string xmlFile)
         {
+            if (!File.Exists(xmlFile)) return default(T);
+
             using (var reader = new StreamReader(xmlFile))
             {
                 var xmlSer = CreateSerializer(typeof(T));
@@ -19,6 +21,9 @@ namespace RoomForRentXmlDataAccess
 
         public static void Save<T>(T data, string xmlFile)
         {
+            var dir = Path.GetDirectoryName(xmlFile);
+            if (dir != null && !Directory.Exists(dir)) Directory.CreateDirectory(dir);
+
             using (var writer = new StreamWriter(xmlFile))
             {
                 var xmlSer = CreateSerializer(typeof(T));

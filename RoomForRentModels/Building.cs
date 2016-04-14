@@ -11,14 +11,14 @@ namespace RoomForRentModels
     {
         #region Fields
         [NonSerialized]
-        private ICollection<Apartment> _apartments;
+        private ICollection<Apartment> _apartments = new List<Apartment>();
 
-        private string _district;
-        private string _name;
-        private int _number;
-        private string _province;
-        private string _street;
-        private string _ward;
+        private string _district = "1";
+        private string _name = "My Building";
+        private int _number = 123;
+        private string _province = "My Province";
+        private string _street = "My Street";
+        private string _ward = "My Ward";
         #endregion
 
 

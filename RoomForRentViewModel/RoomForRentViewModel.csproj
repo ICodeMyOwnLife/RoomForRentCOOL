@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{91D74AEE-7E3F-49DC-9DD7-5536B2A26873}</ProjectGuid>
+    <ProjectGuid>{DEDC5A40-58B2-4466-9C56-D6E2A863D64D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RoomForRentXmlDataAccess</RootNamespace>
-    <AssemblyName>RoomForRentXmlDataAccess</AssemblyName>
+    <RootNamespace>RoomForRentViewModel</RootNamespace>
+    <AssemblyName>RoomForRentViewModel</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,19 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RoomForRentXmlConfig.cs" />
-    <Compile Include="RoomForRentXmlContext.cs" />
+    <Compile Include="BuildingsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XmlDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Model\CB.Model.Common\CB.Model.Common.csproj">
-      <Project>{33a5df99-1312-4023-a6ef-eabb9848f5a6}</Project>
+      <Project>{33A5DF99-1312-4023-A6EF-EABB9848F5A6}</Project>
       <Name>CB.Model.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\RoomForRentModels\RoomForRentModels.csproj">
-      <Project>{36A10AD9-3B98-4F37-849D-D717FC9BCF02}</Project>
+      <Project>{36a10ad9-3b98-4f37-849d-d717fc9bcf02}</Project>
       <Name>RoomForRentModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoomForRentXmlDataAccess\RoomForRentXmlDataAccess.csproj">
+      <Project>{91d74aee-7e3f-49dc-9dd7-5536b2a26873}</Project>
+      <Name>RoomForRentXmlDataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

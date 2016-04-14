@@ -26,7 +26,7 @@ namespace RoomForRentModels
 
         private int _ownerId;
         private decimal _price;
-        private DateTime _updatedOn;
+        private DateTime _updatedOn = DateTime.Now;
         #endregion
 
 
