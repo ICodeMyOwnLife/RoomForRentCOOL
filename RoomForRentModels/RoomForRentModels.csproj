@@ -43,6 +43,15 @@
     <Compile Include="Building.cs" />
     <Compile Include="Apartment.cs" />
     <Compile Include="Email.cs" />
+    <Compile Include="IAppartmentDataAccess.cs" />
+    <Compile Include="IAppartmentDataAccessAsync.cs" />
+    <Compile Include="IAppartmentDataAccessSync.cs" />
+    <Compile Include="IBuildingDataAccess.cs" />
+    <Compile Include="IBuildingDataAccessAsync.cs" />
+    <Compile Include="IBuildingDataAccessSync.cs" />
+    <Compile Include="IOwnerDataAccess.cs" />
+    <Compile Include="IOwnerDataAccessAsync.cs" />
+    <Compile Include="IOwnerDataAccessSync.cs" />
     <Compile Include="Owner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Telephone.cs" />
