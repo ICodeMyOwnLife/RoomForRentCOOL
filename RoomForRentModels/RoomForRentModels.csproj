@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Building.cs" />
     <Compile Include="Apartment.cs" />
+    <Compile Include="Building.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="IAppartmentDataAccess.cs" />
     <Compile Include="IAppartmentDataAccessAsync.cs" />
@@ -57,8 +57,8 @@
     <Compile Include="Telephone.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Libraries\Dot Net\CB.Model\CB.Model.Common\CB.Model.Common.csproj">
-      <Project>{33A5DF99-1312-4023-A6EF-EABB9848F5A6}</Project>
+    <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Model\CB.Model.Common\CB.Model.Common.csproj">
+      <Project>{33a5df99-1312-4023-a6ef-eabb9848f5a6}</Project>
       <Name>CB.Model.Common</Name>
     </ProjectReference>
   </ItemGroup>
