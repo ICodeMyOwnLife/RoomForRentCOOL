@@ -6,11 +6,10 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Email: ObservableObject
+    public class Email: IdModelBase
     {
         #region Fields
         private string _address;
-        private int? _id;
 
         [NonSerialized]
         private Owner _owner;
@@ -26,12 +25,6 @@ namespace RoomForRentModels
             set { SetProperty(ref _address, value); }
         }
 
-        public int? Id
-        {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
-        }
-
         [XmlIgnore]
         public Owner Owner
         {
@@ -43,6 +36,19 @@ namespace RoomForRentModels
         {
             get { return _ownerId; }
             set { SetProperty(ref _ownerId, value); }
+        }
+        #endregion
+
+
+        #region Override
+        public override void CopyFrom(IdModelBase obj, bool copyId)
+        {
+            var email = obj as Email;
+            if (email == null) return;
+            Address = email.Address;
+            Owner = email.Owner;
+            OwnerId = email.OwnerId;
+            base.CopyFrom(obj, copyId);
         }
         #endregion
     }

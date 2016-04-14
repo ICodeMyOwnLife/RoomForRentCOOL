@@ -7,14 +7,13 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Building: ObservableObject
+    public class Building: IdModelBase
     {
         #region Fields
         [NonSerialized]
         private ICollection<Apartment> _apartments;
 
         private string _district;
-        private int? _id;
         private string _name;
         private int _number;
         private string _province;
@@ -35,12 +34,6 @@ namespace RoomForRentModels
         {
             get { return _district; }
             set { SetProperty(ref _district, value); }
-        }
-
-        public int? Id
-        {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
         }
 
         public string Name
@@ -71,6 +64,23 @@ namespace RoomForRentModels
         {
             get { return _ward; }
             set { SetProperty(ref _ward, value); }
+        }
+        #endregion
+
+
+        #region Override
+        public override void CopyFrom(IdModelBase obj, bool copyId)
+        {
+            var building = obj as Building;
+            if (building == null) return;
+            Apartments = building.Apartments;
+            District = building.District;
+            Name = building.Name;
+            Number = building.Number;
+            Province = building.Province;
+            Street = building.Street;
+            Ward = building.Ward;
+            base.CopyFrom(obj, copyId);
         }
         #endregion
     }

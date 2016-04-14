@@ -10,8 +10,9 @@ namespace RoomForRentXmlDataAccess
         {
             RoomForRentXmlContext.Load();
         }
-        public void DeleteApartment(Apartment apartment)
+        public void DeleteApartment(int apartmentId)
         {
+            
             RoomForRentXmlContext.Apartments.Remove(apartment);
             RoomForRentXmlContext.SaveApartments();
         }

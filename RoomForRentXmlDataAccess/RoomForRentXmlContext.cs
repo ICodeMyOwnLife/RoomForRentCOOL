@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CB.Model.Common;
 using RoomForRentModels;
 
 
 namespace RoomForRentXmlDataAccess
 {
-    public static class RoomForRentXmlContext
+    public class RoomForRentXmlContext: IAppartmentDataAccessSync
     {
         #region Fields
         private static IList<Apartment> _apartments;
@@ -51,7 +52,46 @@ namespace RoomForRentXmlDataAccess
 
 
         #region Methods
-        public static void Load()
+        public static Telephone AddTelephone(Telephone telephone)
+        {
+            telephone.Id = Telephones.Max(t => t.Id.Value) + 1;
+            Telephones.Add(telephone);
+            SaveTelephones();
+            return telephone;
+        }
+
+        public void DeleteApartment(int apartmentId)
+        {
+            var apartment = GetApartment(apartmentId);
+            if (apartment != null)
+            {
+                Apartments.Remove(apartment);
+                SaveApartments();
+            }
+        }
+
+        public Apartment GetApartment(int id)
+        {
+            return Apartments?.FirstOrDefault(a => a.Id.HasValue && a.Id.Value == id);
+        }
+
+        public Apartment[] GetApartments()
+        {
+            return Apartments?.ToArray();
+        }
+
+        public Apartment[] GetApartments(int buildingId)
+        {
+            var building = GetBuilding(buildingId);
+            return building?.Apartments?.ToArray();
+        }
+
+        public Building GetBuilding(int id)
+        {
+            return Buildings?.FirstOrDefault(b => b.Id.HasValue && b.Id.Value == id);
+        }
+
+        public void Load()
         {
             if (!_isLoaded)
             {
@@ -65,43 +105,41 @@ namespace RoomForRentXmlDataAccess
             }
         }
 
-        public static void Save()
+        public void Save()
         {
-            SaveTelephones();
-            SaveEmails();
-            SaveBuildings();
-            SaveOwners();
-            SaveApartments();
+            Save(Apartments, nameof(Apartments));
+            Save(Buildings, nameof(Buildings));
+            Save(Emails, nameof(Emails));
+            Save(Owners, nameof(Owners));
+            Save(Telephones, nameof(Telephones));
         }
 
-        public static void SaveApartments()
+        public Apartment SaveApartment(Apartment apartment)
         {
-            SaveItems(Apartments, RoomForRentXmlConfig.GetFilePath(nameof(Apartments)));
+            return Save(apartment, Apartments, nameof(Apartments));
         }
 
-        public static void SaveBuildings()
+        public Telephone SaveTelephone(Telephone telephone)
         {
-            SaveItems(Buildings, RoomForRentXmlConfig.GetFilePath(nameof(Buildings)));
-        }
-
-        public static void SaveEmails()
-        {
-            SaveItems(Emails, RoomForRentXmlConfig.GetFilePath(nameof(Emails)));
-        }
-
-        public static void SaveOwners()
-        {
-            SaveItems(Owners, RoomForRentXmlConfig.GetFilePath(nameof(Owners)));
-        }
-
-        public static void SaveTelephones()
-        {
-            SaveItems(Telephones, RoomForRentXmlConfig.GetFilePath(nameof(Telephones)));
+            return Save(telephone, Telephones, nameof(Telephones));
         }
         #endregion
 
 
         #region Implementation
+        private static TModel Get<TModel>(ICollection<TModel> models, int id) where TModel: IdModelBase
+        {
+            return models?.FirstOrDefault(m => m.Id.HasValue && m.Id.Value == id);
+        }
+
+        private static int GetNextId<TModel>(IEnumerable<TModel> models) where TModel: IdModelBase
+        {
+            var idModels = models.Where(m => m.Id.HasValue).ToArray();
+
+            // ReSharper disable once PossibleInvalidOperationException
+            return idModels.Any() ? idModels.Max(m => m.Id.Value) + 1 : 1;
+        }
+
         private static void LoadApartments()
         {
             LoadItems(ref _apartments, RoomForRentXmlConfig.GetFilePath(nameof(Apartments)));
@@ -132,9 +170,58 @@ namespace RoomForRentXmlDataAccess
             LoadItems(ref _telephones, RoomForRentXmlConfig.GetFilePath(nameof(Telephones)));
         }
 
+        private static TModel Save<TModel>(TModel model, ICollection<TModel> models, string nameOfModelCollection)
+            where TModel: IdModelBase
+        {
+            var current = model.Id.HasValue ? Get(models, model.Id.Value) : null;
+
+            // If not existing
+            if (current == null)
+            {
+                model.Id = GetNextId(models);
+                models.Add(model);
+                Save(models, nameOfModelCollection);
+                return model;
+            }
+
+            current.CopyFrom(model, false);
+            Save(models, nameOfModelCollection);
+            return current;
+        }
+
+        private static void Save<TModel>(IEnumerable<TModel> models, string nameOfModelCollection)
+        {
+            XmlDataAccess.Save(models.ToArray(), RoomForRentXmlConfig.GetFilePath(nameOfModelCollection));
+        }
+
+        private static void SaveApartments()
+        {
+            SaveItems(Apartments, RoomForRentXmlConfig.GetFilePath(nameof(Apartments)));
+        }
+
+        private static void SaveBuildings()
+        {
+            SaveItems(Buildings, RoomForRentXmlConfig.GetFilePath(nameof(Buildings)));
+        }
+
+        private static void SaveEmails()
+        {
+            SaveItems(Emails, RoomForRentXmlConfig.GetFilePath(nameof(Emails)));
+        }
+
         private static void SaveItems<TItem>(IEnumerable<TItem> telephones, string filePath)
         {
             XmlDataAccess.Save(telephones.ToArray(), filePath);
+        }
+
+        private static void SaveOwners()
+        {
+            SaveItems(Owners, RoomForRentXmlConfig.GetFilePath(nameof(Owners)));
+        }
+
+        private static void SaveTelephones()
+        {
+            SaveItems(Telephones, RoomForRentXmlConfig.GetFilePath(nameof(Telephones)));
         }
 
         private static void SetRelationalProperties()

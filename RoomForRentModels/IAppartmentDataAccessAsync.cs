@@ -6,7 +6,7 @@ namespace RoomForRentModels
     public interface IAppartmentDataAccessAsync
     {
         #region Abstract
-        Task DeleteApartmentAsync(Apartment apartment);
+        Task DeleteApartmentAsync(int apartmentId);
         Task<Apartment> GetApartmentAsync(int id);
         Task<Apartment[]> GetApartmentsAsync();
         Task<Apartment[]> GetApartmentsAsync(int buildingId);

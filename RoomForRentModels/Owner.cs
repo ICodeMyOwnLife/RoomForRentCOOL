@@ -7,7 +7,7 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Owner: ObservableObject
+    public class Owner: IdModelBase
     {
         #region Fields
         [NonSerialized]
@@ -16,7 +16,6 @@ namespace RoomForRentModels
         [NonSerialized]
         private ICollection<Email> _emails;
 
-        private int? _id;
         private string _name;
 
         [NonSerialized]
@@ -39,12 +38,6 @@ namespace RoomForRentModels
             set { SetProperty(ref _emails, value); }
         }
 
-        public int? Id
-        {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
-        }
-
         public string Name
         {
             get { return _name; }
@@ -56,6 +49,20 @@ namespace RoomForRentModels
         {
             get { return _telephones; }
             set { SetProperty(ref _telephones, value); }
+        }
+        #endregion
+
+
+        #region Override
+        public override void CopyFrom(IdModelBase obj, bool copyId)
+        {
+            var owner = obj as Owner;
+            if (owner == null) return;
+            Apartments = owner.Apartments;
+            Emails = owner.Emails;
+            Name = owner.Name;
+            Telephones = owner.Telephones;
+            base.CopyFrom(obj, copyId);
         }
         #endregion
     }
