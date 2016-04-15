@@ -9,6 +9,7 @@ namespace RoomForRentModels
     public class Apartment: IdModelBase
     {
         #region Fields
+        private decimal _area;
         private DateTime _availableFrom;
         private int _bedRoomCount;
 
@@ -31,6 +32,12 @@ namespace RoomForRentModels
 
 
         #region  Properties & Indexers
+        public decimal Area
+        {
+            get { return _area; }
+            set { SetProperty(ref _area, value); }
+        }
+
         public DateTime AvailableFrom
         {
             get { return _availableFrom; }
@@ -73,7 +80,7 @@ namespace RoomForRentModels
             get { return _hasFurniture; }
             set { if (SetProperty(ref _hasFurniture, value)) SetUpdatedOn(); }
         }
-        
+
         public string Note
         {
             get { return _note; }
@@ -107,11 +114,11 @@ namespace RoomForRentModels
         #endregion
 
 
-        #region Methods
+        #region Override
         public override void CopyFrom(IdModelBase obj, bool copyId)
         {
             var apartment = obj as Apartment;
-            if(apartment==null) return;
+            if (apartment == null) return;
             AvailableFrom = apartment.AvailableFrom;
             BedRoomCount = apartment.BedRoomCount;
             Building = apartment.Building;

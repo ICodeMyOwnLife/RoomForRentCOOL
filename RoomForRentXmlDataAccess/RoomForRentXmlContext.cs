@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Windows;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -13,6 +16,7 @@ namespace RoomForRentXmlDataAccess
         private static IList<Apartment> _apartments;
         private static IList<Building> _buildings;
         private static IList<Email> _emails;
+        private static IList<ModelId> _ids;
         private static bool _isLoaded;
         private static IList<Owner> _owners;
         private static IList<Telephone> _telephones;
@@ -38,6 +42,12 @@ namespace RoomForRentXmlDataAccess
             set { _emails = value; }
         }
 
+        private static IList<ModelId> Ids
+        {
+            get { return _ids; }
+            set { _ids = value; }
+        }
+
         public static IList<Owner> Owners
         {
             get { return _owners; }
@@ -55,17 +65,23 @@ namespace RoomForRentXmlDataAccess
         #region Methods
         public void DeleteApartment(int apartmentId)
         {
-            Delete(apartmentId, Apartments, nameof(Apartments));
+            Delete(apartmentId, Apartments, nameof(Apartments), null);
         }
 
         public void DeleteBuilding(int buildingId)
         {
-            Delete(buildingId, Buildings, nameof(Buildings));
+            if (!Delete(buildingId, Buildings, nameof(Buildings), null, building => building.Apartments))
+                MessageBox.Show("Cannot delete this building.");
         }
 
         public void DeleteOwner(int ownerId)
         {
-            Delete(ownerId, Owners, nameof(Owners));
+            if (!Delete(ownerId, Owners, nameof(Owners), owner =>
+            {
+                Delete(owner.Emails, Emails, nameof(Emails));
+                Delete(owner.Telephones, Telephones, nameof(Telephones));
+            }, owner => owner.Apartments))
+                MessageBox.Show("Cannot delete this owner.");
         }
 
         public Apartment GetApartment(int id)
@@ -113,6 +129,7 @@ namespace RoomForRentXmlDataAccess
                 Load(ref _emails, nameof(Emails));
                 Load(ref _owners, nameof(Owners));
                 Load(ref _telephones, nameof(Telephones));
+                Load(ref _ids, nameof(Ids));
                 SetRelationalProperties();
                 _isLoaded = true;
             }
@@ -125,6 +142,7 @@ namespace RoomForRentXmlDataAccess
             Save(Emails, nameof(Emails));
             Save(Owners, nameof(Owners));
             Save(Telephones, nameof(Telephones));
+            Save(Ids, nameof(Ids));
         }
 
         public Apartment SaveApartment(Apartment apartment)
@@ -150,14 +168,51 @@ namespace RoomForRentXmlDataAccess
 
 
         #region Implementation
-        private static void Delete<TModel>(int id, ICollection<TModel> models, string nameofModelCollection)
+        /*private static void Delete<TModel>(int id, ICollection<TModel> models, string nameOfModelCollection)
             where TModel: IdModelBase
         {
             var model = Get(models, id);
             if (model == null) return;
 
             models.Remove(model);
-            Save(models, nameofModelCollection);
+            Save(models, nameOfModelCollection);
+        }*/
+
+        /*private static void Delete<TModel>(int id, ICollection<TModel> models, string nameOfModelCollection,
+            Func<TModel, bool> deleteCascadedAction = null)
+            where TModel: IdModelBase
+        {
+            var model = Get(models, id);
+            if (model == null || deleteCascadedAction?.Invoke(model) != true) return;
+            models.Remove(model);
+            Save(models, nameOfModelCollection);
+        }*/
+
+        private static bool Delete<TModel>(int id, ICollection<TModel> models, string nameOfModelCollection,
+            Action<TModel> success = null,
+            params Func<TModel, IEnumerable>[] dependenceCollections)
+            where TModel: IdModelBase
+        {
+            var model = Get(models, id);
+            if (model == null ||
+                dependenceCollections.Any(dependenceCollection => dependenceCollection(model).Cast<object>().Any()))
+            {
+                return false;
+            }
+            models.Remove(model);
+            Save(models, nameOfModelCollection);
+            success?.Invoke(model);
+            return true;
+        }
+
+        private static void Delete<TModel>(IEnumerable<TModel> deletedModels, ICollection<TModel> models,
+            string nameOfModelCollection)
+        {
+            foreach (var model in deletedModels)
+            {
+                models.Remove(model);
+            }
+            Save(models, nameOfModelCollection);
         }
 
         private static TModel Get<TModel>(IEnumerable<TModel> models, int id) where TModel: IdModelBase
@@ -165,12 +220,28 @@ namespace RoomForRentXmlDataAccess
             return models?.FirstOrDefault(m => m.Id.HasValue && m.Id.Value == id);
         }
 
-        private static int GetNextId<TModel>(IEnumerable<TModel> models) where TModel: IdModelBase
+        private static int GetNextId(string modelName)
         {
-            var idModels = models.Where(m => m.Id.HasValue).ToArray();
+            /*var idModels = models.Where(m => m.Id.HasValue).ToArray();
 
             // ReSharper disable once PossibleInvalidOperationException
-            return idModels.Any() ? idModels.Max(m => m.Id.Value) + 1 : 1;
+            return idModels.Any() ? idModels.Max(m => m.Id.Value) + 1 : 1;*/
+
+            var modelId = Ids?.FirstOrDefault(mi => mi.ModelName == modelName);
+            int id;
+            if (modelId == null)
+            {
+                id = 1;
+                modelId = new ModelId { ModelName = modelName, Id = 1 };
+                Ids?.Add(modelId);
+            }
+            else
+            {
+                id = modelId.Id;
+            }
+            modelId.Id += 1;
+            Save(Ids, nameof(Ids));
+            return id;
         }
 
         // ReSharper disable once RedundantAssignment
@@ -188,7 +259,7 @@ namespace RoomForRentXmlDataAccess
             // If not existing
             if (current == null)
             {
-                model.Id = GetNextId(models);
+                model.Id = GetNextId(nameOfModelCollection);
                 models.Add(model);
                 Save(models, nameOfModelCollection);
                 return model;
@@ -202,6 +273,7 @@ namespace RoomForRentXmlDataAccess
         private static void Save<TModel>(IEnumerable<TModel> models, string nameOfModelCollection)
         {
             XmlDataAccess.Save(models.ToArray(), RoomForRentXmlConfig.GetFilePath(nameOfModelCollection));
+            SetRelationalProperties();
         }
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]

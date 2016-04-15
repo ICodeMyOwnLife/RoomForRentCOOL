@@ -6,9 +6,9 @@ namespace RoomForRentXmlDataAccess
     internal class RoomForRentXmlConfig
     {
         #region Methods
-        public static string GetFilePath(string name)
+        public static string GetFilePath(string modelName)
         {
-            return ConfigurationManager.AppSettings[name];
+            return ConfigurationManager.AppSettings[modelName];
         }
         #endregion
     }

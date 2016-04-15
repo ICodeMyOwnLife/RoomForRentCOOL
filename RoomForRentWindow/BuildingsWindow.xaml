@@ -4,11 +4,57 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
+        xmlns:mdl="clr-namespace:RoomForRentModels;assembly=RoomForRentModels"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="BuildingsWindow" Height="480" Width="640">
 
     <Window.Resources>
         <vmd:BuildingsViewModel x:Key="ViewModel" />
+        <DataTemplate x:Key="BuildingNameCellTemplate" DataType="mdl:Building">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingNameCellEditingTemplate" DataType="mdl:Building">
+            <TextBox Text="{Binding Name}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingNumberCellTemplate" DataType="mdl:Building">
+            <TextBlock Text="{Binding Number}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingNumberCellEditingTemplate" DataType="mdl:Building">
+            <xctk:IntegerUpDown Value="{Binding Number}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingStreetCellTemplate" DataType="mdl:Building">
+            <TextBlock Text="{Binding Street}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingStreetCellEditingTemplate" DataType="mdl:Building">
+            <TextBox Text="{Binding Street}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingWardCellTemplate" DataType="mdl:Building">
+            <TextBlock Text="{Binding Ward}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingWardCellEditingTemplate" DataType="mdl:Building">
+            <TextBox Text="{Binding Ward}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingDistrictCellTemplate" DataType="mdl:Building">
+            <TextBlock Text="{Binding District}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingDistrictCellEditingTemplate" DataType="mdl:Building">
+            <TextBox Text="{Binding District}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingProvinceCellTemplate" DataType="mdl:Building">
+            <TextBlock Text="{Binding Province}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingProvinceCellEditingTemplate" DataType="mdl:Building">
+            <TextBox Text="{Binding Province}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingSaveCellTemplate">
+            <Button Content="Save" Command="{Binding Source={StaticResource ViewModel}, Path=SaveBuildingCommand}"
+                    CommandParameter="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Key="BuildingDeleteCellTemplate">
+            <Button Content="Delete" Command="{Binding Source={StaticResource ViewModel}, Path=DeleteBuildingCommand}"
+                    CommandParameter="{Binding}" />
+        </DataTemplate>
     </Window.Resources>
 
     <Grid DataContext="{StaticResource ViewModel}">
@@ -18,7 +64,32 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" ItemsSource="{Binding Buildings}" />
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Buildings}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Name"
+                                        CellTemplate="{StaticResource BuildingNameCellTemplate}"
+                                        CellEditingTemplate="{StaticResource BuildingNameCellEditingTemplate}" />
+                <DataGridTemplateColumn Header="Number"
+                                        CellTemplate="{StaticResource BuildingNumberCellTemplate}"
+                                        CellEditingTemplate="{StaticResource BuildingNumberCellEditingTemplate}" />
+                <DataGridTemplateColumn Header="Street"
+                                        CellTemplate="{StaticResource BuildingStreetCellTemplate}"
+                                        CellEditingTemplate="{StaticResource BuildingStreetCellEditingTemplate}" />
+                <DataGridTemplateColumn Header="Ward"
+                                        CellTemplate="{StaticResource BuildingWardCellEditingTemplate}"
+                                        CellEditingTemplate="{StaticResource BuildingWardCellEditingTemplate}" />
+                <DataGridTemplateColumn Header="District"
+                                        CellTemplate="{StaticResource BuildingDistrictCellTemplate}"
+                                        CellEditingTemplate="{StaticResource BuildingDistrictCellEditingTemplate}" />
+                <DataGridTemplateColumn Header="Province"
+                                        CellTemplate="{StaticResource BuildingProvinceCellTemplate}"
+                                        CellEditingTemplate="{StaticResource BuildingProvinceCellEditingTemplate}" />
+                <DataGridTemplateColumn Header="Save"
+                                        CellTemplate="{StaticResource BuildingSaveCellTemplate}" />
+                <DataGridTemplateColumn Header="Delete"
+                                        CellTemplate="{StaticResource BuildingDeleteCellTemplate}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
         <Grid Grid.Row="1" DataContext="{Binding Path=NewBuilding}">
             <Grid.RowDefinitions>
