@@ -54,7 +54,13 @@ namespace RoomForRentModels
         public Building Building
         {
             get { return _building; }
-            set { if (SetProperty(ref _building, value)) SetUpdatedOn(); }
+            set {
+                if (SetProperty(ref _building, value))
+                {
+                    if (value.Id != null) BuildingId = value.Id.Value;
+                    SetUpdatedOn();
+                }
+            }
         }
 
         public int BuildingId
@@ -91,7 +97,13 @@ namespace RoomForRentModels
         public Owner Owner
         {
             get { return _owner; }
-            set { if (SetProperty(ref _owner, value)) SetUpdatedOn(); }
+            set {
+                if (SetProperty(ref _owner, value))
+                {
+                    if (value.Id != null) OwnerId = value.Id.Value;
+                    SetUpdatedOn();
+                }
+            }
         }
 
         public int OwnerId

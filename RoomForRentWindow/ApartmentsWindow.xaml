@@ -1,0 +1,78 @@
+﻿<Window x:Class="RoomForRentWindow.ApartmentsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="ApartmentsWindow" Height="600" Width="800">
+
+    <Window.Resources>
+        <vmd:ApartmentsViewModel x:Key="ViewModel" />
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource ViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Apartments}" />
+        <Grid Grid.Row="1" DataContext="{Binding NewApartment}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0">Building:</TextBlock>
+            <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Building}"
+                      ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Buildings}"
+                      DisplayMemberPath="Name" />
+
+            <TextBlock Grid.Row="0" Grid.Column="2">Code:</TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Code}" />
+
+            <TextBlock Grid.Row="0" Grid.Column="4">Available from:</TextBlock>
+            <xctk:DateTimePicker Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3" Value="{Binding AvailableFrom}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="2">Area:</TextBlock>
+            <xctk:DecimalUpDown Grid.Row="1" Grid.Column="3" Value="{Binding Area}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0">Owner:</TextBlock>
+            <ComboBox Grid.Row="1" Grid.Column="1" SelectedItem="{Binding Owner}"
+                      ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Owners}"
+                      DisplayMemberPath="Name" />
+            
+            <TextBlock Grid.Row="1" Grid.Column="4">Bed room count:</TextBlock>
+            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="5" Value="{Binding BedRoomCount}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="6">Has furniture:</TextBlock>
+            <CheckBox Grid.Row="1" Grid.Column="7" IsChecked="{Binding HasFurniture}" />
+            
+            <TextBlock Grid.Row="2" Grid.Column="0">Price:</TextBlock>
+            <xctk:DecimalUpDown Grid.Row="2" Grid.Column="1" Value="{Binding BedRoomCount}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="2">Commission:</TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="5" Text="{Binding Commission}" />
+
+            <TextBlock Grid.Row="3" Grid.Column="0">Note:</TextBlock>
+            <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7" Text="{Binding Note}" />
+        </Grid>
+        <Button Grid.Row="2" Content="Add New Apartment" Command="{Binding AddNewApartmentCommand}" />
+    </Grid>
+</Window>
