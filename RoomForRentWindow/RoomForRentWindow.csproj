@@ -102,6 +102,7 @@
     <Compile Include="BuildingsWindow.xaml.cs">
       <DependentUpon>BuildingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DaysColor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
