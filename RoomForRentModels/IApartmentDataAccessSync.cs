@@ -1,6 +1,6 @@
 ﻿namespace RoomForRentModels
 {
-    public interface IAppartmentDataAccessSync
+    public interface IApartmentDataAccessSync
     {
         #region Abstract
         void DeleteApartment(int apartmentId);

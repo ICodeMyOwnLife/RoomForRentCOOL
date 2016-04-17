@@ -10,7 +10,7 @@ using RoomForRentModels;
 
 namespace RoomForRentXmlDataAccess
 {
-    public class RoomForRentXmlContext: IAppartmentDataAccessSync, IBuildingDataAccessSync, IOwnerDataAccessSync
+    public class RoomForRentXmlContext: IApartmentDataAccessSync, IBuildingDataAccessSync, IOwnerDataAccessSync
     {
         #region Fields
         private static IList<Apartment> _apartments;

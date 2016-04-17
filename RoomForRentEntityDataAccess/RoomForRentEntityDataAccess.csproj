@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DEDC5A40-58B2-4466-9C56-D6E2A863D64D}</ProjectGuid>
+    <ProjectGuid>{753E4481-12BC-4B29-BDDE-A6C77A164530}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RoomForRentViewModel</RootNamespace>
-    <AssemblyName>RoomForRentViewModel</AssemblyName>
+    <RootNamespace>RoomForRentEntityDataAccess</RootNamespace>
+    <AssemblyName>RoomForRentEntityDataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,7 +30,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,34 +57,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApartmentsViewModel.cs" />
-    <Compile Include="BuildingsViewModel.cs" />
+    <Compile Include="ApartmentMap.cs" />
+    <Compile Include="BuildingMap.cs" />
+    <Compile Include="EmailMap.cs" />
+    <Compile Include="Migrations\201604170158014_CreateDatabase.cs" />
+    <Compile Include="Migrations\201604170158014_CreateDatabase.Designer.cs">
+      <DependentUpon>201604170158014_CreateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="OwnerMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Database\CB.Database.EntityFramework\CB.Database.EntityFramework.csproj">
-      <Project>{b6eab130-16b2-4b28-8ef3-041f14d60523}</Project>
-      <Name>CB.Database.EntityFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Model\CB.Model.Common\CB.Model.Common.csproj">
-      <Project>{33A5DF99-1312-4023-A6EF-EABB9848F5A6}</Project>
-      <Name>CB.Model.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RoomForRentEntityDataAccess\RoomForRentEntityDataAccess.csproj">
-      <Project>{753E4481-12BC-4B29-BDDE-A6C77A164530}</Project>
-      <Name>RoomForRentEntityDataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RoomForRentModels\RoomForRentModels.csproj">
-      <Project>{36a10ad9-3b98-4f37-849d-d717fc9bcf02}</Project>
-      <Name>RoomForRentModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RoomForRentXmlDataAccess\RoomForRentXmlDataAccess.csproj">
-      <Project>{91d74aee-7e3f-49dc-9dd7-5536b2a26873}</Project>
-      <Name>RoomForRentXmlDataAccess</Name>
-    </ProjectReference>
+    <Compile Include="RoomForRentDbInitializer.cs" />
+    <Compile Include="RoomForRentEntityDataContext.cs" />
+    <Compile Include="RoomForRentEntityContext.cs" />
+    <Compile Include="TelephoneMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Database\CB.Database.EntityFramework\CB.Database.EntityFramework.csproj">
+      <Project>{B6EAB130-16B2-4B28-8EF3-041F14D60523}</Project>
+      <Name>CB.Database.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Model\CB.Model.Common\CB.Model.Common.csproj">
+      <Project>{33a5df99-1312-4023-a6ef-eabb9848f5a6}</Project>
+      <Name>CB.Model.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoomForRentModels\RoomForRentModels.csproj">
+      <Project>{36A10AD9-3B98-4F37-849D-D717FC9BCF02}</Project>
+      <Name>RoomForRentModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604170158014_CreateDatabase.resx">
+      <DependentUpon>201604170158014_CreateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

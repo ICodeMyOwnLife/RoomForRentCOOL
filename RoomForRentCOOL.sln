@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentWindow", "RoomFo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentViewModel", "RoomForRentViewModel\RoomForRentViewModel.csproj", "{DEDC5A40-58B2-4466-9C56-D6E2A863D64D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentEntityDataAccess", "RoomForRentEntityDataAccess\RoomForRentEntityDataAccess.csproj", "{753E4481-12BC-4B29-BDDE-A6C77A164530}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CB.Database.EntityFramework", "..\..\..\Libraries\DotNet\CB.Database\CB.Database.EntityFramework\CB.Database.EntityFramework.csproj", "{B6EAB130-16B2-4B28-8EF3-041F14D60523}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{DEDC5A40-58B2-4466-9C56-D6E2A863D64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEDC5A40-58B2-4466-9C56-D6E2A863D64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEDC5A40-58B2-4466-9C56-D6E2A863D64D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{753E4481-12BC-4B29-BDDE-A6C77A164530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{753E4481-12BC-4B29-BDDE-A6C77A164530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{753E4481-12BC-4B29-BDDE-A6C77A164530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{753E4481-12BC-4B29-BDDE-A6C77A164530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

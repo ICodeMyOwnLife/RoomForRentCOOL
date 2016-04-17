@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using CB.Model.Common;
+using RoomForRentEntityDataAccess;
 using RoomForRentModels;
-using RoomForRentXmlDataAccess;
 
 
 namespace RoomForRentViewModel
@@ -24,8 +24,9 @@ namespace RoomForRentViewModel
         #region  Constructors & Destructor
         public BuildingsViewModel()
         {
-            var context = new RoomForRentXmlContext();
-            context.Load();
+            /*var context = new RoomForRentXmlContext();
+            context.Load();*/
+            var context = new RoomForRentEntityDataContext();
             _buildingDataAccess = context;
             Buildings = _buildingDataAccess.GetBuildings();
         }
@@ -58,14 +59,9 @@ namespace RoomForRentViewModel
         #region Methods
         public void AddNewBuilding()
         {
-            _buildingDataAccess.SaveBuilding(NewBuilding);
+            var b = _buildingDataAccess.SaveBuilding(NewBuilding);
             NewBuilding = new Building();
             ReloadBuildings();
-        }
-
-        private void ReloadBuildings()
-        {
-            Buildings = _buildingDataAccess.GetBuildings();
         }
 
         public void DeleteBuilding(Building building)
@@ -79,7 +75,15 @@ namespace RoomForRentViewModel
 
         public void SaveBuilding(Building building)
         {
-            _buildingDataAccess.SaveBuilding(building);
+            var b = _buildingDataAccess.SaveBuilding(building);
+        }
+        #endregion
+
+
+        #region Implementation
+        private void ReloadBuildings()
+        {
+            Buildings = _buildingDataAccess.GetBuildings();
         }
         #endregion
     }

@@ -76,7 +76,7 @@
                                         CellTemplate="{StaticResource BuildingStreetCellTemplate}"
                                         CellEditingTemplate="{StaticResource BuildingStreetCellEditingTemplate}" />
                 <DataGridTemplateColumn Header="Ward"
-                                        CellTemplate="{StaticResource BuildingWardCellEditingTemplate}"
+                                        CellTemplate="{StaticResource BuildingWardCellTemplate}"
                                         CellEditingTemplate="{StaticResource BuildingWardCellEditingTemplate}" />
                 <DataGridTemplateColumn Header="District"
                                         CellTemplate="{StaticResource BuildingDistrictCellTemplate}"

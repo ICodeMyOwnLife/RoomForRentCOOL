@@ -10,7 +10,7 @@ namespace RoomForRentViewModel
     {
         #region Fields
         private Apartment[] _apartments;
-        private readonly IAppartmentDataAccessSync _appartmentDataAccess;
+        private readonly IApartmentDataAccessSync _apartmentDataAccess;
         private Building[] _buildings;
         private Apartment _newApartment = new Apartment();
         private Owner[] _owners;
@@ -22,7 +22,7 @@ namespace RoomForRentViewModel
         {
             var context = new RoomForRentXmlContext();
             context.Load();
-            _appartmentDataAccess = context;
+            _apartmentDataAccess = context;
             Buildings = context.GetBuildings();
             Owners = context.GetOwners();
             ReloadAppartments();
@@ -60,7 +60,7 @@ namespace RoomForRentViewModel
         #region Methods
         public void AddNewApartment()
         {
-            _appartmentDataAccess.SaveApartment(NewApartment);
+            _apartmentDataAccess.SaveApartment(NewApartment);
             NewApartment = new Apartment();
             ReloadAppartments();
         }
@@ -73,7 +73,7 @@ namespace RoomForRentViewModel
         #region Implementation
         private void ReloadAppartments()
         {
-            Apartments = _appartmentDataAccess.GetApartments();
+            Apartments = _apartmentDataAccess.GetApartments();
         }
         #endregion
     }

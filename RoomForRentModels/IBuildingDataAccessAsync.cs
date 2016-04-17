@@ -8,7 +8,7 @@ namespace RoomForRentModels
         #region Abstract
         Task DeleteBuildingAsync(int buildingId);
         Task<Building[]> GetBuidingsAsync();
-        Task<Building> GetBuildingAsync();
+        Task<Building> GetBuildingAsync(int id);
         Task<Building> SaveBuildingAsync(Building building);
         #endregion
     }

@@ -15,13 +15,14 @@ namespace RoomForRentWindow
             if (!(value is DateTime)) return DependencyProperty.UnsetValue;
             var availableFrom = (DateTime)value;
 
-            var waitingTime = availableFrom - DateTime.Now;
-            TimeSpan.Parse()
+            /*var waitingTime = availableFrom - DateTime.Now;
+            TimeSpan.Parse()*/
+            throw new NotImplementedException();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

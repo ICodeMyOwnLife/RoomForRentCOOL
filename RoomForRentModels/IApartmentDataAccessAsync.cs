@@ -3,7 +3,7 @@
 
 namespace RoomForRentModels
 {
-    public interface IAppartmentDataAccessAsync
+    public interface IApartmentDataAccessAsync
     {
         #region Abstract
         Task DeleteApartmentAsync(int apartmentId);

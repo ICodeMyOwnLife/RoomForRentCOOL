@@ -44,9 +44,9 @@
     <Compile Include="Apartment.cs" />
     <Compile Include="Building.cs" />
     <Compile Include="Email.cs" />
-    <Compile Include="IAppartmentDataAccess.cs" />
-    <Compile Include="IAppartmentDataAccessAsync.cs" />
-    <Compile Include="IAppartmentDataAccessSync.cs" />
+    <Compile Include="IApartmentDataAccess.cs" />
+    <Compile Include="IApartmentDataAccessAsync.cs" />
+    <Compile Include="IApartmentDataAccessSync.cs" />
     <Compile Include="IBuildingDataAccess.cs" />
     <Compile Include="IBuildingDataAccessAsync.cs" />
     <Compile Include="IBuildingDataAccessSync.cs" />
