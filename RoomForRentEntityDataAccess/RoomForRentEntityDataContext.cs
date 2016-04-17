@@ -9,38 +9,20 @@ namespace RoomForRentEntityDataAccess
         : ModelDbContextBase<RoomForRentEntityContext>, IApartmentDataAccess, IBuildingDataAccess, IOwnerDataAccess
     {
         #region Methods
-        /*public void DeleteApartment(int apartmentId)
-            => DeleteModel(apartmentId, context => context.Apartments);*/
-
         public void DeleteApartment(int apartmentId)
             => DeleteModel<Apartment>(apartmentId);
-
-        /*public async Task DeleteApartmentAsync(int apartmentId)
-            => await DeleteModelAsync(apartmentId, context => context.Apartments);*/
 
         public async Task DeleteApartmentAsync(int apartmentId)
             => await DeleteModelAsync<Apartment>(apartmentId);
 
-        /*public void DeleteBuilding(int buildingId)
-            => DeleteModel(buildingId, context => context.Buildings);*/
-
         public void DeleteBuilding(int buildingId)
             => DeleteModel<Building>(buildingId);
-
-        /*public async Task DeleteBuildingAsync(int buildingId)
-            => await DeleteModelAsync(buildingId, context => context.Buildings);*/
 
         public async Task DeleteBuildingAsync(int buildingId)
             => await DeleteModelAsync<Building>(buildingId);
 
-        /*public void DeleteOwner(int ownerId)
-            => DeleteModel(ownerId, context => context.Owners);*/
-
         public void DeleteOwner(int ownerId)
             => DeleteModel<Owner>(ownerId);
-
-        /*public async Task DeleteOwnerAsync(int ownerId)
-            => await DeleteModelAsync(ownerId, context => context.Owners);*/
 
         public async Task DeleteOwnerAsync(int ownerId)
             => await DeleteModelAsync<Owner>(ownerId);
@@ -51,14 +33,8 @@ namespace RoomForRentEntityDataAccess
         public async Task<Apartment> GetApartmentAsync(int id)
             => await GetModelAsync<Apartment>(id);
 
-        /*public Apartment[] GetApartments()
-            => GetModels(context => context.Apartments);*/
-
         public Apartment[] GetApartments()
             => GetModels<Apartment>();
-
-        /*public Apartment[] GetApartments(int buildingId)
-            => GetModels(context => context.Apartments.Where(a => a.BuildingId == buildingId));*/
 
         public Apartment[] GetApartments(int buildingId)
             => GetModels<Apartment>(apartment => apartment.BuildingId == buildingId);
