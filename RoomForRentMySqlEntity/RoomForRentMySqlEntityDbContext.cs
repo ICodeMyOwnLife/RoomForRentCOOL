@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RoomForRentEntityDataAccess;
+﻿using RoomForRentEntityDataAccess;
 
 
 namespace RoomForRentMySqlEntity
 {
     public class RoomForRentMySqlEntityDbContext: RoomForRentEntityContext
     {
+        #region  Constructors & Destructor
+        public RoomForRentMySqlEntityDbContext(): base("name=RoomForRentMySqlContext") { }
+        #endregion
     }
 }

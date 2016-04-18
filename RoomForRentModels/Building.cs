@@ -13,12 +13,23 @@ namespace RoomForRentModels
         [NonSerialized]
         private ICollection<Apartment> _apartments = new List<Apartment>();
 
-        private string _district = "1";
+        [NonSerialized]
+        private District _district;
+
+        private int? _districtId;
         private string _name = "My Building";
-        private int _number = 123;
-        private string _province = "My Province";
+        private string _number = "123";
+
+        [NonSerialized]
+        private Province _province;
+
+        private int? _provinceId;
         private string _street = "My Street";
-        private string _ward = "My Ward";
+
+        [NonSerialized]
+        private Ward _ward;
+
+        private int? _wardId;
         #endregion
 
 
@@ -30,10 +41,17 @@ namespace RoomForRentModels
             set { SetProperty(ref _apartments, value); }
         }
 
-        public string District
+        [XmlIgnore]
+        public District District
         {
             get { return _district; }
             set { SetProperty(ref _district, value); }
+        }
+
+        public int? DistrictId
+        {
+            get { return _districtId; }
+            set { SetProperty(ref _districtId, value); }
         }
 
         public string Name
@@ -42,16 +60,23 @@ namespace RoomForRentModels
             set { SetProperty(ref _name, value); }
         }
 
-        public int Number
+        public string Number
         {
             get { return _number; }
             set { SetProperty(ref _number, value); }
         }
 
-        public string Province
+        [XmlIgnore]
+        public Province Province
         {
             get { return _province; }
             set { SetProperty(ref _province, value); }
+        }
+
+        public int? ProvinceId
+        {
+            get { return _provinceId; }
+            set { SetProperty(ref _provinceId, value); }
         }
 
         public string Street
@@ -60,10 +85,17 @@ namespace RoomForRentModels
             set { SetProperty(ref _street, value); }
         }
 
-        public string Ward
+        [XmlIgnore]
+        public Ward Ward
         {
             get { return _ward; }
             set { SetProperty(ref _ward, value); }
+        }
+
+        public int? WardId
+        {
+            get { return _wardId; }
+            set { SetProperty(ref _wardId, value); }
         }
         #endregion
 
@@ -85,5 +117,6 @@ namespace RoomForRentModels
         #endregion
     }
 }
+
 
 // TODO: Bring Ward, District, Province to its own Entity

@@ -7,7 +7,9 @@ namespace RoomForRentEntityDataAccess
     public class RoomForRentEntityContext: DbContext
     {
         #region  Constructors & Destructor
-        public RoomForRentEntityContext(): base("name=RoomForRentContext") { }
+        public RoomForRentEntityContext(): this("name=RoomForRentContext") { }
+
+        public RoomForRentEntityContext(string nameOrConnectionString): base(nameOrConnectionString) { }
         #endregion
 
 

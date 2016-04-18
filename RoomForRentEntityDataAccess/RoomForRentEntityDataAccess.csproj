@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="ApartmentMap.cs" />
     <Compile Include="BuildingMap.cs" />
+    <Compile Include="DistrictMap.cs" />
     <Compile Include="EmailMap.cs" />
     <Compile Include="Migrations\201604170158014_CreateDatabase.cs" />
     <Compile Include="Migrations\201604170158014_CreateDatabase.Designer.cs">
@@ -67,10 +68,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OwnerMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvinceMap.cs" />
     <Compile Include="RoomForRentDbInitializer.cs" />
     <Compile Include="RoomForRentEntityCommonDataAccess.cs" />
     <Compile Include="RoomForRentEntityContext.cs" />
     <Compile Include="TelephoneMap.cs" />
+    <Compile Include="WardMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
