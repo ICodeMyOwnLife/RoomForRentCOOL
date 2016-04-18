@@ -26,7 +26,7 @@ namespace RoomForRentViewModel
         {
             /*var context = new RoomForRentXmlContext();
             context.Load();*/
-            var context = new RoomForRentEntityDataContext();
+            var context = new RoomForRentEntityCommonDataAccess();
             _buildingDataAccess = context;
             Buildings = _buildingDataAccess.GetBuildings();
         }

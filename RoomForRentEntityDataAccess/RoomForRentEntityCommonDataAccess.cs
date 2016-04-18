@@ -5,7 +5,7 @@ using RoomForRentModels;
 
 namespace RoomForRentEntityDataAccess
 {
-    public class RoomForRentEntityDataContext
+    public class RoomForRentEntityCommonDataAccess
         : ModelDbContextBase<RoomForRentEntityContext>, IApartmentDataAccess, IBuildingDataAccess, IOwnerDataAccess
     {
         #region Methods

@@ -19,6 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentEntityDataAccess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CB.Database.EntityFramework", "..\..\..\Libraries\DotNet\CB.Database\CB.Database.EntityFramework\CB.Database.EntityFramework.csproj", "{B6EAB130-16B2-4B28-8EF3-041F14D60523}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentSqLiteEntity", "RoomForRentSqLiteEntity\RoomForRentSqLiteEntity.csproj", "{40AA1E42-9149-424F-BE0A-7D1BB06C2A16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentMySqlEntity", "RoomForRentMySqlEntity\RoomForRentMySqlEntity.csproj", "{3C65C140-22B3-4C46-8822-C8C8B47CC027}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentSqlServerCompactEntity", "RoomForRentSqlServerCompactEntity\RoomForRentSqlServerCompactEntity.csproj", "{FB23370B-B376-4E9E-A1D1-CD8C4D15018C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +63,18 @@ Global
 		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40AA1E42-9149-424F-BE0A-7D1BB06C2A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40AA1E42-9149-424F-BE0A-7D1BB06C2A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40AA1E42-9149-424F-BE0A-7D1BB06C2A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40AA1E42-9149-424F-BE0A-7D1BB06C2A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C65C140-22B3-4C46-8822-C8C8B47CC027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C65C140-22B3-4C46-8822-C8C8B47CC027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C65C140-22B3-4C46-8822-C8C8B47CC027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C65C140-22B3-4C46-8822-C8C8B47CC027}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB23370B-B376-4E9E-A1D1-CD8C4D15018C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB23370B-B376-4E9E-A1D1-CD8C4D15018C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB23370B-B376-4E9E-A1D1-CD8C4D15018C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB23370B-B376-4E9E-A1D1-CD8C4D15018C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
