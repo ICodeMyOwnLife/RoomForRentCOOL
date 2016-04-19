@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CB.Model.Common;
 using RoomForRentEntityDataAccess;
 using RoomForRentModels;
+using RoomForRentSqLiteEntity;
 
 
 namespace RoomForRentViewModel
@@ -26,8 +27,7 @@ namespace RoomForRentViewModel
         {
             /*var context = new RoomForRentXmlContext();
             context.Load();*/
-            var context = new RoomForRentEntityCommonDataAccess();
-            _buildingDataAccess = context;
+            _buildingDataAccess = RoomForRentViewModelConfig.GetDataAccess<IBuildingDataAccess>();
             Buildings = _buildingDataAccess.GetBuildings();
         }
         #endregion

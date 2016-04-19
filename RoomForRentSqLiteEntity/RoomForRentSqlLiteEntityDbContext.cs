@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using RoomForRentEntityDataAccess;
+using SQLite.CodeFirst;
 
 
 namespace RoomForRentSqLiteEntity
 {
     public class RoomForRentSqlLiteEntityDbContext: RoomForRentEntityContext
     {
+        #region Override
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(
+                new SqliteDropCreateDatabaseWhenModelChanges<RoomForRentSqlLiteEntityDbContext>(modelBuilder));
+            base.OnModelCreating(modelBuilder);
+        }
+        #endregion
     }
 }

@@ -1,25 +1,18 @@
-using MySql.Data.Entity;
-
-
-namespace RoomForRentEntityDataAccess.Migrations
+namespace RoomForRentSqlServerCompactEntity.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<RoomForRentEntityDataAccess.RoomForRentEntityContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<RoomForRentSqlServerCompactEntity.RoomForRentSqlServerConpactEntityDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            AutomaticMigrationDataLossAllowed = true;
-            
-
-            SetSqlGenerator("MySql.Data.MySqlClient", new MySqlMigrationSqlGenerator());
         }
 
-        protected override void Seed(RoomForRentEntityDataAccess.RoomForRentEntityContext context)
+        protected override void Seed(RoomForRentSqlServerCompactEntity.RoomForRentSqlServerConpactEntityDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

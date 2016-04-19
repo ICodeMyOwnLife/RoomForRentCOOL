@@ -10,7 +10,6 @@ namespace RoomForRentWindow
         [STAThread]
         private static void Main(string[] args)
         {
-            Database.SetInitializer(new RoomForRentDbInitializer());
             var app = new App();
             app.InitializeComponent();
             app.Run();

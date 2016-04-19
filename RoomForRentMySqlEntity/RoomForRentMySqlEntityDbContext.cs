@@ -1,12 +1,17 @@
-﻿using RoomForRentEntityDataAccess;
+﻿using System.Data.Entity;
+using RoomForRentEntityDataAccess;
 
 
 namespace RoomForRentMySqlEntity
 {
     public class RoomForRentMySqlEntityDbContext: RoomForRentEntityContext
     {
-        #region  Constructors & Destructor
-        public RoomForRentMySqlEntityDbContext(): base("name=RoomForRentMySqlContext") { }
+        #region Override
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer(new DropCreateDatabaseAlways<RoomForRentMySqlEntityDbContext>());
+            base.OnModelCreating(modelBuilder);
+        }
         #endregion
     }
 }
