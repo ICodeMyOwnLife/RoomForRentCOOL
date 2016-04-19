@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,11 +54,12 @@
     <Compile Include="BuildingMap.cs" />
     <Compile Include="DistrictMap.cs" />
     <Compile Include="EmailMap.cs" />
+    <Compile Include="IAutoBackup.cs" />
     <Compile Include="OwnerMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinceMap.cs" />
-    <Compile Include="RoomForRentDbInitializer.cs" />
     <Compile Include="RoomForRentEntityCommonDataAccess.cs" />
+    <Compile Include="RoomForRentEntityConfig.cs" />
     <Compile Include="RoomForRentEntityContext.cs" />
     <Compile Include="TelephoneMap.cs" />
     <Compile Include="WardMap.cs" />

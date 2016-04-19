@@ -117,6 +117,3 @@ namespace RoomForRentModels
         #endregion
     }
 }
-
-
-// TODO: Bring Ward, District, Province to its own Entity

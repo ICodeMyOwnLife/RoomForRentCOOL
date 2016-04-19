@@ -2,6 +2,7 @@
 using System.Configuration;
 using RoomForRentMySqlEntity;
 using RoomForRentSqlServerCompactEntity;
+using RoomForRentSqLiteEntity;
 
 
 namespace RoomForRentViewModel
@@ -18,7 +19,7 @@ namespace RoomForRentViewModel
                 case "mySql":
                     return new RoomForRentMySqlDataAccess() as TDataAccess;
                 case "sqLite":
-                    return new RoomForRentMySqlDataAccess() as TDataAccess;
+                    return new RoomForRentSqLiteDataAccess() as TDataAccess;
                 case "sqlServer":
                     throw new NotSupportedException();
                 case "sqlServerCompact":

@@ -78,6 +78,3 @@ namespace RoomForRentViewModel
         #endregion
     }
 }
-
-
-//TODO: IdModelBase: IComparable
