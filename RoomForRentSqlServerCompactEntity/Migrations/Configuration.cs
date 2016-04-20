@@ -1,18 +1,20 @@
+using System.Data.Entity.Migrations;
+
+
 namespace RoomForRentSqlServerCompactEntity.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<RoomForRentSqlServerCompactEntity.RoomForRentSqlServerConpactEntityDbContext>
+    internal sealed class Configuration: DbMigrationsConfiguration<RoomForRentSqlServerConpactEntityDbContext>
     {
+        #region  Constructors & Destructor
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
+        #endregion
 
-        protected override void Seed(RoomForRentSqlServerCompactEntity.RoomForRentSqlServerConpactEntityDbContext context)
+
+        #region Override
+        protected override void Seed(RoomForRentSqlServerConpactEntityDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -27,5 +29,6 @@ namespace RoomForRentSqlServerCompactEntity.Migrations
             //    );
             //
         }
+        #endregion
     }
 }

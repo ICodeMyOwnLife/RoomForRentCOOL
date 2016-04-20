@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Timers;
 using CB.Database.EntityFramework;
 using RoomForRentModels;
 
@@ -6,8 +7,41 @@ using RoomForRentModels;
 namespace RoomForRentEntityDataAccess
 {
     public class RoomForRentEntityCommonDataAccess
-        : ModelDbContextBase<RoomForRentEntityContext>, IApartmentDataAccess, IBuildingDataAccess, IOwnerDataAccess
+        : ModelDbContextBase<RoomForRentEntityContext>, IRoomForRentDataAccess, IAutoBackup
     {
+        #region Fields
+        private const double FIVE_MINUTE = 1000 * 15;
+        private bool _autoBackup;
+        protected readonly string _backupFolder = RoomForRentEntityConfig.GetBackupFolder();
+        protected readonly int _backupInterval = RoomForRentEntityConfig.GetBackupInterval();
+        protected readonly string _backupLogFile = RoomForRentEntityConfig.GetBackupLogFile();
+        protected readonly string _connectionString;
+        private Timer _timer;
+        #endregion
+
+
+        #region  Constructors & Destructor
+        public RoomForRentEntityCommonDataAccess()
+        {
+            // ReSharper disable once VirtualMemberCallInContructor
+            _connectionString = FetchDataContext(context => context.ConnectionString);
+        }
+        #endregion
+
+
+        #region  Properties & Indexers
+        public bool AutoBackup
+        {
+            get { return _autoBackup; }
+            set
+            {
+                _autoBackup = value;
+                EnableTimer(value);
+            }
+        }
+        #endregion
+
+
         #region Methods
         public void DeleteApartment(int apartmentId)
             => DeleteModel<Apartment>(apartmentId);
@@ -57,6 +91,12 @@ namespace RoomForRentEntityDataAccess
         public Building[] GetBuildings()
             => GetModels<Building>();
 
+        public District[] GetDistricts(int provinceId)
+            => GetModelsWithNoTracking<District>(d => d.ProvinceId == provinceId);
+
+        public async Task<District[]> GetDistrictsAsync(int provinceId)
+            => await GetModelsWithNoTrackingAsync<District>(d => d.ProvinceId == provinceId);
+
         public Owner GetOwner(int id)
             => GetModel<Owner>(id);
 
@@ -68,6 +108,18 @@ namespace RoomForRentEntityDataAccess
 
         public async Task<Owner[]> GetOwnersAsync()
             => await GetModelsAsync<Owner>();
+
+        public Province[] GetProvinces()
+            => GetModelsWithNoTracking<Province>();
+
+        public async Task<Province[]> GetProvincesAsync()
+            => await GetModelsWithNoTrackingAsync<Province>();
+
+        public Ward[] GetWards(int districtId)
+            => GetModelsWithNoTracking<Ward>(w => w.DistrictId == districtId);
+
+        public async Task<Ward[]> GetWardsAsync(int districtId)
+            => await GetModelsWithNoTrackingAsync<Ward>(w => w.DistrictId == districtId);
 
         public Apartment SaveApartment(Apartment apartment)
             => SaveModel(apartment);
@@ -87,5 +139,45 @@ namespace RoomForRentEntityDataAccess
         public async Task<Owner> SaveOwnerAsync(Owner owner)
             => await SaveModelAsync(owner);
         #endregion
+
+
+        #region Event Handlers
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            _timer.Stop();
+            if (ShouldBackup())
+            {
+                Backup();
+            }
+            _timer.Start();
+        }
+        #endregion
+
+
+        #region Implementation
+        protected virtual void Backup() { }
+
+        private void EnableTimer(bool isEnabled)
+        {
+            if (isEnabled)
+            {
+                _timer = new Timer(FIVE_MINUTE) { AutoReset = true, Enabled = true };
+                _timer.Elapsed += Timer_Elapsed;
+            }
+            else if (_timer != null)
+            {
+                _timer.Elapsed -= Timer_Elapsed;
+                _timer.Dispose();
+            }
+        }
+
+        protected virtual bool ShouldBackup()
+        {
+            return false;
+        }
+        #endregion
     }
 }
+
+
+// TODO: GetWithNoTracking

@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using CB.Model.Common;
 using RoomForRentModels;
-using RoomForRentXmlDataAccess;
 
 
 namespace RoomForRentViewModel
@@ -9,28 +8,29 @@ namespace RoomForRentViewModel
     public class ApartmentsViewModel: ViewModelBase
     {
         #region Fields
+        private ICommand _addNewApartmentCommand;
         private Apartment[] _apartments;
-        private readonly IApartmentDataAccessSync _apartmentDataAccess;
         private Building[] _buildings;
         private Apartment _newApartment = new Apartment();
         private Owner[] _owners;
+        private readonly IRoomForRentDataAccess _roomForRentDataAccess;
         #endregion
 
 
         #region  Constructors & Destructor
         public ApartmentsViewModel()
         {
-            var context = new RoomForRentXmlContext();
-            context.Load();
-            _apartmentDataAccess = context;
-            Buildings = context.GetBuildings();
-            Owners = context.GetOwners();
+            _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
+            Buildings = _roomForRentDataAccess.GetBuildings();
+            Owners = _roomForRentDataAccess.GetOwners();
             ReloadAppartments();
         }
         #endregion
 
 
         #region  Properties & Indexers
+        public ICommand AddNewApartmentCommand => GetCommand(ref _addNewApartmentCommand, _ => AddNewApartment());
+
         public Apartment[] Apartments
         {
             get { return _apartments; }
@@ -60,20 +60,17 @@ namespace RoomForRentViewModel
         #region Methods
         public void AddNewApartment()
         {
-            _apartmentDataAccess.SaveApartment(NewApartment);
+            _roomForRentDataAccess.SaveApartment(NewApartment);
             NewApartment = new Apartment();
             ReloadAppartments();
         }
         #endregion
 
 
-        private ICommand _addNewApartmentCommand;
-        public ICommand AddNewApartmentCommand => GetCommand(ref _addNewApartmentCommand, _ => AddNewApartment());
-        
         #region Implementation
         private void ReloadAppartments()
         {
-            Apartments = _apartmentDataAccess.GetApartments();
+            Apartments = _roomForRentDataAccess.GetApartments();
         }
         #endregion
     }

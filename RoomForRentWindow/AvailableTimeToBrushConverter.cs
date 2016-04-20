@@ -10,19 +10,25 @@ namespace RoomForRentWindow
     [ValueConversion(typeof(DateTime), typeof(Brush))]
     public class AvailableTimeToBrushConverter: IValueConverter
     {
+        #region Fields
+        private static readonly AvailableTimeColorMap _map = RoomForRentWindowConfig.GetAvailableTimeColorMap();
+        #endregion
+
+
+        #region Methods
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is DateTime)) return DependencyProperty.UnsetValue;
             var availableFrom = (DateTime)value;
 
-            /*var waitingTime = availableFrom - DateTime.Now;
-            TimeSpan.Parse()*/
-            throw new NotImplementedException();
+            var waitingDays = (availableFrom - DateTime.Now).TotalDays;
+            return _map.GetBrush(waitingDays);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return DependencyProperty.UnsetValue;
         }
+        #endregion
     }
 }

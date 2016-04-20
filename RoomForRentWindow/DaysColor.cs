@@ -1,5 +1,9 @@
+using System;
+
+
 namespace RoomForRentWindow
 {
+    [Serializable]
     public class DaysColor
     {
         #region  Properties & Indexers

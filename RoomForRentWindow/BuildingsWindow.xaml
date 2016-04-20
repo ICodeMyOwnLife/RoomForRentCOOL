@@ -104,6 +104,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+
             <TextBlock Grid.Row="0" Grid.Column="0">Name</TextBlock>
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
 
@@ -113,14 +114,20 @@
             <TextBlock Grid.Row="0" Grid.Column="4">Street</TextBlock>
             <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Street}" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0">Ward</TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Ward}" />
+            <TextBlock Grid.Row="1" Grid.Column="0">Province</TextBlock>
+            <ComboBox Grid.Row="1" Grid.Column="1"
+                      ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Provinces}"
+                      SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedProvince}"/>
 
             <TextBlock Grid.Row="1" Grid.Column="2">District</TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding District}" />
+            <ComboBox Grid.Row="1" Grid.Column="3"
+                      ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Districts}"
+                      SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedDistrict}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="4">Province</TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding Province}" />
+            <TextBlock Grid.Row="1" Grid.Column="4">Ward</TextBlock>
+            <ComboBox Grid.Row="1" Grid.Column="5"
+                      ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Wards}"
+                      SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedWard}"/>
         </Grid>
 
         <Button Grid.Row="2" Content="Add Building" Command="{Binding AddNewBuildingCommand}" />

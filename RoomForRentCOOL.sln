@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentCOOL", "RoomForRentCOOL\RoomForRentCOOL.csproj", "{70E94837-C74C-4982-974E-F2A7D584562C}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentSqlServerCompactEntity", "RoomForRentSqlServerCompactEntity\RoomForRentSqlServerCompactEntity.csproj", "{FB23370B-B376-4E9E-A1D1-CD8C4D15018C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CB.Database.EntityFramework", "..\..\..\Libraries\DotNet\CB.Database\CB.Database.EntityFramework\CB.Database.EntityFramework.csproj", "{B6EAB130-16B2-4B28-8EF3-041F14D60523}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomForRentHelperApps", "RoomForRentHelperApps\RoomForRentHelperApps.csproj", "{4E5C4761-A7E0-4E83-A2F7-CBEE322817E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6EAB130-16B2-4B28-8EF3-041F14D60523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5C4761-A7E0-4E83-A2F7-CBEE322817E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5C4761-A7E0-4E83-A2F7-CBEE322817E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5C4761-A7E0-4E83-A2F7-CBEE322817E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5C4761-A7E0-4E83-A2F7-CBEE322817E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
