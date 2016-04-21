@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressesViewModel.cs" />
     <Compile Include="ApartmentsViewModel.cs" />
     <Compile Include="BuildingsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

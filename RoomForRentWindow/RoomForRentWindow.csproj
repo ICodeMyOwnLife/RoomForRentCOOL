@@ -118,7 +118,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressesUserControl.xaml.cs">
+      <DependentUpon>AddressesUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RoomForRentWindowConfig.cs" />
+    <Page Include="AddressesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

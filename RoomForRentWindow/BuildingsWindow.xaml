@@ -6,6 +6,7 @@
         xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
         xmlns:mdl="clr-namespace:RoomForRentModels;assembly=RoomForRentModels"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:RoomForRentWindow"
         mc:Ignorable="d"
         Title="BuildingsWindow" Height="480" Width="640">
 
@@ -114,7 +115,7 @@
             <TextBlock Grid.Row="0" Grid.Column="4">Street</TextBlock>
             <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Street}" />
 
-            <TextBlock Grid.Row="1" Grid.Column="0">Province</TextBlock>
+            <!--<TextBlock Grid.Row="1" Grid.Column="0">Province</TextBlock>
             <ComboBox Grid.Row="1" Grid.Column="1"
                       ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Provinces}"
                       SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedProvince}"/>
@@ -127,7 +128,8 @@
             <TextBlock Grid.Row="1" Grid.Column="4">Ward</TextBlock>
             <ComboBox Grid.Row="1" Grid.Column="5"
                       ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Wards}"
-                      SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedWard}"/>
+                      SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedWard}"/>-->
+            <local:AddressesUserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" DataContext="{Binding Source={StaticResource ViewModel}, Path=AddressesViewModel}"></local:AddressesUserControl>
         </Grid>
 
         <Button Grid.Row="2" Content="Add Building" Command="{Binding AddNewBuildingCommand}" />

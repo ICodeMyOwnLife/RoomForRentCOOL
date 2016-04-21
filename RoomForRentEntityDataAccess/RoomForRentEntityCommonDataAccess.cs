@@ -133,11 +133,29 @@ namespace RoomForRentEntityDataAccess
         public async Task<Building> SaveBuildingAsync(Building building)
             => await SaveModelAsync(building);
 
+        public District SaveDistrict(District district)
+            => SaveModel(district);
+
+        public async Task<District> SaveDistrictAsync(District district)
+            => await SaveModelAsync(district);
+
         public Owner SaveOwner(Owner owner)
             => SaveModel(owner);
 
         public async Task<Owner> SaveOwnerAsync(Owner owner)
             => await SaveModelAsync(owner);
+
+        public Province SaveProvince(Province province)
+            => SaveModel(province);
+
+        public async Task<Province> SaveProvinceAsync(Province province)
+            => await SaveModelAsync(province);
+
+        public Ward SaveWard(Ward ward)
+            => SaveModel(ward);
+
+        public async Task<Ward> SaveWardAsync(Ward ward)
+            => await SaveModelAsync(ward);
         #endregion
 
 
