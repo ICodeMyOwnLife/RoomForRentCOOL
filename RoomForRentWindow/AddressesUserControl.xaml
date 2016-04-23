@@ -23,18 +23,49 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0">Province</TextBlock>
+        <!--Provinces-->
+        <TextBlock Grid.Row="0" Grid.Column="0">Province:</TextBlock>
 
         <ComboBox Grid.Row="0" Grid.Column="1" DisplayMemberPath="Name" IsEditable="True"
                   ItemsSource="{Binding Provinces}"
                   SelectedItem="{Binding SelectedProvince}"
-                  Text="{Binding NewProvince.Name}">
+                  Text="{Binding NewProvince.Name, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Behaviors>
-                <xaml:EnterToClickBehavior Target="{x:Reference cmdAddProvince}"></xaml:EnterToClickBehavior>
+                <xaml:EnterToClickBehavior Target="{x:Reference cmdAddProvince}" />
             </i:Interaction.Behaviors>
         </ComboBox>
 
         <Button x:Name="cmdAddProvince" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Add Province"
                 Command="{Binding AddNewProvinceCommand}" />
+
+        <!--Districts-->
+        <TextBlock Grid.Row="0" Grid.Column="2">District:</TextBlock>
+
+        <ComboBox Grid.Row="0" Grid.Column="3" DisplayMemberPath="Name" IsEditable="True"
+                  ItemsSource="{Binding Districts}"
+                  SelectedItem="{Binding SelectedDistrict}"
+                  Text="{Binding NewDistrict.Name, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Behaviors>
+                <xaml:EnterToClickBehavior Target="{x:Reference cmdAddDistrict}" />
+            </i:Interaction.Behaviors>
+        </ComboBox>
+
+        <Button x:Name="cmdAddDistrict" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="Add District"
+                Command="{Binding AddNewDistrictCommand}" />
+
+        <!--Wards-->
+        <TextBlock Grid.Row="0" Grid.Column="4">Ward:</TextBlock>
+
+        <ComboBox Grid.Row="0" Grid.Column="5" DisplayMemberPath="Name" IsEditable="True"
+                  ItemsSource="{Binding Wards}"
+                  SelectedItem="{Binding SelectedWard}"
+                  Text="{Binding NewWard.Name, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Behaviors>
+                <xaml:EnterToClickBehavior Target="{x:Reference cmdAddWard}" />
+            </i:Interaction.Behaviors>
+        </ComboBox>
+
+        <Button x:Name="cmdAddWard" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Content="Add Ward"
+                Command="{Binding AddNewWardCommand}" />
     </Grid>
 </UserControl>
