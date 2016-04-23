@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
+             xmlns:xaml="http://wpf.cb.com/xaml"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance Type=vmd:AddressesViewModel}">
     <Grid>
@@ -26,9 +28,13 @@
         <ComboBox Grid.Row="0" Grid.Column="1" DisplayMemberPath="Name" IsEditable="True"
                   ItemsSource="{Binding Provinces}"
                   SelectedItem="{Binding SelectedProvince}"
-                  Text="{Binding NewProvince.Name}" />
+                  Text="{Binding NewProvince.Name}">
+            <i:Interaction.Behaviors>
+                <xaml:EnterToClickBehavior Target="{x:Reference cmdAddProvince}"></xaml:EnterToClickBehavior>
+            </i:Interaction.Behaviors>
+        </ComboBox>
 
-        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Add Province"
+        <Button x:Name="cmdAddProvince" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Add Province"
                 Command="{Binding AddNewProvinceCommand}" />
     </Grid>
 </UserControl>

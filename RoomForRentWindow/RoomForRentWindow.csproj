@@ -80,6 +80,7 @@
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -194,6 +195,10 @@
     <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Model\CB.Model.Common\CB.Model.Common.csproj">
       <Project>{33a5df99-1312-4023-a6ef-eabb9848f5a6}</Project>
       <Name>CB.Model.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Xaml\CB.Xaml.Behaviors\CB.Xaml.Behaviors.csproj">
+      <Project>{033B6C10-B667-4B70-AA49-E61F6C8AA084}</Project>
+      <Name>CB.Xaml.Behaviors</Name>
     </ProjectReference>
     <ProjectReference Include="..\RoomForRentEntityDataAccess\RoomForRentEntityDataAccess.csproj">
       <Project>{753e4481-12bc-4b29-bdde-a6c77a164530}</Project>
