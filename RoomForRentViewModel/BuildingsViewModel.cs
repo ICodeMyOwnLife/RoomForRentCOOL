@@ -1,11 +1,12 @@
-﻿using System.Windows.Input;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using CB.Model.Common;
 using RoomForRentModels;
 
 
 namespace RoomForRentViewModel
 {
-    public class BuildingsViewModel: ViewModelBase
+    /*public class BuildingsViewModel: ViewModelBase
     {
         #region Fields
         private ICommand _addNewBuildingCommand;
@@ -89,6 +90,102 @@ namespace RoomForRentViewModel
         private void ReloadBuildings()
         {
             Buildings = _roomForRentDataAccess.GetBuildings();
+        }
+        #endregion
+    }*/
+
+    public class BuildingsViewModel: IdNameModelViewModelBase<Building>
+    {
+        #region Fields
+        private AddressesViewModel _addressesViewModel;
+        private readonly IRoomForRentDataAccess _roomForRentDataAccess;
+        #endregion
+
+
+        #region  Constructors & Destructor
+        [SuppressMessage("ReSharper", "VirtualMemberCallInContructor")]
+        public BuildingsViewModel()
+        {
+            _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
+            AddressesViewModel = new AddressesViewModel(_roomForRentDataAccess);
+            Load();
+        }
+        #endregion
+
+
+        #region  Properties & Indexers
+        public AddressesViewModel AddressesViewModel
+        {
+            get { return _addressesViewModel; }
+            private set { SetProperty(ref _addressesViewModel, value); }
+        }
+        #endregion
+
+
+        #region Override
+        protected override void DeleteItem(int id)
+        {
+            _roomForRentDataAccess.DeleteBuilding(id);
+        }
+
+        public override void Load()
+        {
+            base.Load();
+            AddressesViewModel.Load();
+        }
+
+        protected override Building[] LoadItems()
+        {
+            var buildings = _roomForRentDataAccess.GetBuildings();
+            return buildings;
+        }
+
+        protected override void OnSelectedItemChanged(Building seletedItem)
+        {
+            base.OnSelectedItemChanged(seletedItem);
+            SetSelectedProvince(seletedItem.ProvinceId);
+            SetSelectedDistrict(seletedItem.DistrictId);
+            SetSelectedWard(seletedItem.WardId);
+        }
+
+        protected override Building SaveItem(Building item)
+        {
+            SetBuildingAddress(item);
+            return _roomForRentDataAccess.SaveBuilding(item);
+        }
+        #endregion
+
+
+        #region Implementation
+        private void SetBuildingAddress(Building item)
+        {
+            item.Province = null;
+            item.District = null;
+            item.Ward = null;
+            item.ProvinceId = AddressesViewModel.SelectedProvince?.Id;
+            item.DistrictId = AddressesViewModel.SelectedDistrict?.Id;
+            item.WardId = AddressesViewModel.SelectedWard?.Id;
+        }
+
+        private void SetSelectedDistrict(int? districtId)
+        {
+            AddressesViewModel.SelectedDistrict = districtId == null ? null :
+                                                      AddressesViewModel.DistrictsViewModel.Items?.FirstOrDefault(
+                                                          d => d.Id == districtId);
+        }
+
+        private void SetSelectedProvince(int? provinceId)
+        {
+            AddressesViewModel.SelectedProvince = provinceId == null ? null :
+                                                      AddressesViewModel.ProvincesViewModel.Items?.FirstOrDefault(
+                                                          p => p.Id == provinceId);
+        }
+
+        private void SetSelectedWard(int? wardId)
+        {
+            AddressesViewModel.SelectedWard = wardId == null ? null :
+                                                  AddressesViewModel.WardsViewModel.Items?.FirstOrDefault(
+                                                      w => w.Id == wardId);
         }
         #endregion
     }

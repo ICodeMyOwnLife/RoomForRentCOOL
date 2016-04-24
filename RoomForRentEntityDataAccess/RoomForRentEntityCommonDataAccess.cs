@@ -108,7 +108,9 @@ namespace RoomForRentEntityDataAccess
             => await GetModelAsync<Building>(id);
 
         public Building[] GetBuildings()
-            => GetModelsWithNoTracking<Building>();
+            =>
+                GetModelsWithNoTracking<Building>(nameof(Building.Province), nameof(Building.District),
+                    nameof(Building.Ward));
 
         public District[] GetDistricts(int provinceId)
             => GetModelsWithNoTracking<District>(

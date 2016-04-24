@@ -16,12 +16,12 @@
         </Grid.ColumnDefinitions>
 
         <!--Provinces UserControl-->
-        <uc:NamedModelUserControl Grid.Column="0" DataContext="{Binding ProvincesViewModel}" />
+        <uc:IdNameModelUserControl Grid.Column="0" DataContext="{Binding ProvincesViewModel}" />
 
         <!--Districts-->
-        <uc:NamedModelUserControl Grid.Column="1" DataContext="{Binding DistrictsViewModel}" />
+        <uc:IdNameModelUserControl Grid.Column="1" DataContext="{Binding DistrictsViewModel}" />
 
         <!--Wards-->
-        <uc:NamedModelUserControl Grid.Column="2" DataContext="{Binding WardsViewModel}" />
+        <uc:IdNameModelUserControl Grid.Column="2" DataContext="{Binding WardsViewModel}" />
     </Grid>
 </UserControl>

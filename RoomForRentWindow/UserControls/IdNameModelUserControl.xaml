@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="RoomForRentWindow.UserControls.IdNameModelUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:CB.Model.Common;assembly=CB.Model.Common"
+             xmlns:dataControls="http://wpf.cb.com/xaml"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance common:IdNameModelViewModel}">
+    <dataControls:IdModelControl>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                   Text="{Binding Name, StringFormat='Select {0}:'}" />
+
+            <ComboBox Grid.Row="0" Grid.Column="1"
+                  DisplayMemberPath="Name"
+                  ItemsSource="{Binding Items}"
+                  SelectedItem="{Binding SelectedItem}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="{Binding Name, StringFormat='Edit {0}:'}" />
+
+            <TextBox Grid.Row="1" Grid.Column="1"
+                 IsEnabled="{Binding CanEdit}"
+                 Text="{Binding SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </dataControls:IdModelControl>
+</UserControl>

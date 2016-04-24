@@ -119,13 +119,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserControls\IdNameModelUserControl.xaml.cs">
+      <DependentUpon>IdNameModelUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AddressesUserControl.xaml.cs">
       <DependentUpon>AddressesUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="RoomForRentWindowConfig.cs" />
-    <Compile Include="UserControls\NamedModelUserControl.xaml.cs">
-      <DependentUpon>NamedModelUserControl.xaml</DependentUpon>
-    </Compile>
+    <Page Include="UserControls\IdNameModelUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\AddressesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,10 +167,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\NamedModelUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -202,6 +202,10 @@
     <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Model\CB.Model.Common\CB.Model.Common.csproj">
       <Project>{33a5df99-1312-4023-a6ef-eabb9848f5a6}</Project>
       <Name>CB.Model.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.WPF\CB.WPF.Controls.DataControls\CB.WPF.Controls.DataControls.csproj">
+      <Project>{7f7a05ab-7135-4065-b72f-8796dc9df11d}</Project>
+      <Name>CB.WPF.Controls.DataControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Xaml\CB.Xaml.Behaviors\CB.Xaml.Behaviors.csproj">
       <Project>{033B6C10-B667-4B70-AA49-E61F6C8AA084}</Project>

@@ -7,6 +7,7 @@
         xmlns:mdl="clr-namespace:RoomForRentModels;assembly=RoomForRentModels"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:RoomForRentWindow"
+        xmlns:dataControls="http://wpf.cb.com/xaml"
         mc:Ignorable="d"
         Title="BuildingsWindow" Height="480" Width="640">
 
@@ -60,82 +61,77 @@
         <DataTemplate x:Key="BuildingProvinceCellEditingTemplate" DataType="mdl:Building">
             <TextBox Text="{Binding Province.Name}" />
         </DataTemplate>
-
-        <DataTemplate x:Key="BuildingSaveCellTemplate">
-            <Button Content="Save" Command="{Binding Source={StaticResource ViewModel}, Path=SaveBuildingCommand}"
-                    CommandParameter="{Binding}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="BuildingDeleteCellTemplate">
-            <Button Content="Delete" Command="{Binding Source={StaticResource ViewModel}, Path=DeleteBuildingCommand}"
-                    CommandParameter="{Binding}" />
-        </DataTemplate>
     </Window.Resources>
 
     <Grid DataContext="{StaticResource ViewModel}">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+        
+        <dataControls:IdModelControl Grid.Row="1">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" ItemsSource="{Binding Buildings}"
-                  SelectedItem="{Binding SelectedBuilding}"
+                <DataGrid Grid.Row="0" ItemsSource="{Binding Items}"
+                  SelectedItem="{Binding SelectedItem}"
                   AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Name"
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Name"
                                         CellTemplate="{StaticResource BuildingNameCellTemplate}"
                                         CellEditingTemplate="{StaticResource BuildingNameCellEditingTemplate}" />
-                <DataGridTemplateColumn Header="Number"
+                        <DataGridTemplateColumn Header="Number"
                                         CellTemplate="{StaticResource BuildingNumberCellTemplate}"
                                         CellEditingTemplate="{StaticResource BuildingNumberCellEditingTemplate}" />
-                <DataGridTemplateColumn Header="Street"
+                        <DataGridTemplateColumn Header="Street"
                                         CellTemplate="{StaticResource BuildingStreetCellTemplate}"
                                         CellEditingTemplate="{StaticResource BuildingStreetCellEditingTemplate}" />
-                <DataGridTemplateColumn Header="Ward"
+                        <DataGridTemplateColumn Header="Ward"
                                         CellTemplate="{StaticResource BuildingWardCellTemplate}"
                                         CellEditingTemplate="{StaticResource BuildingWardCellEditingTemplate}" />
-                <DataGridTemplateColumn Header="District"
+                        <DataGridTemplateColumn Header="District"
                                         CellTemplate="{StaticResource BuildingDistrictCellTemplate}"
                                         CellEditingTemplate="{StaticResource BuildingDistrictCellEditingTemplate}" />
-                <DataGridTemplateColumn Header="Province"
+                        <DataGridTemplateColumn Header="Province"
                                         CellTemplate="{StaticResource BuildingProvinceCellTemplate}"
                                         CellEditingTemplate="{StaticResource BuildingProvinceCellEditingTemplate}" />
-                <DataGridTemplateColumn Header="Save"
-                                        CellTemplate="{StaticResource BuildingSaveCellTemplate}" />
-                <DataGridTemplateColumn Header="Delete"
-                                        CellTemplate="{StaticResource BuildingDeleteCellTemplate}" />
-            </DataGrid.Columns>
-        </DataGrid>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-        <Grid Grid.Row="1" DataContext="{Binding Path=SelectedBuilding}">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+                <Grid Grid.Row="1" DataContext="{Binding Path=SelectedItem}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0">Name</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="2">Number</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Number}" />
+                    <TextBlock Grid.Row="0" Grid.Column="0">Name</TextBlock>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
 
-            <TextBlock Grid.Row="0" Grid.Column="4">Street</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Street}" />
+                    <TextBlock Grid.Row="0" Grid.Column="2">Number</TextBlock>
+                    <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Number}" />
 
-            <local:AddressesUserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
+                    <TextBlock Grid.Row="0" Grid.Column="4">Street</TextBlock>
+                    <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Street}" />
+
+                    <local:AddressesUserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
                                         HorizontalAlignment="Stretch"
                                         DataContext="{Binding Source={StaticResource ViewModel}, Path=AddressesViewModel}" />
-        </Grid>
-
-        <Button Grid.Row="2" Content="Add Building" Command="{Binding AddNewBuildingCommand}" />
+                </Grid>
+            </Grid>
+        </dataControls:IdModelControl>
     </Grid>
+    
 </Window>

@@ -1,15 +1,18 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows.Input;
 using CB.Model.Common;
 
 
 namespace RoomForRentViewModel
 {
-    public abstract class NamedModelViewModel<TNamedModel>: ViewModelBase where TNamedModel: IdNameModelBase, new()
+    /*public abstract class NamedModelViewModel<TNamedModel>: ViewModelBase where TNamedModel: IdNameModelBase, new()
     {
         #region Fields
         private ICommand _addNewItemCommand;
         private bool _canEdit;
+        private bool _canSave;
         private ICommand _deleteCommand;
         private TNamedModel[] _items;
         private string _name = typeof(TNamedModel).Name;
@@ -36,6 +39,12 @@ namespace RoomForRentViewModel
             private set { SetProperty(ref _canEdit, value); }
         }
 
+        public bool CanSave
+        {
+            get { return _canSave; }
+            private set { SetProperty(ref _canSave, value); }
+        }
+
         public virtual ICommand DeleteCommand
             => GetCommand(ref _deleteCommand, _ => Delete(), _ => SelectedItem?.Id != null);
 
@@ -52,7 +61,7 @@ namespace RoomForRentViewModel
         }
 
         public virtual ICommand SaveCommand
-            => GetCommand(ref _saveCommand, _ => Save(), _ => !string.IsNullOrEmpty(SelectedItem?.Name));
+            => GetCommand(ref _saveCommand, _ => Save(), _ => CanSave);
 
         public virtual TNamedModel SelectedItem
         {
@@ -62,6 +71,7 @@ namespace RoomForRentViewModel
                 if (SetProperty(ref _selectedItem, value))
                 {
                     CanEdit = SelectedItem != null;
+                    CanSave = CanSaveItem(SelectedItem);
                 }
             }
         }
@@ -96,5 +106,33 @@ namespace RoomForRentViewModel
             SelectedItem = savedItem.Id.HasValue ? Items.FirstOrDefault(i => i.Id == savedItem.Id) : null;
         }
         #endregion
-    }
+
+
+        #region Implementation
+        protected virtual bool CanSaveItem(TNamedModel item)
+        {
+            return !string.IsNullOrEmpty(item?.Name);
+        }
+        #endregion
+    }*/
+
+    /*public class NamedModelViewModel: NamedModelViewModel<IdNameModelBase>
+    {
+        #region Override
+        protected override void DeleteItem(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override IdNameModelBase[] LoadItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override IdNameModelBase SaveItem(IdNameModelBase item)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }*/
 }

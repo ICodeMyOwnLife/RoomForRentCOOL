@@ -1,9 +1,10 @@
+using CB.Model.Common;
 using RoomForRentModels;
 
 
 namespace RoomForRentViewModel
 {
-    public class ProvincesViewModel: NamedModelViewModel<Province>
+    public class ProvincesViewModel: IdNameModelViewModelBase<Province>
     {
         #region Fields
         private readonly IAddressDataAccess _addressDataAccess;
