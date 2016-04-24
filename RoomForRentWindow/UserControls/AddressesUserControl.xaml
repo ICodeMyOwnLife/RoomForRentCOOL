@@ -4,75 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
-             xmlns:xaml="http://wpf.cb.com/xaml"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:uc="clr-namespace:RoomForRentWindow.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance Type=vmd:AddressesViewModel}">
 
-    <UserControl.Resources>
-        <Style TargetType="ComboBox">
-            <Setter Property="IsEditable" Value="False"></Setter>
-        </Style>
-    </UserControl.Resources>
-    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <!--Provinces-->
-        <TextBlock Grid.Row="0" Grid.Column="0">Province:</TextBlock>
-
-        <ComboBox Grid.Row="0" Grid.Column="1" DisplayMemberPath="Name"
-                  ItemsSource="{Binding Provinces}"
-                  SelectedItem="{Binding SelectedProvince}"
-                  Text="{Binding NewProvince.Name, UpdateSourceTrigger=PropertyChanged}">
-            <i:Interaction.Behaviors>
-                <xaml:EnterToClickBehavior Target="{x:Reference cmdAddProvince}" />
-            </i:Interaction.Behaviors>
-        </ComboBox>
-
-        <Button x:Name="cmdAddProvince" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Add Province"
-                Command="{Binding AddNewProvinceCommand}" />
+        <!--Provinces UserControl-->
+        <uc:NamedModelUserControl Grid.Column="0" DataContext="{Binding ProvincesViewModel}" />
 
         <!--Districts-->
-        <TextBlock Grid.Row="0" Grid.Column="2">District:</TextBlock>
-
-        <ComboBox Grid.Row="0" Grid.Column="3" DisplayMemberPath="Name"
-                  ItemsSource="{Binding Districts}"
-                  SelectedItem="{Binding SelectedDistrict}"
-                  Text="{Binding NewDistrict.Name, UpdateSourceTrigger=PropertyChanged}">
-            <i:Interaction.Behaviors>
-                <xaml:EnterToClickBehavior Target="{x:Reference cmdAddDistrict}" />
-            </i:Interaction.Behaviors>
-        </ComboBox>
-
-        <Button x:Name="cmdAddDistrict" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Content="Add District"
-                Command="{Binding AddNewDistrictCommand}" />
+        <uc:NamedModelUserControl Grid.Column="1" DataContext="{Binding DistrictsViewModel}" />
 
         <!--Wards-->
-        <TextBlock Grid.Row="0" Grid.Column="4">Ward:</TextBlock>
-
-        <ComboBox Grid.Row="0" Grid.Column="5" DisplayMemberPath="Name"
-                  ItemsSource="{Binding Wards}"
-                  SelectedItem="{Binding SelectedWard}"
-                  Text="{Binding NewWard.Name, UpdateSourceTrigger=PropertyChanged}">
-            <i:Interaction.Behaviors>
-                <xaml:EnterToClickBehavior Target="{x:Reference cmdAddWard}" />
-            </i:Interaction.Behaviors>
-        </ComboBox>
-
-        <Button x:Name="cmdAddWard" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Content="Add Ward"
-                Command="{Binding AddNewWardCommand}" />
+        <uc:NamedModelUserControl Grid.Column="2" DataContext="{Binding WardsViewModel}" />
     </Grid>
 </UserControl>

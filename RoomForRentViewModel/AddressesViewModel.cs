@@ -1,13 +1,81 @@
-using System.Diagnostics;
-using System.Linq;
-using System.Windows.Input;
 using CB.Model.Common;
 using RoomForRentModels;
 
 
 namespace RoomForRentViewModel
 {
-    /*public class AddressesViewModel: ViewModelBase
+    public class AddressesViewModel: ViewModelBase
+    {
+        #region Fields
+        private District _selectedDistrict;
+        private Province _selectedProvince;
+        private Ward _selectedWard;
+        #endregion
+
+
+        #region  Constructors & Destructor
+        public AddressesViewModel(IAddressDataAccess addressDataAccess)
+        {
+            ProvincesViewModel = new ProvincesViewModel(addressDataAccess);
+            DistrictsViewModel = new DistrictsViewModel(addressDataAccess);
+            WardsViewModel = new WardsViewModel(addressDataAccess);
+
+            BindProperties();
+        }
+        #endregion
+
+
+        #region  Properties & Indexers
+        public DistrictsViewModel DistrictsViewModel { get; }
+        public ProvincesViewModel ProvincesViewModel { get; }
+
+        public District SelectedDistrict
+        {
+            get { return _selectedDistrict; }
+            set { SetProperty(ref _selectedDistrict, value); }
+        }
+
+        public Province SelectedProvince
+        {
+            get { return _selectedProvince; }
+            set { SetProperty(ref _selectedProvince, value); }
+        }
+
+        public Ward SelectedWard
+        {
+            get { return _selectedWard; }
+            set { SetProperty(ref _selectedWard, value); }
+        }
+
+        public WardsViewModel WardsViewModel { get; }
+        #endregion
+
+
+        #region Methods
+        public void Load()
+        {
+            ProvincesViewModel.Load();
+            DistrictsViewModel.Load();
+            WardsViewModel.Load();
+        }
+        #endregion
+
+
+        #region Implementation
+        private void BindProperties()
+        {
+            ProvincesViewModel.BindProperty(nameof(ProvincesViewModel.SelectedItem), DistrictsViewModel,
+                nameof(DistrictsViewModel.SelectedProvince), BindMode.OneWay);
+            DistrictsViewModel.BindProperty(nameof(DistrictsViewModel.SelectedItem), WardsViewModel,
+                nameof(WardsViewModel.SeleteDistrict), BindMode.OneWay);
+            this.BindProperty(nameof(SelectedProvince), ProvincesViewModel, nameof(ProvincesViewModel.SelectedItem));
+            this.BindProperty(nameof(SelectedDistrict), DistrictsViewModel, nameof(DistrictsViewModel.SelectedItem));
+            this.BindProperty(nameof(SelectedWard), WardsViewModel, nameof(WardsViewModel.SelectedItem));
+        }
+        #endregion
+    }
+
+    /*public class AddressesViewModel : ViewModelBase
     {
         #region Fields
         private ICommand _addNewDistrictCommand;

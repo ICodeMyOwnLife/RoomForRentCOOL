@@ -11,7 +11,7 @@ namespace RoomForRentViewModel
         private ICommand _addNewBuildingCommand;
         private Building[] _buildings;
         private ICommand _deleteBuildingCommand;
-        private Building _newBuilding = new Building();
+        private Building _selectedBuilding = new Building();
         private readonly IRoomForRentDataAccess _roomForRentDataAccess;
         private ICommand _saveBuildingCommand;
         #endregion
@@ -39,10 +39,10 @@ namespace RoomForRentViewModel
         public ICommand DeleteBuildingCommand
             => GetCommand(ref _deleteBuildingCommand, obj => DeleteBuilding(obj as Building), obj => obj is Building);
 
-        public Building NewBuilding
+        public Building SelectedBuilding
         {
-            get { return _newBuilding; }
-            set { SetProperty(ref _newBuilding, value); }
+            get { return _selectedBuilding; }
+            set { SetProperty(ref _selectedBuilding, value); }
         }
 
         public ICommand SaveBuildingCommand
@@ -55,11 +55,11 @@ namespace RoomForRentViewModel
         #region Methods
         public void AddNewBuilding()
         {
-            NewBuilding.Province = AddressesViewModel.SelectedProvince;
-            NewBuilding.District = AddressesViewModel.SelectedDistrict;
-            NewBuilding.Ward = AddressesViewModel.SelectedWard;
-            var b = _roomForRentDataAccess.SaveBuilding(NewBuilding);
-            NewBuilding = new Building();
+            SelectedBuilding.Province = AddressesViewModel.SelectedProvince;
+            SelectedBuilding.District = AddressesViewModel.SelectedDistrict;
+            SelectedBuilding.Ward = AddressesViewModel.SelectedWard;
+            var b = _roomForRentDataAccess.SaveBuilding(SelectedBuilding);
+            SelectedBuilding = new Building();
             ReloadBuildings();
         }
 

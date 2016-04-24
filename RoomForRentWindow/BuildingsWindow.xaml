@@ -12,60 +12,60 @@
 
     <Window.Resources>
         <vmd:BuildingsViewModel x:Key="ViewModel" />
-        
+
         <DataTemplate x:Key="BuildingNameCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Name}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingNameCellEditingTemplate" DataType="mdl:Building">
             <TextBox Text="{Binding Name}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingNumberCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Number}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingNumberCellEditingTemplate" DataType="mdl:Building">
             <xctk:IntegerUpDown Value="{Binding Number}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingStreetCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Street}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingStreetCellEditingTemplate" DataType="mdl:Building">
             <TextBox Text="{Binding Street}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingWardCellTemplate" DataType="mdl:Building">
-            <TextBlock Text="{Binding Ward}" />
+            <TextBlock Text="{Binding Ward.Name}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingWardCellEditingTemplate" DataType="mdl:Building">
-            <TextBox Text="{Binding Ward}" />
+            <TextBox Text="{Binding Ward.Name}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingDistrictCellTemplate" DataType="mdl:Building">
-            <TextBlock Text="{Binding District}" />
+            <TextBlock Text="{Binding District.Name}" />
         </DataTemplate>
-        
+
         <DataTemplate x:Key="BuildingDistrictCellEditingTemplate" DataType="mdl:Building">
-            <TextBox Text="{Binding District}" />
+            <TextBox Text="{Binding District.Name}" />
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingProvinceCellTemplate" DataType="mdl:Building">
-            <TextBlock Text="{Binding Province}" />
+            <TextBlock Text="{Binding Province.Name}" />
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingProvinceCellEditingTemplate" DataType="mdl:Building">
-            <TextBox Text="{Binding Province}" />
+            <TextBox Text="{Binding Province.Name}" />
         </DataTemplate>
-            
+
         <DataTemplate x:Key="BuildingSaveCellTemplate">
             <Button Content="Save" Command="{Binding Source={StaticResource ViewModel}, Path=SaveBuildingCommand}"
                     CommandParameter="{Binding}" />
         </DataTemplate>
-            
+
         <DataTemplate x:Key="BuildingDeleteCellTemplate">
             <Button Content="Delete" Command="{Binding Source={StaticResource ViewModel}, Path=DeleteBuildingCommand}"
                     CommandParameter="{Binding}" />
@@ -79,7 +79,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" ItemsSource="{Binding Buildings}" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Buildings}"
+                  SelectedItem="{Binding SelectedBuilding}"
+                  AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name"
                                         CellTemplate="{StaticResource BuildingNameCellTemplate}"
@@ -106,7 +108,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Grid.Row="1" DataContext="{Binding Path=NewBuilding}">
+        <Grid Grid.Row="1" DataContext="{Binding Path=SelectedBuilding}">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -129,23 +131,9 @@
             <TextBlock Grid.Row="0" Grid.Column="4">Street</TextBlock>
             <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Street}" />
 
-            <!--<TextBlock Grid.Row="1" Grid.Column="0">Province</TextBlock>
-            <ComboBox Grid.Row="1" Grid.Column="1"
-                      ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Provinces}"
-                      SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedProvince}"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="2">District</TextBlock>
-            <ComboBox Grid.Row="1" Grid.Column="3"
-                      ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Districts}"
-                      SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedDistrict}"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="4">Ward</TextBlock>
-            <ComboBox Grid.Row="1" Grid.Column="5"
-                      ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Wards}"
-                      SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedWard}"/>-->
             <local:AddressesUserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
                                         HorizontalAlignment="Stretch"
-                                        DataContext="{Binding Source={StaticResource ViewModel}, Path=AddressesViewModel}"></local:AddressesUserControl>
+                                        DataContext="{Binding Source={StaticResource ViewModel}, Path=AddressesViewModel}" />
         </Grid>
 
         <Button Grid.Row="2" Content="Add Building" Command="{Binding AddNewBuildingCommand}" />

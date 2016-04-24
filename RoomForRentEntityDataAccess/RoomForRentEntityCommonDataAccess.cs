@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using CB.Database.EntityFramework;
 using RoomForRentModels;
@@ -86,19 +87,19 @@ namespace RoomForRentEntityDataAccess
             => await GetModelAsync<Apartment>(id);
 
         public Apartment[] GetApartments()
-            => GetModels<Apartment>();
+            => GetModelsWithNoTracking<Apartment>();
 
         public Apartment[] GetApartments(int buildingId)
-            => GetModels<Apartment>(apartment => apartment.BuildingId == buildingId);
+            => GetModelsWithNoTracking<Apartment>(apartment => apartment.BuildingId == buildingId);
 
         public async Task<Apartment[]> GetApartmentsAsync()
-            => await GetModelsAsync<Apartment>();
+            => await GetModelsWithNoTrackingAsync<Apartment>();
 
         public async Task<Apartment[]> GetApartmentsAsync(int buildingId)
-            => await GetModelsAsync<Apartment>(apartment => apartment.BuildingId == buildingId);
+            => await GetModelsWithNoTrackingAsync<Apartment>(apartment => apartment.BuildingId == buildingId);
 
         public async Task<Building[]> GetBuidingsAsync()
-            => await GetModelsAsync<Building>();
+            => await GetModelsWithNoTrackingAsync<Building>();
 
         public Building GetBuilding(int id)
             => GetModel<Building>(id);
@@ -107,10 +108,11 @@ namespace RoomForRentEntityDataAccess
             => await GetModelAsync<Building>(id);
 
         public Building[] GetBuildings()
-            => GetModels<Building>();
+            => GetModelsWithNoTracking<Building>();
 
         public District[] GetDistricts(int provinceId)
-            => GetModelsWithNoTracking<District>(d => d.ProvinceId == provinceId);
+            => GetModelsWithNoTracking<District>(
+                districts => districts.Where(d => d.ProvinceId == provinceId).OrderBy(d => d.Name));
 
         public async Task<District[]> GetDistrictsAsync(int provinceId)
             => await GetModelsWithNoTrackingAsync<District>(d => d.ProvinceId == provinceId);
@@ -122,22 +124,24 @@ namespace RoomForRentEntityDataAccess
             => await GetModelAsync<Owner>(id);
 
         public Owner[] GetOwners()
-            => GetModels<Owner>();
+            => GetModelsWithNoTracking<Owner>();
 
         public async Task<Owner[]> GetOwnersAsync()
-            => await GetModelsAsync<Owner>();
+            => await GetModelsWithNoTrackingAsync<Owner>();
 
         public Province[] GetProvinces()
-            => GetModelsWithNoTracking<Province>();
+            => GetModelsWithNoTracking<Province>(provinces => provinces.OrderBy(p => p.Name));
 
         public async Task<Province[]> GetProvincesAsync()
-            => await GetModelsWithNoTrackingAsync<Province>();
+            => await GetModelsWithNoTrackingAsync<Province>(provinces => provinces.OrderBy(p => p.Name));
 
         public Ward[] GetWards(int districtId)
-            => GetModelsWithNoTracking<Ward>(w => w.DistrictId == districtId);
+            => GetModelsWithNoTracking<Ward>(wards => wards.Where(w => w.DistrictId == districtId).OrderBy(w => w.Name));
 
         public async Task<Ward[]> GetWardsAsync(int districtId)
-            => await GetModelsWithNoTrackingAsync<Ward>(w => w.DistrictId == districtId);
+            => await
+               GetModelsWithNoTrackingAsync<Ward>(
+                   wards => wards.Where(w => w.DistrictId == districtId).OrderBy(w => w.Name));
 
         public Apartment SaveApartment(Apartment apartment)
             => SaveModel(apartment);

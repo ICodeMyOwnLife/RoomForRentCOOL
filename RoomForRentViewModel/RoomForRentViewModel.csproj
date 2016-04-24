@@ -79,10 +79,12 @@
     <Compile Include="AddressesViewModel.cs" />
     <Compile Include="ApartmentsViewModel.cs" />
     <Compile Include="BuildingsViewModel.cs" />
+    <Compile Include="DistrictsViewModel.cs" />
     <Compile Include="NamedModelViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvincesViewModel.cs" />
     <Compile Include="RoomForRentViewModelConfig.cs" />
+    <Compile Include="WardsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Libraries\DotNet\CB.Database\CB.Database.EntityFramework\CB.Database.EntityFramework.csproj">
