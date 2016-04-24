@@ -12,46 +12,60 @@
 
     <Window.Resources>
         <vmd:BuildingsViewModel x:Key="ViewModel" />
+        
         <DataTemplate x:Key="BuildingNameCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Name}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingNameCellEditingTemplate" DataType="mdl:Building">
             <TextBox Text="{Binding Name}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingNumberCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Number}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingNumberCellEditingTemplate" DataType="mdl:Building">
             <xctk:IntegerUpDown Value="{Binding Number}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingStreetCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Street}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingStreetCellEditingTemplate" DataType="mdl:Building">
             <TextBox Text="{Binding Street}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingWardCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Ward}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingWardCellEditingTemplate" DataType="mdl:Building">
             <TextBox Text="{Binding Ward}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingDistrictCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding District}" />
         </DataTemplate>
+        
         <DataTemplate x:Key="BuildingDistrictCellEditingTemplate" DataType="mdl:Building">
             <TextBox Text="{Binding District}" />
         </DataTemplate>
+
         <DataTemplate x:Key="BuildingProvinceCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Province}" />
         </DataTemplate>
+
         <DataTemplate x:Key="BuildingProvinceCellEditingTemplate" DataType="mdl:Building">
             <TextBox Text="{Binding Province}" />
         </DataTemplate>
+            
         <DataTemplate x:Key="BuildingSaveCellTemplate">
             <Button Content="Save" Command="{Binding Source={StaticResource ViewModel}, Path=SaveBuildingCommand}"
                     CommandParameter="{Binding}" />
         </DataTemplate>
+            
         <DataTemplate x:Key="BuildingDeleteCellTemplate">
             <Button Content="Delete" Command="{Binding Source={StaticResource ViewModel}, Path=DeleteBuildingCommand}"
                     CommandParameter="{Binding}" />
@@ -129,7 +143,9 @@
             <ComboBox Grid.Row="1" Grid.Column="5"
                       ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Wards}"
                       SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedWard}"/>-->
-            <local:AddressesUserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" DataContext="{Binding Source={StaticResource ViewModel}, Path=AddressesViewModel}"></local:AddressesUserControl>
+            <local:AddressesUserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
+                                        HorizontalAlignment="Stretch"
+                                        DataContext="{Binding Source={StaticResource ViewModel}, Path=AddressesViewModel}"></local:AddressesUserControl>
         </Grid>
 
         <Button Grid.Row="2" Content="Add Building" Command="{Binding AddNewBuildingCommand}" />

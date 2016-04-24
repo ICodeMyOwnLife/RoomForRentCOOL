@@ -7,12 +7,11 @@ using RoomForRentModels;
 
 namespace RoomForRentViewModel
 {
-    public class AddressesViewModel: ViewModelBase
+    /*public class AddressesViewModel: ViewModelBase
     {
         #region Fields
         private ICommand _addNewDistrictCommand;
         private ICommand _addNewProvinceCommand;
-
         private ICommand _addNewWardCommand;
         private District[] _districts;
         private District _newDistrict = new District();
@@ -213,5 +212,5 @@ namespace RoomForRentViewModel
                         ? _roomForRentDataAccess.GetWards(SelectedDistrict.Id.Value) : new Ward[0];
         }
         #endregion
-    }
+    }*/
 }

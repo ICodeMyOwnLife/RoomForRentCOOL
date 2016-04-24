@@ -7,10 +7,11 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class District: IdModelBase
+    public class District: IdNameModelBase
     {
         #region Fields
-        private string _name;
+        [NonSerialized]
+        private ICollection<Building> _buildings;
 
         [NonSerialized]
         private Province _province;
@@ -23,10 +24,11 @@ namespace RoomForRentModels
 
 
         #region  Properties & Indexers
-        public string Name
+        [XmlIgnore]
+        public ICollection<Building> Buildings
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return _buildings; }
+            set { SetProperty(ref _buildings, value); }
         }
 
         [XmlIgnore]
@@ -35,16 +37,6 @@ namespace RoomForRentModels
             get { return _province; }
             set { SetProperty(ref _province, value); }
         }
-        [NonSerialized]
-        private ICollection<Building> _buildings;
-        [XmlIgnore]
-        public ICollection<Building> Buildings
-        {
-            get { return _buildings; }
-            set { SetProperty(ref _buildings, value); }
-        }
-
-        
 
         public int ProvinceId
         {

@@ -55,11 +55,29 @@ namespace RoomForRentEntityDataAccess
         public async Task DeleteBuildingAsync(int buildingId)
             => await DeleteModelAsync<Building>(buildingId);
 
+        public void DeleteDistrict(int districtId)
+            => DeleteModel<District>(districtId);
+
+        public async Task DeleteDistrictAsync(int districtId)
+            => await DeleteModelAsync<District>(districtId);
+
         public void DeleteOwner(int ownerId)
             => DeleteModel<Owner>(ownerId);
 
         public async Task DeleteOwnerAsync(int ownerId)
             => await DeleteModelAsync<Owner>(ownerId);
+
+        public void DeleteProvince(int provinceId)
+            => DeleteModel<Province>(provinceId);
+
+        public async Task DeleteProvinceAsync(int provinceId)
+            => await DeleteModelAsync<Province>(provinceId);
+
+        public void DeleteWard(int wardId)
+            => DeleteModel<Ward>(wardId);
+
+        public async Task DeleteWardAsync(int wardId)
+            => await DeleteModelAsync<Ward>(wardId);
 
         public Apartment GetApartment(int id)
             => GetModel<Apartment>(id);

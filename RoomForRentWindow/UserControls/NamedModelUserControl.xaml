@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="RoomForRentWindow.UserControls.NamedModelUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance vmd:NamedModelViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="{Binding Name, StringFormat='Select {0}:'}" />
+
+            <ComboBox Grid.Row="0" Grid.Column="1"
+                      ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                       Text="{Binding Name, StringFormat='Edit {0}:'}" />
+
+            <TextBox Grid.Row="1" Grid.Column="1"
+                     IsEnabled="{Binding CanEdit}"
+                     Text="{Binding SelectedItem.Name}" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Delete"
+                    Command="{Binding DeleteCommand}" />
+
+            <Button Grid.Column="2" Content="Add New"
+                    Command="{Binding AddNewItemCommand}" />
+
+            <Button Grid.Column="3" Content="Save"
+                    Command="{Binding SaveCommand}" />
+        </Grid>
+    </Grid>
+</UserControl>

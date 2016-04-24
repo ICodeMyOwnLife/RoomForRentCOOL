@@ -6,6 +6,9 @@ namespace RoomForRentModels
     public interface IAddressDataAccessAsync
     {
         #region Abstract
+        Task DeleteDistrictAsync(int districtId);
+        Task DeleteProvinceAsync(int provinceId);
+        Task DeleteWardAsync(int wardId);
         Task<District[]> GetDistrictsAsync(int provinceId);
         Task<Province[]> GetProvincesAsync();
         Task<Ward[]> GetWardsAsync(int districtId);

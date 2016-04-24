@@ -119,11 +119,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddressesUserControl.xaml.cs">
+    <Compile Include="UserControls\AddressesUserControl.xaml.cs">
       <DependentUpon>AddressesUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="RoomForRentWindowConfig.cs" />
-    <Page Include="AddressesUserControl.xaml">
+    <Compile Include="UserControls\NamedModelUserControl.xaml.cs">
+      <DependentUpon>NamedModelUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UserControls\AddressesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +163,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\NamedModelUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -8,6 +8,13 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance Type=vmd:AddressesViewModel}">
+
+    <UserControl.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="IsEditable" Value="False"></Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -26,7 +33,7 @@
         <!--Provinces-->
         <TextBlock Grid.Row="0" Grid.Column="0">Province:</TextBlock>
 
-        <ComboBox Grid.Row="0" Grid.Column="1" DisplayMemberPath="Name" IsEditable="True"
+        <ComboBox Grid.Row="0" Grid.Column="1" DisplayMemberPath="Name"
                   ItemsSource="{Binding Provinces}"
                   SelectedItem="{Binding SelectedProvince}"
                   Text="{Binding NewProvince.Name, UpdateSourceTrigger=PropertyChanged}">
@@ -41,7 +48,7 @@
         <!--Districts-->
         <TextBlock Grid.Row="0" Grid.Column="2">District:</TextBlock>
 
-        <ComboBox Grid.Row="0" Grid.Column="3" DisplayMemberPath="Name" IsEditable="True"
+        <ComboBox Grid.Row="0" Grid.Column="3" DisplayMemberPath="Name"
                   ItemsSource="{Binding Districts}"
                   SelectedItem="{Binding SelectedDistrict}"
                   Text="{Binding NewDistrict.Name, UpdateSourceTrigger=PropertyChanged}">
@@ -56,7 +63,7 @@
         <!--Wards-->
         <TextBlock Grid.Row="0" Grid.Column="4">Ward:</TextBlock>
 
-        <ComboBox Grid.Row="0" Grid.Column="5" DisplayMemberPath="Name" IsEditable="True"
+        <ComboBox Grid.Row="0" Grid.Column="5" DisplayMemberPath="Name"
                   ItemsSource="{Binding Wards}"
                   SelectedItem="{Binding SelectedWard}"
                   Text="{Binding NewWard.Name, UpdateSourceTrigger=PropertyChanged}">

@@ -7,7 +7,7 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Province: IdModelBase
+    public class Province: IdNameModelBase
     {
         #region Fields
         [NonSerialized]
@@ -15,8 +15,6 @@ namespace RoomForRentModels
 
         [NonSerialized]
         private ICollection<District> _districts;
-
-        private string _name;
         #endregion
 
 
@@ -33,12 +31,6 @@ namespace RoomForRentModels
         {
             get { return _districts; }
             set { SetProperty(ref _districts, value); }
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
         }
         #endregion
     }
