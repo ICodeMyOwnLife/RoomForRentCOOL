@@ -140,12 +140,12 @@ namespace RoomForRentViewModel
             return buildings;
         }
 
-        protected override void OnSelectedItemChanged(Building seletedItem)
+        protected override void OnSelectedItemChanged(Building selectedItem)
         {
-            base.OnSelectedItemChanged(seletedItem);
-            SetSelectedProvince(seletedItem.ProvinceId);
-            SetSelectedDistrict(seletedItem.DistrictId);
-            SetSelectedWard(seletedItem.WardId);
+            base.OnSelectedItemChanged(selectedItem);
+            SetSelectedProvince(selectedItem?.ProvinceId);
+            SetSelectedDistrict(selectedItem?.DistrictId);
+            SetSelectedWard(selectedItem?.WardId);
         }
 
         protected override Building SaveItem(Building item)

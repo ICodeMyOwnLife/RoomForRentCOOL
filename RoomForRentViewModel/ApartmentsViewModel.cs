@@ -1,19 +1,19 @@
-﻿using System.Windows.Input;
-using CB.Model.Common;
+﻿using CB.Model.Common;
 using RoomForRentModels;
 
 
 namespace RoomForRentViewModel
 {
-    public class ApartmentsViewModel: ViewModelBase
+    public class ApartmentsViewModel: IdModelViewModelBase<Apartment>
     {
         #region Fields
-        private ICommand _addNewApartmentCommand;
-        private Apartment[] _apartments;
         private Building[] _buildings;
-        private Apartment _newApartment = new Apartment();
         private Owner[] _owners;
         private readonly IRoomForRentDataAccess _roomForRentDataAccess;
+
+        private Building _selectedBuilding;
+
+        private Owner _selectedOwner;
         #endregion
 
 
@@ -29,24 +29,10 @@ namespace RoomForRentViewModel
 
 
         #region  Properties & Indexers
-        public ICommand AddNewApartmentCommand => GetCommand(ref _addNewApartmentCommand, _ => AddNewApartment());
-
-        public Apartment[] Apartments
-        {
-            get { return _apartments; }
-            set { SetProperty(ref _apartments, value); }
-        }
-
         public Building[] Buildings
         {
             get { return _buildings; }
             set { SetProperty(ref _buildings, value); }
-        }
-
-        public Apartment NewApartment
-        {
-            get { return _newApartment; }
-            set { SetProperty(ref _newApartment, value); }
         }
 
         public Owner[] Owners
@@ -54,23 +40,41 @@ namespace RoomForRentViewModel
             get { return _owners; }
             set { SetProperty(ref _owners, value); }
         }
-        #endregion
 
-
-        #region Methods
-        public void AddNewApartment()
+        public Building SelectedBuilding
         {
-            _roomForRentDataAccess.SaveApartment(NewApartment);
-            NewApartment = new Apartment();
-            ReloadAppartments();
+            get { return _selectedBuilding; }
+            set { SetProperty(ref _selectedBuilding, value); }
+        }
+
+        public Owner SelectedOwner
+        {
+            get { return _selectedOwner; }
+            set { SetProperty(ref _selectedOwner, value); }
         }
         #endregion
 
 
-        #region Implementation
-        private void ReloadAppartments()
+        #region Override
+        protected override bool CanSaveItem(Apartment item)
         {
-            Apartments = _roomForRentDataAccess.GetApartments();
+            return item?.Code != null;
+        }
+
+        protected override void DeleteItem(int id)
+        {
+            _roomForRentDataAccess.DeleteApartment(id);
+        }
+
+        protected override Apartment[] LoadItems()
+        {
+            return _roomForRentDataAccess.GetApartments();
+        }
+
+        protected override Apartment SaveItem(Apartment item)
+        {
+            //UNDONE: Set selected Building, selected Owner
+            return _roomForRentDataAccess.SaveApartment(item);
         }
         #endregion
     }

@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
         xmlns:mdl="clr-namespace:RoomForRentModels;assembly=RoomForRentModels"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:RoomForRentWindow"
-        xmlns:dataControls="http://wpf.cb.com/xaml"
+        xmlns:xaml="http://wpf.cb.com/xaml"
         mc:Ignorable="d"
         Title="BuildingsWindow" Height="480" Width="640">
 
@@ -18,87 +17,57 @@
             <TextBlock Text="{Binding Name}" />
         </DataTemplate>
 
-        <DataTemplate x:Key="BuildingNameCellEditingTemplate" DataType="mdl:Building">
-            <TextBox Text="{Binding Name}" />
-        </DataTemplate>
-
         <DataTemplate x:Key="BuildingNumberCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Number}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="BuildingNumberCellEditingTemplate" DataType="mdl:Building">
-            <xctk:IntegerUpDown Value="{Binding Number}" />
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingStreetCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Street}" />
         </DataTemplate>
 
-        <DataTemplate x:Key="BuildingStreetCellEditingTemplate" DataType="mdl:Building">
-            <TextBox Text="{Binding Street}" />
-        </DataTemplate>
-
         <DataTemplate x:Key="BuildingWardCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Ward.Name}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="BuildingWardCellEditingTemplate" DataType="mdl:Building">
-            <TextBox Text="{Binding Ward.Name}" />
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingDistrictCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding District.Name}" />
         </DataTemplate>
 
-        <DataTemplate x:Key="BuildingDistrictCellEditingTemplate" DataType="mdl:Building">
-            <TextBox Text="{Binding District.Name}" />
-        </DataTemplate>
-
         <DataTemplate x:Key="BuildingProvinceCellTemplate" DataType="mdl:Building">
             <TextBlock Text="{Binding Province.Name}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="BuildingProvinceCellEditingTemplate" DataType="mdl:Building">
-            <TextBox Text="{Binding Province.Name}" />
         </DataTemplate>
     </Window.Resources>
 
     <Grid DataContext="{StaticResource ViewModel}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <dataControls:IdModelControl Grid.Row="1">
-            <Grid >
+
+        <xaml:IdModelControl Grid.Row="1">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <DataGrid Grid.Row="0" ItemsSource="{Binding Items}"
-                  SelectedItem="{Binding SelectedItem}"
-                  AutoGenerateColumns="False">
+                <DataGrid Grid.Row="0" AutoGenerateColumns="False" HorizontalContentAlignment="Stretch"
+                          ItemsSource="{Binding Items}"
+                          SelectedItem="{Binding SelectedItem}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Name"
-                                        CellTemplate="{StaticResource BuildingNameCellTemplate}"
-                                        CellEditingTemplate="{StaticResource BuildingNameCellEditingTemplate}" />
+                                                CellTemplate="{StaticResource BuildingNameCellTemplate}" />
                         <DataGridTemplateColumn Header="Number"
-                                        CellTemplate="{StaticResource BuildingNumberCellTemplate}"
-                                        CellEditingTemplate="{StaticResource BuildingNumberCellEditingTemplate}" />
+                                                CellTemplate="{StaticResource BuildingNumberCellTemplate}" />
                         <DataGridTemplateColumn Header="Street"
-                                        CellTemplate="{StaticResource BuildingStreetCellTemplate}"
-                                        CellEditingTemplate="{StaticResource BuildingStreetCellEditingTemplate}" />
+                                                CellTemplate="{StaticResource BuildingStreetCellTemplate}" />
                         <DataGridTemplateColumn Header="Ward"
-                                        CellTemplate="{StaticResource BuildingWardCellTemplate}"
-                                        CellEditingTemplate="{StaticResource BuildingWardCellEditingTemplate}" />
+                                                CellTemplate="{StaticResource BuildingWardCellTemplate}" />
                         <DataGridTemplateColumn Header="District"
-                                        CellTemplate="{StaticResource BuildingDistrictCellTemplate}"
-                                        CellEditingTemplate="{StaticResource BuildingDistrictCellEditingTemplate}" />
+                                                CellTemplate="{StaticResource BuildingDistrictCellTemplate}" />
                         <DataGridTemplateColumn Header="Province"
-                                        CellTemplate="{StaticResource BuildingProvinceCellTemplate}"
-                                        CellEditingTemplate="{StaticResource BuildingProvinceCellEditingTemplate}" />
+                                                CellTemplate="{StaticResource BuildingProvinceCellTemplate}" />
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -127,11 +96,11 @@
                     <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Street}" />
 
                     <local:AddressesUserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"
-                                        HorizontalAlignment="Stretch"
-                                        DataContext="{Binding Source={StaticResource ViewModel}, Path=AddressesViewModel}" />
+                                                HorizontalAlignment="Stretch"
+                                                DataContext="{Binding Source={StaticResource ViewModel}, Path=AddressesViewModel}" />
                 </Grid>
             </Grid>
-        </dataControls:IdModelControl>
+        </xaml:IdModelControl>
     </Grid>
-    
+
 </Window>

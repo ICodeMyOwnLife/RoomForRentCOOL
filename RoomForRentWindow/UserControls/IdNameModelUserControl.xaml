@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:common="clr-namespace:CB.Model.Common;assembly=CB.Model.Common"
-             xmlns:dataControls="http://wpf.cb.com/xaml"
+             xmlns:xaml="http://wpf.cb.com/xaml"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance common:IdNameModelViewModel}">
-    <dataControls:IdModelControl>
+    
+    <xaml:IdModelControl>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -34,5 +35,5 @@
                  IsEnabled="{Binding CanEdit}"
                  Text="{Binding SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
-    </dataControls:IdModelControl>
+    </xaml:IdModelControl>
 </UserControl>
