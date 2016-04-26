@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -39,7 +40,7 @@ namespace RoomForRentViewModel
             _addressDataAccess.DeleteWard(id);
         }
 
-        protected override Ward[] LoadItems()
+        protected override IEnumerable<Ward> LoadItems()
         {
             return SeleteDistrict?.Id != null ? _addressDataAccess.GetWards(SeleteDistrict.Id.Value) : new Ward[0];
         }

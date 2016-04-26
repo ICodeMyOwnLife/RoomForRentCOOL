@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CB.Model.Common;
 using RoomForRentModels;
@@ -108,7 +109,6 @@ namespace RoomForRentViewModel
         {
             _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
             AddressesViewModel = new AddressesViewModel(_roomForRentDataAccess);
-            Load();
         }
         #endregion
 
@@ -134,7 +134,7 @@ namespace RoomForRentViewModel
             base.Load();
         }
 
-        protected override Building[] LoadItems()
+        protected override IEnumerable<Building> LoadItems()
         {
             var buildings = _roomForRentDataAccess.GetBuildings();
             return buildings;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -25,7 +26,7 @@ namespace RoomForRentViewModel
             _addressDataAccess.DeleteProvince(id);
         }
 
-        protected override Province[] LoadItems()
+        protected override IEnumerable<Province> LoadItems()
         {
             return _addressDataAccess.GetProvinces();
         }

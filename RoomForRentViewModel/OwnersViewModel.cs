@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -17,7 +18,6 @@ namespace RoomForRentViewModel
         public OwnersViewModel()
         {
             _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
-            Load();
         }
         #endregion
 
@@ -28,7 +28,7 @@ namespace RoomForRentViewModel
             _roomForRentDataAccess.DeleteOwner(id);
         }
 
-        protected override Owner[] LoadItems()
+        protected override IEnumerable<Owner> LoadItems()
         {
             return _roomForRentDataAccess.GetOwners();
         }

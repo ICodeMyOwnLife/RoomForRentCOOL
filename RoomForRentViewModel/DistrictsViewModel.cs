@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -39,7 +40,7 @@ namespace RoomForRentViewModel
             _addressDataAccess.DeleteDistrict(id);
         }
 
-        protected override District[] LoadItems()
+        protected override IEnumerable<District> LoadItems()
         {
             return SelectedProvince?.Id != null
                        ? _addressDataAccess.GetDistricts(SelectedProvince.Id.Value) : new District[0];
