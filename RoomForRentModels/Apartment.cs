@@ -9,9 +9,9 @@ namespace RoomForRentModels
     public class Apartment: IdModelBase
     {
         #region Fields
-        private decimal _area;
-        private DateTime _availableFrom;
-        private int _bedRoomCount;
+        private decimal? _area;
+        private DateTime? _availableFrom;
+        private int? _bedRoomCount;
 
         [NonSerialized]
         private Building _building;
@@ -19,32 +19,32 @@ namespace RoomForRentModels
         private int _buildingId;
         private string _code;
         private string _commission;
-        private bool _hasFurniture;
+        private bool? _hasFurniture;
         private string _note;
 
         [NonSerialized]
         private Owner _owner;
 
         private int _ownerId;
-        private decimal _price;
+        private decimal? _price;
         private DateTime _updatedOn = DateTime.Now;
         #endregion
 
 
         #region  Properties & Indexers
-        public decimal Area
+        public decimal? Area
         {
             get { return _area; }
             set { SetProperty(ref _area, value); }
         }
 
-        public DateTime AvailableFrom
+        public DateTime? AvailableFrom
         {
             get { return _availableFrom; }
             set { if (SetProperty(ref _availableFrom, value)) SetUpdatedOn(); }
         }
 
-        public int BedRoomCount
+        public int? BedRoomCount
         {
             get { return _bedRoomCount; }
             set { if (SetProperty(ref _bedRoomCount, value)) SetUpdatedOn(); }
@@ -81,7 +81,7 @@ namespace RoomForRentModels
             set { if (SetProperty(ref _commission, value)) SetUpdatedOn(); }
         }
 
-        public bool HasFurniture
+        public bool? HasFurniture
         {
             get { return _hasFurniture; }
             set { if (SetProperty(ref _hasFurniture, value)) SetUpdatedOn(); }
@@ -112,7 +112,7 @@ namespace RoomForRentModels
             set { if (SetProperty(ref _ownerId, value)) SetUpdatedOn(); }
         }
 
-        public decimal Price
+        public decimal? Price
         {
             get { return _price; }
             set { if (SetProperty(ref _price, value)) SetUpdatedOn(); }

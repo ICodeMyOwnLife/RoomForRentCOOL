@@ -76,11 +76,7 @@ namespace RoomForRentXmlDataAccess
 
         public void DeleteOwner(int ownerId)
         {
-            if (!Delete(ownerId, Owners, nameof(Owners), owner =>
-            {
-                Delete(owner.Emails, Emails, nameof(Emails));
-                Delete(owner.Telephones, Telephones, nameof(Telephones));
-            }, owner => owner.Apartments))
+            if (!Delete(ownerId, Owners, nameof(Owners), null, owner => owner.Apartments))
                 MessageBox.Show("Cannot delete this owner.");
         }
 
@@ -281,24 +277,6 @@ namespace RoomForRentXmlDataAccess
         {
             foreach (var owner in Owners.Where(o => o.Id.HasValue))
             {
-                owner.Telephones = Telephones.Where(t =>
-                {
-                    if (t.OwnerId != owner.Id.Value) return false;
-
-                    t.Owner = owner;
-                    t.OwnerId = owner.Id.Value;
-                    return true;
-                }).ToArray();
-
-                owner.Emails = Emails.Where(e =>
-                {
-                    if (e.OwnerId != owner.Id.Value) return false;
-
-                    e.Owner = owner;
-                    e.OwnerId = owner.Id.Value;
-                    return true;
-                }).ToArray();
-
                 owner.Apartments = Apartments.Where(a =>
                 {
                     if (a.OwnerId != owner.Id.Value) return false;

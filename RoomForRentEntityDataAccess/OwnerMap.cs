@@ -10,6 +10,8 @@ namespace RoomForRentEntityDataAccess
         {
             Property(o => o.Id).HasColumnOrder(50);
             Property(o => o.Name).HasColumnOrder(70).HasMaxLength(64).IsRequired();
+            Property(o => o.Telephones).HasColumnOrder(90).HasMaxLength(64).IsUnicode(false);
+            Property(o => o.Emails).HasColumnOrder(110).HasMaxLength(128);
 
             /*MapToStoredProcedures(s =>
             {

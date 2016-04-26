@@ -119,18 +119,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserControls\IdNameModelUserControl.xaml.cs">
-      <DependentUpon>IdNameModelUserControl.xaml</DependentUpon>
+    <Compile Include="Views\IdNameModelView.xaml.cs">
+      <DependentUpon>IdNameModelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\AddressesUserControl.xaml.cs">
-      <DependentUpon>AddressesUserControl.xaml</DependentUpon>
+    <Compile Include="Views\AddressesView.xaml.cs">
+      <DependentUpon>AddressesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="RoomForRentWindowConfig.cs" />
-    <Page Include="UserControls\IdNameModelUserControl.xaml">
+    <Compile Include="Views\OwnersView.xaml.cs">
+      <DependentUpon>OwnersView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\IdNameModelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\AddressesUserControl.xaml">
+    <Page Include="Views\AddressesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,20 +141,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ApartmentsWindow.xaml">
+    <Page Include="Views\ApartmentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BuildingsWindow.xaml">
+    <Page Include="Views\BuildingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="ApartmentsWindow.xaml.cs">
-      <DependentUpon>ApartmentsWindow.xaml</DependentUpon>
+    <Compile Include="Views\ApartmentsView.xaml.cs">
+      <DependentUpon>ApartmentsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -159,14 +162,18 @@
     </Compile>
     <Compile Include="AvailableTimeColorMap.cs" />
     <Compile Include="AvailableTimeToBrushConverter.cs" />
-    <Compile Include="BuildingsWindow.xaml.cs">
-      <DependentUpon>BuildingsWindow.xaml</DependentUpon>
+    <Compile Include="Views\BuildingsView.xaml.cs">
+      <DependentUpon>BuildingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="DaysColor.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Shell.xaml.cs">
+      <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\OwnersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

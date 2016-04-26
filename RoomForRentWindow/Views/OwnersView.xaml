@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="RoomForRentWindow.Views.OwnersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xaml="http://wpf.cb.com/xaml"
+             xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
+             xmlns:mdl="clr-namespace:RoomForRentModels;assembly=RoomForRentModels"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance vmd:OwnersViewModel}">
+
+    <UserControl.Resources>
+        <vmd:OwnersViewModel x:Key="ViewModel" />
+
+        <DataTemplate x:Key="OwnerNameTemplate" DataType="mdl:Owner">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="OwnerTelephonesTemplate" DataType="mdl:Owner">
+            <TextBlock Text="{Binding Telephones}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="OwnerEmailsTemplate" DataType="mdl:Owner">
+            <TextBlock Text="{Binding Emails}" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <xaml:IdModelControl DataContext="{StaticResource ViewModel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0" AutoGenerateColumns="False"
+                      ItemsSource="{Binding Items}"
+                      SelectedItem="{Binding SelectedItem}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Name" Width="*"
+                                            CellTemplate="{StaticResource OwnerNameTemplate}" />
+
+                    <DataGridTemplateColumn Header="Telephones" Width="3*"
+                                            CellTemplate="{StaticResource OwnerTelephonesTemplate}" />
+
+                    <DataGridTemplateColumn Header="Emails" Width="5*"
+                                            CellTemplate="{StaticResource OwnerEmailsTemplate}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="1" DataContext="{Binding SelectedItem}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Name:" />
+                <TextBox Grid.Column="1" Text="{Binding Name}" />
+
+                <TextBlock Grid.Column="2" Text="Telephones:" />
+                <TextBox Grid.Column="3" Text="{Binding Telephones}" />
+
+                <TextBlock Grid.Column="4" Text="Emails:" />
+                <TextBox Grid.Column="5" Text="{Binding Emails}" />
+            </Grid>
+        </Grid>
+    </xaml:IdModelControl>
+</UserControl>

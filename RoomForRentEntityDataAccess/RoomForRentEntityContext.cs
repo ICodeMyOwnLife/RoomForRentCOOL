@@ -40,9 +40,7 @@ namespace RoomForRentEntityDataAccess
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new ApartmentMap());
             modelBuilder.Configurations.Add(new BuildingMap());
-            modelBuilder.Configurations.Add(new EmailMap());
             modelBuilder.Configurations.Add(new OwnerMap());
-            modelBuilder.Configurations.Add(new TelephoneMap());
         }
         #endregion
     }

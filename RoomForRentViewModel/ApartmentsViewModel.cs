@@ -1,4 +1,6 @@
-﻿using CB.Model.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using CB.Model.Common;
 using RoomForRentModels;
 
 
@@ -10,20 +12,17 @@ namespace RoomForRentViewModel
         private Building[] _buildings;
         private Owner[] _owners;
         private readonly IRoomForRentDataAccess _roomForRentDataAccess;
-
         private Building _selectedBuilding;
-
         private Owner _selectedOwner;
         #endregion
 
 
         #region  Constructors & Destructor
+        [SuppressMessage("ReSharper", "VirtualMemberCallInContructor")]
         public ApartmentsViewModel()
         {
             _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
-            Buildings = _roomForRentDataAccess.GetBuildings();
-            Owners = _roomForRentDataAccess.GetOwners();
-            ReloadAppartments();
+            Load();
         }
         #endregion
 
@@ -58,7 +57,7 @@ namespace RoomForRentViewModel
         #region Override
         protected override bool CanSaveItem(Apartment item)
         {
-            return item?.Code != null;
+            return SelectedBuilding?.Id != null && SelectedOwner?.Id != null && item?.Code != null;
         }
 
         protected override void DeleteItem(int id)
@@ -66,15 +65,48 @@ namespace RoomForRentViewModel
             _roomForRentDataAccess.DeleteApartment(id);
         }
 
+        public override void Load()
+        {
+            Buildings = _roomForRentDataAccess.GetBuildings();
+            Owners = _roomForRentDataAccess.GetOwners();
+            base.Load();
+        }
+
         protected override Apartment[] LoadItems()
         {
             return _roomForRentDataAccess.GetApartments();
         }
 
+        protected override void OnSelectedItemChanged(Apartment seletedItem)
+        {
+            base.OnSelectedItemChanged(seletedItem);
+            SetSelectedBuilding(seletedItem?.BuildingId);
+            SetSelectedOwner(seletedItem?.OwnerId);
+        }
+
         protected override Apartment SaveItem(Apartment item)
         {
-            //UNDONE: Set selected Building, selected Owner
+            if (SelectedBuilding?.Id == null || SelectedOwner?.Id == null) return null;
+
+            SelectedItem.Building = null;
+            SelectedItem.BuildingId = SelectedBuilding.Id.Value;
+
+            SelectedItem.Owner = null;
+            SelectedItem.OwnerId = SelectedOwner.Id.Value;
             return _roomForRentDataAccess.SaveApartment(item);
+        }
+        #endregion
+
+
+        #region Implementation
+        private void SetSelectedBuilding(int? buildingId)
+        {
+            SelectedBuilding = buildingId == null ? null : Buildings?.FirstOrDefault(b => b.Id == buildingId);
+        }
+
+        private void SetSelectedOwner(int? ownerId)
+        {
+            SelectedOwner = ownerId == null ? null : Owners?.FirstOrDefault(o => o.Id == ownerId);
         }
         #endregion
     }

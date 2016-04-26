@@ -130,8 +130,8 @@ namespace RoomForRentViewModel
 
         public override void Load()
         {
-            base.Load();
             AddressesViewModel.Load();
+            base.Load();
         }
 
         protected override Building[] LoadItems()

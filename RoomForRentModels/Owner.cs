@@ -7,19 +7,14 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Owner: IdModelBase
+    public class Owner: IdNameModelBase
     {
         #region Fields
         [NonSerialized]
         private ICollection<Apartment> _apartments;
 
-        [NonSerialized]
-        private ICollection<Email> _emails;
-
-        private string _name;
-
-        [NonSerialized]
-        private ICollection<Telephone> _telephones;
+        private string _emails;
+        private string _telephones;
         #endregion
 
 
@@ -31,21 +26,13 @@ namespace RoomForRentModels
             set { SetProperty(ref _apartments, value); }
         }
 
-        [XmlIgnore]
-        public ICollection<Email> Emails
+        public string Emails
         {
             get { return _emails; }
             set { SetProperty(ref _emails, value); }
         }
 
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-
-        [XmlIgnore]
-        public ICollection<Telephone> Telephones
+        public string Telephones
         {
             get { return _telephones; }
             set { SetProperty(ref _telephones, value); }

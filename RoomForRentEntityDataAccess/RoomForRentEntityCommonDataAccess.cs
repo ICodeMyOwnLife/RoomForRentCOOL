@@ -12,10 +12,19 @@ namespace RoomForRentEntityDataAccess
     {
         #region Fields
         private const double FIVE_MINUTE = 1000 * 15;
+
+        private static readonly string[] _apartmentInclusions = { nameof(Apartment.Building), nameof(Apartment.Owner) };
         private bool _autoBackup;
         protected readonly string _backupFolder = RoomForRentEntityConfig.GetBackupFolder();
         protected readonly int _backupInterval = RoomForRentEntityConfig.GetBackupInterval();
         protected readonly string _backupLogFile = RoomForRentEntityConfig.GetBackupLogFile();
+
+        private readonly string[] _buildingInclusions =
+        {
+            nameof(Building.Province), nameof(Building.District),
+            nameof(Building.Ward)
+        };
+
         protected readonly string _connectionString;
         private Timer _timer;
         #endregion
@@ -87,19 +96,22 @@ namespace RoomForRentEntityDataAccess
             => await GetModelAsync<Apartment>(id);
 
         public Apartment[] GetApartments()
-            => GetModelsWithNoTracking<Apartment>();
+            => GetModelsWithNoTracking<Apartment>(_apartmentInclusions);
 
         public Apartment[] GetApartments(int buildingId)
-            => GetModelsWithNoTracking<Apartment>(apartment => apartment.BuildingId == buildingId);
+            => GetModelsWithNoTracking<Apartment>(apartment => apartment.BuildingId == buildingId, _apartmentInclusions);
 
         public async Task<Apartment[]> GetApartmentsAsync()
-            => await GetModelsWithNoTrackingAsync<Apartment>();
+            => await GetModelsWithNoTrackingAsync<Apartment>(_apartmentInclusions);
 
         public async Task<Apartment[]> GetApartmentsAsync(int buildingId)
-            => await GetModelsWithNoTrackingAsync<Apartment>(apartment => apartment.BuildingId == buildingId);
+            =>
+                await
+                GetModelsWithNoTrackingAsync<Apartment>(apartment => apartment.BuildingId == buildingId,
+                    _apartmentInclusions);
 
         public async Task<Building[]> GetBuidingsAsync()
-            => await GetModelsWithNoTrackingAsync<Building>();
+            => await GetModelsWithNoTrackingAsync<Building>(_buildingInclusions);
 
         public Building GetBuilding(int id)
             => GetModel<Building>(id);
@@ -109,8 +121,7 @@ namespace RoomForRentEntityDataAccess
 
         public Building[] GetBuildings()
             =>
-                GetModelsWithNoTracking<Building>(nameof(Building.Province), nameof(Building.District),
-                    nameof(Building.Ward));
+                GetModelsWithNoTracking<Building>(_buildingInclusions);
 
         public District[] GetDistricts(int provinceId)
             => GetModelsWithNoTracking<District>(

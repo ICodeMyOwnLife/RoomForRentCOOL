@@ -1,9 +1,9 @@
-﻿namespace RoomForRentWindow
+﻿namespace RoomForRentWindow.Views
 {
-    public partial class BuildingsWindow
+    public partial class ApartmentsView
     {
         #region  Constructors & Destructor
-        public BuildingsWindow()
+        public ApartmentsView()
         {
             InitializeComponent();
         }
