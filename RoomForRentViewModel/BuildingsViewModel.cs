@@ -151,7 +151,9 @@ namespace RoomForRentViewModel
         protected override Building SaveItem(Building item)
         {
             SetBuildingAddress(item);
-            return _roomForRentDataAccess.SaveBuilding(item);
+            var result = _roomForRentDataAccess.SaveBuilding(item);
+            item.CopyFrom(result, true);
+            return result;
         }
         #endregion
 
@@ -190,3 +192,5 @@ namespace RoomForRentViewModel
         #endregion
     }
 }
+
+// TODO: SaveModel include

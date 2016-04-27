@@ -37,7 +37,8 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentHasFurnitureTemplate" DataType="mdl:Apartment">
-            <CheckBox IsChecked="{Binding HasFurniture}" IsHitTestVisible="False" />
+            <CheckBox IsHitTestVisible="False" Focusable="False"
+                IsChecked="{Binding HasFurniture}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentPriceTemplate" DataType="mdl:Apartment">

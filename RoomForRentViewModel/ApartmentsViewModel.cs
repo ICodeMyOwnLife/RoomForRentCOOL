@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -60,11 +59,14 @@ namespace RoomForRentViewModel
             return SelectedBuilding?.Id != null && SelectedOwner?.Id != null && item?.Code != null;
         }
 
-        protected override IViewModelConfiguration CreateViewModelConfiguration()
+        protected override IViewModelConfiguration<Apartment> CreateViewModelConfiguration()
         {
-            var config = new ViewModelConfiguration<ApartmentsViewModel>(this);
-            config.Items(vm => vm.Buildings, () => _roomForRentDataAccess.GetBuildings(), vm => vm.SelectedBuilding,
+            var config = new ViewModelConfiguration<ApartmentsViewModel, Apartment>(this);
+            config.Items(vmd => vmd.Buildings, () => _roomForRentDataAccess.GetBuildings(), mdl => mdl.Building,
+                vm => vm.SelectedBuilding,
                 b => b.Id);
+            config.Items(vmd => vmd.Owners, () => _roomForRentDataAccess.GetOwners(), mdl => mdl.Owner,
+                vmd => vmd.SelectedOwner, o => o.Id);
             return config;
         }
 
@@ -85,12 +87,12 @@ namespace RoomForRentViewModel
             return _roomForRentDataAccess.GetApartments();
         }
 
-        protected override void OnSelectedItemChanged(Apartment seletedItem)
+        /*protected override void OnSelectedItemChanged(Apartment seletedItem)
         {
             base.OnSelectedItemChanged(seletedItem);
             SetSelectedBuilding(seletedItem?.BuildingId);
             SetSelectedOwner(seletedItem?.OwnerId);
-        }
+        }*/
 
         protected override Apartment SaveItem(Apartment item)
         {
@@ -101,13 +103,14 @@ namespace RoomForRentViewModel
 
             SelectedItem.Owner = null;
             SelectedItem.OwnerId = SelectedOwner.Id.Value;
-            return _roomForRentDataAccess.SaveApartment(item);
+            var result = _roomForRentDataAccess.SaveApartment(item);
+            item.CopyFrom(result, true);
+            return result;
         }
         #endregion
 
 
-        #region Implementation
-        private void SetSelectedBuilding(int? buildingId)
+        /*private void SetSelectedBuilding(int? buildingId)
         {
             SelectedBuilding = buildingId == null ? null : Buildings?.FirstOrDefault(b => b.Id == buildingId);
         }
@@ -115,7 +118,6 @@ namespace RoomForRentViewModel
         private void SetSelectedOwner(int? ownerId)
         {
             SelectedOwner = ownerId == null ? null : Owners?.FirstOrDefault(o => o.Id == ownerId);
-        }
-        #endregion
+        }*/
     }
 }
