@@ -60,17 +60,25 @@ namespace RoomForRentViewModel
             return SelectedBuilding?.Id != null && SelectedOwner?.Id != null && item?.Code != null;
         }
 
+        protected override IViewModelConfiguration CreateViewModelConfiguration()
+        {
+            var config = new ViewModelConfiguration<ApartmentsViewModel>(this);
+            config.Items(vm => vm.Buildings, () => _roomForRentDataAccess.GetBuildings(), vm => vm.SelectedBuilding,
+                b => b.Id);
+            return config;
+        }
+
         protected override void DeleteItem(int id)
         {
             _roomForRentDataAccess.DeleteApartment(id);
         }
 
-        public override void Load()
+        /*public override void Load()
         {
             Buildings = _roomForRentDataAccess.GetBuildings();
             Owners = _roomForRentDataAccess.GetOwners();
             base.Load();
-        }
+        }*/
 
         protected override IEnumerable<Apartment> LoadItems()
         {
