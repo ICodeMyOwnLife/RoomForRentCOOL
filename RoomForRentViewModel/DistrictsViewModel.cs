@@ -17,6 +17,7 @@ namespace RoomForRentViewModel
         public DistrictsViewModel(IAddressDataAccess addressDataAccess)
         {
             _addressDataAccess = addressDataAccess;
+            ModelDeleter(d => { if (d.Id != null) _addressDataAccess.DeleteDistrict(d.Id.Value); });
         }
         #endregion
 
@@ -35,11 +36,11 @@ namespace RoomForRentViewModel
 
 
         #region Override
-        protected override void DeleteItem(int id)
+        /*protected override void DeleteItem(int id)
         {
             _addressDataAccess.DeleteDistrict(id);
         }
-
+*/
         protected override IEnumerable<District> LoadItems()
         {
             return SelectedProvince?.Id != null

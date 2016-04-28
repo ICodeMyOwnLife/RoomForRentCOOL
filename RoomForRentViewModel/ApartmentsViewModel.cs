@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using CB.Model.Common;
 using RoomForRentModels;
 
 
 namespace RoomForRentViewModel
 {
-    public class ApartmentsViewModel: IdModelViewModelBase<Apartment>
+    public class ApartmentsViewModel : IdModelViewModelBase<Apartment>
     {
         #region Fields
         private Building[] _buildings;
@@ -22,9 +21,13 @@ namespace RoomForRentViewModel
         public ApartmentsViewModel()
         {
             _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
-            Collection(() => Buildings, () => SelectedBuilding, () => _roomForRentDataAccess.GetBuildings(), mdl => mdl.Building, b => b.Id);
-            Collection(() => Owners, () => SelectedOwner, () => _roomForRentDataAccess.GetOwners(), a => a.Owner,
-                o => o.Id);
+            ModelDeleter(a => { if (a.Id != null) _roomForRentDataAccess.DeleteApartment(a.Id.Value); });
+            ModelsLoader(() => _roomForRentDataAccess.GetApartments());
+            ModelSaver(a => _roomForRentDataAccess.SaveApartment(a));
+            Collection(() => Buildings, () => _roomForRentDataAccess.GetBuildings(), () => SelectedBuilding,
+                mdl => mdl.Building, a => a.BuildingId, b => b?.Id ?? 0);
+            Collection(() => Owners, () => _roomForRentDataAccess.GetOwners(), () => SelectedOwner, a => a.Owner, a => a.OwnerId,
+                o => o?.Id ?? 0);
         }
         #endregion
 
@@ -61,23 +64,13 @@ namespace RoomForRentViewModel
         {
             return SelectedBuilding?.Id != null && SelectedOwner?.Id != null && item?.Code != null;
         }
-        
-        protected override void DeleteItem(int id)
-        {
-            _roomForRentDataAccess.DeleteApartment(id);
-        }
 
-        /*public override void Load()
+        /*protected override void DeleteItem(Apartment item)
         {
-            Buildings = _roomForRentDataAccess.GetBuildings();
-            Owners = _roomForRentDataAccess.GetOwners();
-            base.Load();
+            if (item.Id != null) _roomForRentDataAccess.DeleteApartment(item.Id.Value);
         }*/
+        #endregion
 
-        protected override IEnumerable<Apartment> LoadItems()
-        {
-            return _roomForRentDataAccess.GetApartments();
-        }
 
         /*protected override void OnSelectedItemChanged(Apartment seletedItem)
         {
@@ -86,7 +79,7 @@ namespace RoomForRentViewModel
             SetSelectedOwner(seletedItem?.OwnerId);
         }*/
 
-        protected override Apartment SaveItem(Apartment item)
+        /*protected override Apartment SaveItem(Apartment item)
         {
             if (SelectedBuilding?.Id == null || SelectedOwner?.Id == null) return null;
 
@@ -101,9 +94,7 @@ namespace RoomForRentViewModel
             item.Building = SelectedBuilding;
             item.Owner = SelectedOwner;
             return result;
-        }
-        #endregion
-
+        }*/
 
         /*private void SetSelectedBuilding(int? buildingId)
         {
@@ -113,6 +104,18 @@ namespace RoomForRentViewModel
         private void SetSelectedOwner(int? ownerId)
         {
             SelectedOwner = ownerId == null ? null : Owners?.FirstOrDefault(o => o.Id == ownerId);
+        }*/
+
+        /*protected override IEnumerable<Apartment> LoadItems()
+        {
+            return _roomForRentDataAccess.GetApartments();
+        }*/
+
+        /*public override void Load()
+        {
+            Buildings = _roomForRentDataAccess.GetBuildings();
+            Owners = _roomForRentDataAccess.GetOwners();
+            base.Load();
         }*/
     }
 }

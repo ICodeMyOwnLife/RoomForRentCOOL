@@ -57,7 +57,7 @@ namespace RoomForRentModels
             set {
                 if (SetProperty(ref _building, value))
                 {
-                    if (value.Id != null) BuildingId = value.Id.Value;
+                    //if (value?.Id != null) BuildingId = value.Id.Value;
                     SetUpdatedOn();
                 }
             }
@@ -100,7 +100,7 @@ namespace RoomForRentModels
             set {
                 if (SetProperty(ref _owner, value))
                 {
-                    if (value.Id != null) OwnerId = value.Id.Value;
+                    //if (value?.Id != null) OwnerId = value.Id.Value;
                     SetUpdatedOn();
                 }
             }

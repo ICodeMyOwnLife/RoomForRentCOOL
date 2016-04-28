@@ -109,6 +109,7 @@ namespace RoomForRentViewModel
         {
             _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
             AddressesViewModel = new AddressesViewModel(_roomForRentDataAccess);
+            ModelDeleter(b => { if (b.Id != null) _roomForRentDataAccess.DeleteBuilding(b.Id.Value); });
         }
         #endregion
 
@@ -123,10 +124,10 @@ namespace RoomForRentViewModel
 
 
         #region Override
-        protected override void DeleteItem(int id)
+        /*protected override void DeleteItem(int id)
         {
             _roomForRentDataAccess.DeleteBuilding(id);
-        }
+        }*/
 
         public override void Load()
         {
@@ -193,4 +194,4 @@ namespace RoomForRentViewModel
     }
 }
 
-// TODO: SaveModel include
+// TODO: Set references after saving
