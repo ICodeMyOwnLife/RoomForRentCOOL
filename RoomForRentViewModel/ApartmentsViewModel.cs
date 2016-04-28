@@ -22,6 +22,9 @@ namespace RoomForRentViewModel
         public ApartmentsViewModel()
         {
             _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
+            Collection(() => Buildings, () => SelectedBuilding, () => _roomForRentDataAccess.GetBuildings(), mdl => mdl.Building, b => b.Id);
+            Collection(() => Owners, () => SelectedOwner, () => _roomForRentDataAccess.GetOwners(), a => a.Owner,
+                o => o.Id);
         }
         #endregion
 
@@ -58,18 +61,7 @@ namespace RoomForRentViewModel
         {
             return SelectedBuilding?.Id != null && SelectedOwner?.Id != null && item?.Code != null;
         }
-
-        protected override IViewModelConfiguration<Apartment> CreateViewModelConfiguration()
-        {
-            var config = new ViewModelConfiguration<ApartmentsViewModel, Apartment>(this);
-            config.Items(vmd => vmd.Buildings, () => _roomForRentDataAccess.GetBuildings(), mdl => mdl.Building,
-                vm => vm.SelectedBuilding,
-                b => b.Id);
-            config.Items(vmd => vmd.Owners, () => _roomForRentDataAccess.GetOwners(), mdl => mdl.Owner,
-                vmd => vmd.SelectedOwner, o => o.Id);
-            return config;
-        }
-
+        
         protected override void DeleteItem(int id)
         {
             _roomForRentDataAccess.DeleteApartment(id);
@@ -98,13 +90,16 @@ namespace RoomForRentViewModel
         {
             if (SelectedBuilding?.Id == null || SelectedOwner?.Id == null) return null;
 
-            SelectedItem.Building = null;
-            SelectedItem.BuildingId = SelectedBuilding.Id.Value;
+            item.Building = null;
+            item.BuildingId = SelectedBuilding.Id.Value;
 
-            SelectedItem.Owner = null;
-            SelectedItem.OwnerId = SelectedOwner.Id.Value;
+            item.Owner = null;
+            item.OwnerId = SelectedOwner.Id.Value;
+
             var result = _roomForRentDataAccess.SaveApartment(item);
-            item.CopyFrom(result, true);
+
+            item.Building = SelectedBuilding;
+            item.Owner = SelectedOwner;
             return result;
         }
         #endregion
