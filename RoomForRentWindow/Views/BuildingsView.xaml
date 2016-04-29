@@ -48,17 +48,17 @@
                       ItemsSource="{Binding Items}"
                       SelectedItem="{Binding SelectedItem}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Name" Width="2*"
+                    <DataGridTemplateColumn Header="Name" Width="2*" SortMemberPath="Name"
                                             CellTemplate="{StaticResource BuildingNameCellTemplate}" />
-                    <DataGridTemplateColumn Header="Number" Width="60"
+                    <DataGridTemplateColumn Header="Number" Width="60" SortMemberPath="Number"
                                             CellTemplate="{StaticResource BuildingNumberCellTemplate}" />
-                    <DataGridTemplateColumn Header="Street" Width="3*"
+                    <DataGridTemplateColumn Header="Street" Width="3*" SortMemberPath="Street"
                                             CellTemplate="{StaticResource BuildingStreetCellTemplate}" />
-                    <DataGridTemplateColumn Header="Ward" Width="1.5*"
+                    <DataGridTemplateColumn Header="Ward" Width="1.5*" SortMemberPath="Ward.Name"
                                             CellTemplate="{StaticResource BuildingWardCellTemplate}" />
-                    <DataGridTemplateColumn Header="District" Width="2.5*"
+                    <DataGridTemplateColumn Header="District" Width="2.5*" SortMemberPath="District.Name"
                                             CellTemplate="{StaticResource BuildingDistrictCellTemplate}" />
-                    <DataGridTemplateColumn Header="Province" Width="3.5*"
+                    <DataGridTemplateColumn Header="Province" Width="3.5*" SortMemberPath="Province.Name"
                                             CellTemplate="{StaticResource BuildingProvinceCellTemplate}" />
                 </DataGrid.Columns>
             </DataGrid>
@@ -78,13 +78,13 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0">Name</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="0">Name:</TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
 
-                <TextBlock Grid.Row="0" Grid.Column="2">Number</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="2">Number:</TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Number}" />
 
-                <TextBlock Grid.Row="0" Grid.Column="4">Street</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="4">Street:</TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Street}" />
 
                 <views:AddressesView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6"

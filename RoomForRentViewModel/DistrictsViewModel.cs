@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -17,7 +16,17 @@ namespace RoomForRentViewModel
         public DistrictsViewModel(IAddressDataAccess addressDataAccess)
         {
             _addressDataAccess = addressDataAccess;
-            ModelDeleter(d => { if (d.Id != null) _addressDataAccess.DeleteDistrict(d.Id.Value); });
+            ModelDeleter(i => _addressDataAccess.DeleteDistrict(i));
+            ModelSaver(d =>
+            {
+                if (SelectedProvince?.Id == null) return null;
+
+                d.ProvinceId = SelectedProvince.Id.Value;
+                return _addressDataAccess.SaveDistrict(d);
+            });
+            ModelsLoader(() =>
+                         SelectedProvince?.Id == null
+                             ? new District[0] : _addressDataAccess.GetDistricts(SelectedProvince.Id.Value));
         }
         #endregion
 
@@ -35,13 +44,13 @@ namespace RoomForRentViewModel
         #endregion
 
 
-        #region Override
         /*protected override void DeleteItem(int id)
         {
             _addressDataAccess.DeleteDistrict(id);
         }
 */
-        protected override IEnumerable<District> LoadItems()
+
+        /*protected override IEnumerable<District> LoadItems()
         {
             return SelectedProvince?.Id != null
                        ? _addressDataAccess.GetDistricts(SelectedProvince.Id.Value) : new District[0];
@@ -53,7 +62,6 @@ namespace RoomForRentViewModel
 
             item.ProvinceId = SelectedProvince.Id.Value;
             return _addressDataAccess.SaveDistrict(item);
-        }
-        #endregion
+        }*/
     }
 }

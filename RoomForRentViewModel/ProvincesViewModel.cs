@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -16,12 +15,14 @@ namespace RoomForRentViewModel
         public ProvincesViewModel(IAddressDataAccess addressDataAccess)
         {
             _addressDataAccess = addressDataAccess;
+            ModelDeleter(i => _addressDataAccess.DeleteProvince(i));
+            ModelSaver(p => _addressDataAccess.SaveProvince(p));
+            ModelsLoader(() => _addressDataAccess.GetProvinces());
         }
         #endregion
 
 
-        #region Override
-        protected override void DeleteItem(int id)
+        /*protected override void DeleteItem(int id)
         {
             _addressDataAccess.DeleteProvince(id);
         }
@@ -34,7 +35,6 @@ namespace RoomForRentViewModel
         protected override Province SaveItem(Province item)
         {
             return _addressDataAccess.SaveProvince(item);
-        }
-        #endregion
+        }*/
     }
 }

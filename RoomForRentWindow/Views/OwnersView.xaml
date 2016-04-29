@@ -36,13 +36,13 @@
                       ItemsSource="{Binding Items}"
                       SelectedItem="{Binding SelectedItem}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Name" Width="*"
+                    <DataGridTemplateColumn Header="Name" Width="*" SortMemberPath="Name"
                                             CellTemplate="{StaticResource OwnerNameTemplate}" />
 
-                    <DataGridTemplateColumn Header="Telephones" Width="3*"
+                    <DataGridTemplateColumn Header="Telephones" Width="3*" SortMemberPath="Telephones"
                                             CellTemplate="{StaticResource OwnerTelephonesTemplate}" />
 
-                    <DataGridTemplateColumn Header="Emails" Width="5*"
+                    <DataGridTemplateColumn Header="Emails" Width="5*" SortMemberPath="Emails"
                                             CellTemplate="{StaticResource OwnerEmailsTemplate}" />
                 </DataGrid.Columns>
             </DataGrid>

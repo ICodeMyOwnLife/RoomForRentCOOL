@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -9,7 +8,7 @@ namespace RoomForRentViewModel
     {
         #region Fields
         private readonly IAddressDataAccess _addressDataAccess;
-        private District _seleteDistrict;
+        private District _selectedDistrict;
         #endregion
 
 
@@ -17,41 +16,49 @@ namespace RoomForRentViewModel
         public WardsViewModel(IAddressDataAccess addressDataAccess)
         {
             _addressDataAccess = addressDataAccess;
+            ModelDeleter(i => _addressDataAccess.DeleteWard(i));
+            ModelSaver(w =>
+            {
+                if (SelectedDistrict?.Id == null) return null;
+
+                w.DistrictId = SelectedDistrict.Id.Value;
+                return _addressDataAccess.SaveWard(w);
+            });
+            ModelsLoader(
+                () => SelectedDistrict?.Id == null ? new Ward[0] : _addressDataAccess.GetWards(SelectedDistrict.Id.Value));
         }
         #endregion
 
 
         #region  Properties & Indexers
-        public District SeleteDistrict
+        public District SelectedDistrict
         {
-            get { return _seleteDistrict; }
+            get { return _selectedDistrict; }
             set
             {
-                _seleteDistrict = value; 
+                _selectedDistrict = value;
                 Load();
             }
         }
         #endregion
 
 
-        #region Override
-        protected override void DeleteItem(int id)
+        /*protected override void DeleteItem(int id)
         {
             _addressDataAccess.DeleteWard(id);
         }
 
         protected override IEnumerable<Ward> LoadItems()
         {
-            return SeleteDistrict?.Id != null ? _addressDataAccess.GetWards(SeleteDistrict.Id.Value) : new Ward[0];
+            return SelectedDistrict?.Id != null ? _addressDataAccess.GetWards(SelectedDistrict.Id.Value) : new Ward[0];
         }
 
         protected override Ward SaveItem(Ward item)
         {
-            if (SeleteDistrict?.Id == null) return null;
+            if (SelectedDistrict?.Id == null) return null;
 
-            item.DistrictId = SeleteDistrict.Id.Value;
+            item.DistrictId = SelectedDistrict.Id.Value;
             return _addressDataAccess.SaveWard(item);
-        }
-        #endregion
+        }*/
     }
 }

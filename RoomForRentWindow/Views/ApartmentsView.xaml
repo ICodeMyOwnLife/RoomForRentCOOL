@@ -60,7 +60,7 @@
             <TextBlock Text="{Binding UpdatedOn, StringFormat=dd/MM/yyyy}" />
         </DataTemplate>
 
-        <Style x:Key="ApartmentRowStyle" TargetType="DataGridRow">
+        <Style x:Key="ApartmentRowStyle" TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
             <Setter Property="Background"
                     Value="{Binding Path=(mdl:Apartment.AvailableFrom), Converter={StaticResource BrushConverter}}" />
         </Style>
@@ -82,34 +82,40 @@
                     <DataGridTemplateColumn Header="Code" Width="70" CanUserSort="True" SortMemberPath="Code"
                                             CellTemplate="{StaticResource ApartmentCodeTemplate}" />
 
-                    <DataGridTemplateColumn Header="Building" Width="1.5*" CanUserSort="True" SortMemberPath="Building.Name"
+                    <DataGridTemplateColumn Header="Building" Width="1*" CanUserSort="True"
+                                            SortMemberPath="Building.Name"
                                             CellTemplate="{StaticResource ApartmentBuildingTemplate}" />
 
                     <DataGridTemplateColumn Header="Owner" Width="*" CanUserSort="True" SortMemberPath="Owner.Name"
                                             CellTemplate="{StaticResource ApartmentOwnerTemplate}" />
 
-                    <DataGridTemplateColumn Header="Available From" Width="90" CanUserSort="True" SortMemberPath="AvailableFrom"
+                    <DataGridTemplateColumn Header="Available From" Width="95" CanUserSort="True"
+                                            SortMemberPath="AvailableFrom"
                                             CellTemplate="{StaticResource ApartmentAvailableFromTemplate}" />
 
                     <DataGridTemplateColumn Header="Area" Width="60" CanUserSort="True" SortMemberPath="Area"
                                             CellTemplate="{StaticResource ApartmentAreaTemplate}" />
 
-                    <DataGridTemplateColumn Header="Bedrooms" Width="65" CanUserSort="True" SortMemberPath="BedRoomCount"
+                    <DataGridTemplateColumn Header="Bedrooms" Width="70" CanUserSort="True"
+                                            SortMemberPath="BedRoomCount"
                                             CellTemplate="{StaticResource ApartmentBedRoomCountTemplate}" />
 
-                    <DataGridTemplateColumn Header="Furniture?" Width="70" CanUserSort="True" SortMemberPath="HasFurniture"
+                    <DataGridTemplateColumn Header="Furniture?" Width="75" CanUserSort="True"
+                                            SortMemberPath="HasFurniture"
                                             CellTemplate="{StaticResource ApartmentHasFurnitureTemplate}" />
 
                     <DataGridTemplateColumn Header="Price" Width="60" CanUserSort="True" SortMemberPath="Price"
                                             CellTemplate="{StaticResource ApartmentPriceTemplate}" />
 
-                    <DataGridTemplateColumn Header="Commission" Width="*" CanUserSort="True" SortMemberPath="Commission"
+                    <DataGridTemplateColumn Header="Commission" Width="*" CanUserSort="True"
+                                            SortMemberPath="Commission"
                                             CellTemplate="{StaticResource ApartmentCommissionTemplate}" />
 
                     <DataGridTemplateColumn Header="Note" Width="2*" CanUserSort="True" SortMemberPath="Note"
                                             CellTemplate="{StaticResource ApartmentNoteTemplate}" />
 
-                    <DataGridTemplateColumn Header="Updated On" Width="80" CanUserSort="True" SortMemberPath="UpdatedOn"
+                    <DataGridTemplateColumn Header="Updated On" Width="85" CanUserSort="True"
+                                            SortMemberPath="UpdatedOn"
                                             CellTemplate="{StaticResource ApartmentUpdatedOnTemplate}" />
                 </DataGrid.Columns>
             </DataGrid>

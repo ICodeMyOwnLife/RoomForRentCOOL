@@ -67,7 +67,7 @@ namespace RoomForRentViewModel
             ProvincesViewModel.BindProperty(nameof(ProvincesViewModel.SelectedItem), DistrictsViewModel,
                 nameof(DistrictsViewModel.SelectedProvince), BindMode.OneWay);
             DistrictsViewModel.BindProperty(nameof(DistrictsViewModel.SelectedItem), WardsViewModel,
-                nameof(WardsViewModel.SeleteDistrict), BindMode.OneWay);
+                nameof(WardsViewModel.SelectedDistrict), BindMode.OneWay);
             this.BindProperty(nameof(SelectedProvince), ProvincesViewModel, nameof(ProvincesViewModel.SelectedItem));
             this.BindProperty(nameof(SelectedDistrict), DistrictsViewModel, nameof(DistrictsViewModel.SelectedItem));
             this.BindProperty(nameof(SelectedWard), WardsViewModel, nameof(WardsViewModel.SelectedItem));
