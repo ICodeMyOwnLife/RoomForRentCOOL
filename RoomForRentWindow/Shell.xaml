@@ -8,15 +8,18 @@
         Title="Shell" Height="640" Width="800" WindowState="Maximized">
 
     <Window.Resources>
-        <Style TargetType="DataGrid">
+        <!--<Style TargetType="DataGrid">
             <Setter Property="CanUserAddRows" Value="False" />
             <Setter Property="CanUserDeleteRows" Value="False" />
+            <Setter Property="CanUserSortColumns" Value="True" />
             <Setter Property="ColumnWidth" Value="Auto" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
-        </Style>
+        </Style>-->
+        
+        
     </Window.Resources>
 
     <Grid>

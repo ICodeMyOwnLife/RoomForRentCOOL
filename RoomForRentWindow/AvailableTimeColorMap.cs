@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Xml.Serialization;
 
 
 namespace RoomForRentWindow
 {
     [Serializable]
+    [XmlRoot("AvailableTimeColorMap")]
     public class AvailableTimeColorMap
     {
         #region Fields
@@ -22,6 +24,7 @@ namespace RoomForRentWindow
         }
 
         public string DefaultColor1 { get; set; }
+
         public string DefaultColor2 { get; set; }
         #endregion
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CB.Model.Common;
 using RoomForRentModels;
@@ -109,7 +108,9 @@ namespace RoomForRentViewModel
         {
             _roomForRentDataAccess = RoomForRentViewModelConfig.GetDataAccess();
             AddressesViewModel = new AddressesViewModel(_roomForRentDataAccess);
-            ModelDeleter(b => { if (b.Id != null) _roomForRentDataAccess.DeleteBuilding(b.Id.Value); });
+            ModelDeleter(i => _roomForRentDataAccess.DeleteBuilding(i));
+            ModelsLoader(() => _roomForRentDataAccess.GetBuildings());
+            ModelSaver(b => _roomForRentDataAccess.SaveBuilding(b));
         }
         #endregion
 
@@ -129,17 +130,17 @@ namespace RoomForRentViewModel
             _roomForRentDataAccess.DeleteBuilding(id);
         }*/
 
-        public override void Load()
+        protected override void LoadCollections()
         {
             AddressesViewModel.Load();
-            base.Load();
+            base.LoadCollections();
         }
 
-        protected override IEnumerable<Building> LoadItems()
+        /*protected override IEnumerable<Building> LoadItems()
         {
             var buildings = _roomForRentDataAccess.GetBuildings();
             return buildings;
-        }
+        }*/
 
         protected override void OnSelectedItemChanged(Building selectedItem)
         {
@@ -149,18 +150,37 @@ namespace RoomForRentViewModel
             SetSelectedWard(selectedItem?.WardId);
         }
 
-        protected override Building SaveItem(Building item)
+        /*protected override Building SaveItem(Building item)
         {
-            SetBuildingAddress(item);
+            SetBuildingAddressId(item);
             var result = _roomForRentDataAccess.SaveBuilding(item);
             item.CopyFrom(result, true);
             return result;
+        }*/
+
+        protected override void SetModelAfterSaving(Building model)
+        {
+            model.Province = AddressesViewModel.SelectedProvince;
+            model.District = AddressesViewModel.SelectedDistrict;
+            model.Ward = AddressesViewModel.SelectedWard;
+            base.SetModelAfterSaving(model);
+        }
+
+        protected override void SetModelBeforeSaving(Building model)
+        {
+            model.Province = null;
+            model.District = null;
+            model.Ward = null;
+            model.ProvinceId = AddressesViewModel.SelectedProvince?.Id;
+            model.DistrictId = AddressesViewModel.SelectedDistrict?.Id;
+            model.WardId = AddressesViewModel.SelectedWard?.Id;
+            base.SetModelBeforeSaving(model);
         }
         #endregion
 
 
         #region Implementation
-        private void SetBuildingAddress(Building item)
+        /*private void SetBuildingAddressId(Building item)
         {
             item.Province = null;
             item.District = null;
@@ -168,7 +188,7 @@ namespace RoomForRentViewModel
             item.ProvinceId = AddressesViewModel.SelectedProvince?.Id;
             item.DistrictId = AddressesViewModel.SelectedDistrict?.Id;
             item.WardId = AddressesViewModel.SelectedWard?.Id;
-        }
+        }*/
 
         private void SetSelectedDistrict(int? districtId)
         {
@@ -193,5 +213,6 @@ namespace RoomForRentViewModel
         #endregion
     }
 }
+
 
 // TODO: Set references after saving

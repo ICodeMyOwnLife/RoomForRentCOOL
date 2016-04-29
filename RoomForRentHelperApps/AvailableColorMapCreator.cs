@@ -23,13 +23,13 @@ namespace RoomForRentHelperApps
                 DefaultColor1 = "Blue",
                 DefaultColor2 = "White"
             };
-            const string FILE = "color.map";
+            const string FILE = "colors.map";
             using (var writer = new StreamWriter(FILE))
             {
                 var ser = new XmlSerializer(typeof(AvailableTimeColorMap));
                 ser.Serialize(writer, map);
             }
-            Process.Start("explore.exe", $"/select,{FILE}");
+            Process.Start("explorer.exe", $"/select, {Path.GetFullPath(FILE)}");
         }
         #endregion
     }
