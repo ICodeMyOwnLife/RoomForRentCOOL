@@ -52,43 +52,82 @@ namespace RoomForRentEntityDataAccess
         #endregion
 
 
-        #region Methods
-        public void DeleteApartment(int apartmentId)
-            => DeleteModel<Apartment>(apartmentId);
+        #region Event Handlers
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            _timer.Stop();
+            if (ShouldBackup())
+            {
+                Backup();
+            }
+            _timer.Start();
+        }
+        #endregion
 
-        public async Task DeleteApartmentAsync(int apartmentId)
-            => await DeleteModelAsync<Apartment>(apartmentId);
 
-        public void DeleteBuilding(int buildingId)
-            => DeleteModel<Building>(buildingId);
+        #region Implementation
+        protected virtual void Backup() { }
 
-        public async Task DeleteBuildingAsync(int buildingId)
-            => await DeleteModelAsync<Building>(buildingId);
+        private void EnableTimer(bool isEnabled)
+        {
+            if (isEnabled)
+            {
+                _timer = new Timer(FIVE_MINUTE) { AutoReset = true, Enabled = true };
+                _timer.Elapsed += Timer_Elapsed;
+            }
+            else if (_timer != null)
+            {
+                _timer.Elapsed -= Timer_Elapsed;
+                _timer.Dispose();
+            }
+        }
 
-        public void DeleteDistrict(int districtId)
-            => DeleteModel<District>(districtId);
+        protected virtual bool ShouldBackup()
+        {
+            return false;
+        }
+        #endregion
 
-        public async Task DeleteDistrictAsync(int districtId)
-            => await DeleteModelAsync<District>(districtId);
 
-        public void DeleteOwner(int ownerId)
-            => DeleteModel<Owner>(ownerId);
+        #region Insertion/Updation
+        public Apartment SaveApartment(Apartment apartment) => SaveModel(apartment);
 
-        public async Task DeleteOwnerAsync(int ownerId)
-            => await DeleteModelAsync<Owner>(ownerId);
+        public async Task<Apartment> SaveApartmentAsync(Apartment apartment)
+            => await SaveModelAsync(apartment);
 
-        public void DeleteProvince(int provinceId)
-            => DeleteModel<Province>(provinceId);
+        public Building SaveBuilding(Building building)
+            => SaveModel(building);
 
-        public async Task DeleteProvinceAsync(int provinceId)
-            => await DeleteModelAsync<Province>(provinceId);
+        public async Task<Building> SaveBuildingAsync(Building building)
+            => await SaveModelAsync(building);
 
-        public void DeleteWard(int wardId)
-            => DeleteModel<Ward>(wardId);
+        public District SaveDistrict(District district)
+            => SaveModel(district);
 
-        public async Task DeleteWardAsync(int wardId)
-            => await DeleteModelAsync<Ward>(wardId);
+        public async Task<District> SaveDistrictAsync(District district)
+            => await SaveModelAsync(district);
 
+        public Owner SaveOwner(Owner owner)
+            => SaveModel(owner);
+
+        public async Task<Owner> SaveOwnerAsync(Owner owner)
+            => await SaveModelAsync(owner);
+
+        public Province SaveProvince(Province province)
+            => SaveModel(province);
+
+        public async Task<Province> SaveProvinceAsync(Province province)
+            => await SaveModelAsync(province);
+
+        public Ward SaveWard(Ward ward)
+            => SaveModel(ward);
+
+        public async Task<Ward> SaveWardAsync(Ward ward)
+            => await SaveModelAsync(ward);
+        #endregion
+
+
+        #region Retrieval
         public Apartment GetApartment(int id)
             => GetModel<Apartment>(id);
 
@@ -155,79 +194,45 @@ namespace RoomForRentEntityDataAccess
             => await
                GetModelsWithNoTrackingAsync<Ward>(
                    wards => wards.Where(w => w.DistrictId == districtId).OrderBy(w => w.Name));
-
-        public Apartment SaveApartment(Apartment apartment)
-            => SaveModel(apartment);
-
-        public async Task<Apartment> SaveApartmentAsync(Apartment apartment)
-            => await SaveModelAsync(apartment);
-
-        public Building SaveBuilding(Building building)
-            => SaveModel(building);
-
-        public async Task<Building> SaveBuildingAsync(Building building)
-            => await SaveModelAsync(building);
-
-        public District SaveDistrict(District district)
-            => SaveModel(district);
-
-        public async Task<District> SaveDistrictAsync(District district)
-            => await SaveModelAsync(district);
-
-        public Owner SaveOwner(Owner owner)
-            => SaveModel(owner);
-
-        public async Task<Owner> SaveOwnerAsync(Owner owner)
-            => await SaveModelAsync(owner);
-
-        public Province SaveProvince(Province province)
-            => SaveModel(province);
-
-        public async Task<Province> SaveProvinceAsync(Province province)
-            => await SaveModelAsync(province);
-
-        public Ward SaveWard(Ward ward)
-            => SaveModel(ward);
-
-        public async Task<Ward> SaveWardAsync(Ward ward)
-            => await SaveModelAsync(ward);
         #endregion
 
 
-        #region Event Handlers
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            _timer.Stop();
-            if (ShouldBackup())
-            {
-                Backup();
-            }
-            _timer.Start();
-        }
-        #endregion
+        #region Deletion
+        public void DeleteApartment(int apartmentId)
+            => DeleteModel<Apartment>(apartmentId);
 
+        public async Task DeleteApartmentAsync(int apartmentId)
+            => await DeleteModelAsync<Apartment>(apartmentId);
 
-        #region Implementation
-        protected virtual void Backup() { }
+        public void DeleteBuilding(int buildingId)
+            => DeleteModel<Building>(buildingId);
 
-        private void EnableTimer(bool isEnabled)
-        {
-            if (isEnabled)
-            {
-                _timer = new Timer(FIVE_MINUTE) { AutoReset = true, Enabled = true };
-                _timer.Elapsed += Timer_Elapsed;
-            }
-            else if (_timer != null)
-            {
-                _timer.Elapsed -= Timer_Elapsed;
-                _timer.Dispose();
-            }
-        }
+        public async Task DeleteBuildingAsync(int buildingId)
+            => await DeleteModelAsync<Building>(buildingId);
 
-        protected virtual bool ShouldBackup()
-        {
-            return false;
-        }
+        public void DeleteDistrict(int districtId)
+            => DeleteModel<District>(districtId);
+
+        public async Task DeleteDistrictAsync(int districtId)
+            => await DeleteModelAsync<District>(districtId);
+
+        public void DeleteOwner(int ownerId)
+            => DeleteModel<Owner>(ownerId);
+
+        public async Task DeleteOwnerAsync(int ownerId)
+            => await DeleteModelAsync<Owner>(ownerId);
+
+        public void DeleteProvince(int provinceId)
+            => DeleteModel<Province>(provinceId);
+
+        public async Task DeleteProvinceAsync(int provinceId)
+            => await DeleteModelAsync<Province>(provinceId);
+
+        public void DeleteWard(int wardId)
+            => DeleteModel<Ward>(wardId);
+
+        public async Task DeleteWardAsync(int wardId)
+            => await DeleteModelAsync<Ward>(wardId);
         #endregion
     }
 }
