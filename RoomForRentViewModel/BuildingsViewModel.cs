@@ -215,4 +215,4 @@ namespace RoomForRentViewModel
 }
 
 
-// TODO: Set references after saving
+// TODO: Test Set references after saving
