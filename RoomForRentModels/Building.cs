@@ -7,7 +7,7 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Building: IdNameModelBase
+    public class Building: IdNameEntityBase
     {
         #region Fields
         [NonSerialized]
@@ -34,14 +34,14 @@ namespace RoomForRentModels
 
         #region  Properties & Indexers
         [XmlIgnore]
-        public ICollection<Apartment> Apartments
+        public virtual ICollection<Apartment> Apartments
         {
             get { return _apartments; }
             set { SetProperty(ref _apartments, value); }
         }
 
         [XmlIgnore]
-        public District District
+        public virtual District District
         {
             get { return _district; }
             set { SetProperty(ref _district, value); }
@@ -60,7 +60,7 @@ namespace RoomForRentModels
         }
 
         [XmlIgnore]
-        public Province Province
+        public virtual Province Province
         {
             get { return _province; }
             set { SetProperty(ref _province, value); }
@@ -79,7 +79,7 @@ namespace RoomForRentModels
         }
 
         [XmlIgnore]
-        public Ward Ward
+        public virtual Ward Ward
         {
             get { return _ward; }
             set { SetProperty(ref _ward, value); }
@@ -94,10 +94,11 @@ namespace RoomForRentModels
 
 
         #region Override
-        public override void CopyFrom(IdModelBase obj, bool copyId)
+        public override void CopyFrom(IdEntityBase other, bool copyId = false)
         {
-            var building = obj as Building;
+            var building = other as Building;
             if (building == null) return;
+
             Apartments = building.Apartments;
             District = building.District;
             Name = building.Name;
@@ -105,7 +106,7 @@ namespace RoomForRentModels
             Province = building.Province;
             Street = building.Street;
             Ward = building.Ward;
-            base.CopyFrom(obj, copyId);
+            base.CopyFrom(other, copyId);
         }
         #endregion
     }

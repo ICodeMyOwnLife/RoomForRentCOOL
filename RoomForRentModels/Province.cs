@@ -7,7 +7,7 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Province: IdNameModelBase
+    public class Province: IdNameEntityBase
     {
         #region Fields
         [NonSerialized]
@@ -20,17 +20,30 @@ namespace RoomForRentModels
 
         #region  Properties & Indexers
         [XmlIgnore]
-        public ICollection<Building> Buildings
+        public virtual ICollection<Building> Buildings
         {
             get { return _buildings; }
             set { SetProperty(ref _buildings, value); }
         }
 
         [XmlIgnore]
-        public ICollection<District> Districts
+        public virtual ICollection<District> Districts
         {
             get { return _districts; }
             set { SetProperty(ref _districts, value); }
+        }
+        #endregion
+
+
+        #region Override
+        public override void CopyFrom(IdEntityBase other, bool copyId = false)
+        {
+            var province = other as Province;
+            if (province == null) return;
+
+            Buildings = province.Buildings;
+            Districts = province.Districts;
+            base.CopyFrom(other, copyId);
         }
         #endregion
     }

@@ -4,7 +4,7 @@ using RoomForRentModels;
 
 namespace RoomForRentViewModel
 {
-    public class DistrictsViewModel: IdNameModelViewModelBase<District>
+    public class DistrictsViewModel: IdNameEntityViewModelBase<District>
     {
         #region Fields
         private readonly IAddressDataAccess _addressDataAccess;
@@ -21,12 +21,12 @@ namespace RoomForRentViewModel
             {
                 if (SelectedProvince?.Id == null) return null;
 
-                d.ProvinceId = SelectedProvince.Id.Value;
+                d.ProvinceId = SelectedProvince.Id;
                 return _addressDataAccess.SaveDistrict(d);
             });
             ModelsLoader(() =>
                          SelectedProvince?.Id == null
-                             ? new District[0] : _addressDataAccess.GetDistricts(SelectedProvince.Id.Value));
+                             ? new District[0] : _addressDataAccess.GetDistricts(SelectedProvince.Id));
         }
         #endregion
 
@@ -42,26 +42,5 @@ namespace RoomForRentViewModel
             }
         }
         #endregion
-
-
-        /*protected override void DeleteItem(int id)
-        {
-            _addressDataAccess.DeleteDistrict(id);
-        }
-*/
-
-        /*protected override IEnumerable<District> LoadItems()
-        {
-            return SelectedProvince?.Id != null
-                       ? _addressDataAccess.GetDistricts(SelectedProvince.Id.Value) : new District[0];
-        }
-
-        protected override District SaveItem(District item)
-        {
-            if (SelectedProvince?.Id == null) return null;
-
-            item.ProvinceId = SelectedProvince.Id.Value;
-            return _addressDataAccess.SaveDistrict(item);
-        }*/
     }
 }

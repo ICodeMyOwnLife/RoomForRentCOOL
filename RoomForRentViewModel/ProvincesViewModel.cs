@@ -4,7 +4,7 @@ using RoomForRentModels;
 
 namespace RoomForRentViewModel
 {
-    public class ProvincesViewModel: IdNameModelViewModelBase<Province>
+    public class ProvincesViewModel: IdNameEntityViewModelBase<Province>
     {
         #region Fields
         private readonly IAddressDataAccess _addressDataAccess;
@@ -20,21 +20,5 @@ namespace RoomForRentViewModel
             ModelsLoader(() => _addressDataAccess.GetProvinces());
         }
         #endregion
-
-
-        /*protected override void DeleteItem(int id)
-        {
-            _addressDataAccess.DeleteProvince(id);
-        }
-
-        protected override IEnumerable<Province> LoadItems()
-        {
-            return _addressDataAccess.GetProvinces();
-        }
-
-        protected override Province SaveItem(Province item)
-        {
-            return _addressDataAccess.SaveProvince(item);
-        }*/
     }
 }

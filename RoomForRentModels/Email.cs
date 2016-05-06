@@ -6,7 +6,7 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Email: IdModelBase
+    public class Email: IdEntityBase
     {
         #region Fields
         private string _address;
@@ -26,7 +26,7 @@ namespace RoomForRentModels
         }
 
         [XmlIgnore]
-        public Owner Owner
+        public virtual Owner Owner
         {
             get { return _owner; }
             set { SetProperty(ref _owner, value); }
@@ -41,14 +41,15 @@ namespace RoomForRentModels
 
 
         #region Override
-        public override void CopyFrom(IdModelBase obj, bool copyId)
+        public override void CopyFrom(IdEntityBase other, bool copyId = false)
         {
-            var email = obj as Email;
+            var email = other as Email;
             if (email == null) return;
+
             Address = email.Address;
             Owner = email.Owner;
             OwnerId = email.OwnerId;
-            base.CopyFrom(obj, copyId);
+            base.CopyFrom(other, copyId);
         }
         #endregion
     }

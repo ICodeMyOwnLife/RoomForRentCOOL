@@ -81,7 +81,6 @@
     <Compile Include="ApartmentsViewModel.cs" />
     <Compile Include="BuildingsViewModel.cs" />
     <Compile Include="DistrictsViewModel.cs" />
-    <Compile Include="NamedModelViewModel.cs" />
     <Compile Include="OwnersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvincesViewModel.cs" />

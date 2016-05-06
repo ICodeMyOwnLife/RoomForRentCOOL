@@ -165,7 +165,7 @@ namespace RoomForRentXmlDataAccess
 
         #region Implementation
         /*private static void Delete<TModel>(int id, ICollection<TModel> models, string nameOfModelCollection)
-            where TModel: IdModelBase
+            where TModel: IdEntityBase
         {
             var model = Get(models, id);
             if (model == null) return;
@@ -176,7 +176,7 @@ namespace RoomForRentXmlDataAccess
 
         /*private static void Delete<TModel>(int id, ICollection<TModel> models, string nameOfModelCollection,
             Func<TModel, bool> deleteCascadedAction = null)
-            where TModel: IdModelBase
+            where TModel: IdEntityBase
         {
             var model = Get(models, id);
             if (model == null || deleteCascadedAction?.Invoke(model) != true) return;
@@ -187,7 +187,7 @@ namespace RoomForRentXmlDataAccess
         private static bool Delete<TModel>(int id, ICollection<TModel> models, string nameOfModelCollection,
             Action<TModel> success = null,
             params Func<TModel, IEnumerable>[] dependenceCollections)
-            where TModel: IdModelBase
+            where TModel: IdEntityBase
         {
             var model = Get(models, id);
             if (model == null ||
@@ -211,9 +211,9 @@ namespace RoomForRentXmlDataAccess
             Save(models, nameOfModelCollection);
         }
 
-        private static TModel Get<TModel>(IEnumerable<TModel> models, int id) where TModel: IdModelBase
+        private static TModel Get<TModel>(IEnumerable<TModel> models, int id) where TModel: IdEntityBase
         {
-            return models?.FirstOrDefault(m => m.Id.HasValue && m.Id.Value == id);
+            return models?.FirstOrDefault(m => m.Id == id);
         }
 
         private static int GetNextId(string modelName)
@@ -221,7 +221,7 @@ namespace RoomForRentXmlDataAccess
             /*var idModels = models.Where(m => m.Id.HasValue).ToArray();
 
             // ReSharper disable once PossibleInvalidOperationException
-            return idModels.Any() ? idModels.Max(m => m.Id.Value) + 1 : 1;*/
+            return idModels.Any() ? idModels.Max(m => m.Id) + 1 : 1;*/
 
             var modelId = Ids?.FirstOrDefault(mi => mi.ModelName == modelName);
             int id;
@@ -248,9 +248,9 @@ namespace RoomForRentXmlDataAccess
         }
 
         private static TModel Save<TModel>(TModel model, ICollection<TModel> models, string nameOfModelCollection)
-            where TModel: IdModelBase
+            where TModel: IdEntityBase
         {
-            var current = model.Id.HasValue ? Get(models, model.Id.Value) : null;
+            var current = Get(models, model.Id);
 
             // If not existing
             if (current == null)
@@ -275,26 +275,26 @@ namespace RoomForRentXmlDataAccess
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         private static void SetRelationalProperties()
         {
-            foreach (var owner in Owners.Where(o => o.Id.HasValue))
+            foreach (var owner in Owners)
             {
                 owner.Apartments = Apartments.Where(a =>
                 {
-                    if (a.OwnerId != owner.Id.Value) return false;
+                    if (a.OwnerId != owner.Id) return false;
 
                     a.Owner = owner;
-                    a.OwnerId = owner.Id.Value;
+                    a.OwnerId = owner.Id;
                     return true;
                 }).ToArray();
             }
 
-            foreach (var building in Buildings.Where(b => b.Id.HasValue))
+            foreach (var building in Buildings)
             {
                 building.Apartments = Apartments.Where(a =>
                 {
-                    if (a.BuildingId != building.Id.Value) return false;
+                    if (a.BuildingId != building.Id) return false;
 
                     a.Building = building;
-                    a.BuildingId = building.Id.Value;
+                    a.BuildingId = building.Id;
                     return true;
                 }).ToArray();
             }

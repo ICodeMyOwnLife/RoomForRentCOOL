@@ -133,6 +133,7 @@ namespace RoomForRentModels
         {
             var apartment = other as Apartment;
             if (apartment == null) return;
+
             AvailableFrom = apartment.AvailableFrom;
             BedRoomCount = apartment.BedRoomCount;
             Building = apartment.Building;

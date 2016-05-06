@@ -4,7 +4,7 @@ using RoomForRentModels;
 
 namespace RoomForRentViewModel
 {
-    public class WardsViewModel: IdNameModelViewModelBase<Ward>
+    public class WardsViewModel: IdNameEntityViewModelBase<Ward>
     {
         #region Fields
         private readonly IAddressDataAccess _addressDataAccess;
@@ -21,11 +21,11 @@ namespace RoomForRentViewModel
             {
                 if (SelectedDistrict?.Id == null) return null;
 
-                w.DistrictId = SelectedDistrict.Id.Value;
+                w.DistrictId = SelectedDistrict.Id;
                 return _addressDataAccess.SaveWard(w);
             });
             ModelsLoader(
-                () => SelectedDistrict?.Id == null ? new Ward[0] : _addressDataAccess.GetWards(SelectedDistrict.Id.Value));
+                () => SelectedDistrict?.Id == null ? new Ward[0] : _addressDataAccess.GetWards(SelectedDistrict.Id));
         }
         #endregion
 
@@ -41,24 +41,5 @@ namespace RoomForRentViewModel
             }
         }
         #endregion
-
-
-        /*protected override void DeleteItem(int id)
-        {
-            _addressDataAccess.DeleteWard(id);
-        }
-
-        protected override IEnumerable<Ward> LoadItems()
-        {
-            return SelectedDistrict?.Id != null ? _addressDataAccess.GetWards(SelectedDistrict.Id.Value) : new Ward[0];
-        }
-
-        protected override Ward SaveItem(Ward item)
-        {
-            if (SelectedDistrict?.Id == null) return null;
-
-            item.DistrictId = SelectedDistrict.Id.Value;
-            return _addressDataAccess.SaveWard(item);
-        }*/
     }
 }
