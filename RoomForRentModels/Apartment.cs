@@ -6,7 +6,7 @@ using CB.Model.Common;
 namespace RoomForRentModels
 {
     [Serializable]
-    public class Apartment: IdModelBase
+    public class Apartment: IdEntityBase
     {
         #region Fields
         private decimal? _area;
@@ -51,10 +51,11 @@ namespace RoomForRentModels
         }
 
         [XmlIgnore]
-        public Building Building
+        public virtual Building Building
         {
             get { return _building; }
-            set {
+            set
+            {
                 if (SetProperty(ref _building, value))
                 {
                     //if (value?.Id != null) BuildingId = value.Id.Value;
@@ -94,10 +95,11 @@ namespace RoomForRentModels
         }
 
         [XmlIgnore]
-        public Owner Owner
+        public virtual Owner Owner
         {
             get { return _owner; }
-            set {
+            set
+            {
                 if (SetProperty(ref _owner, value))
                 {
                     //if (value?.Id != null) OwnerId = value.Id.Value;
@@ -127,9 +129,9 @@ namespace RoomForRentModels
 
 
         #region Override
-        public override void CopyFrom(IdModelBase obj, bool copyId)
+        public override void CopyFrom(IdEntityBase other, bool copyId = false)
         {
-            var apartment = obj as Apartment;
+            var apartment = other as Apartment;
             if (apartment == null) return;
             AvailableFrom = apartment.AvailableFrom;
             BedRoomCount = apartment.BedRoomCount;
@@ -142,7 +144,7 @@ namespace RoomForRentModels
             Owner = apartment.Owner;
             OwnerId = apartment.OwnerId;
             Price = apartment.Price;
-            base.CopyFrom(obj, copyId);
+            base.CopyFrom(other, copyId);
         }
         #endregion
 
