@@ -6,7 +6,7 @@
              xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
              xmlns:views="clr-namespace:RoomForRentWindow.Views"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300" d:DataContext="{d:DesignInstance Type=vmd:AddressesViewModel}">
+             d:DesignHeight="100" d:DesignWidth="1200" d:DataContext="{d:DesignInstance Type=vmd:AddressesViewModel}">
 
     <Grid>
         <Grid.ColumnDefinitions>

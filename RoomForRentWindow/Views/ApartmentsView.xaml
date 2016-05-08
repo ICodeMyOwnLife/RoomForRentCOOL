@@ -4,19 +4,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:xaml="http://wpf.cb.com/xaml"
              xmlns:mdl="clr-namespace:RoomForRentModels;assembly=RoomForRentModels"
-             xmlns:local="clr-namespace:RoomForRentWindow"
-             mc:Ignorable="d" d:DesignHeight="640" d:DesignWidth="800">
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="1200"
+             d:DataContext="{d:DesignData Source=../SampleData/ApartmentsViewModelSampleData.xaml}">
 
     <UserControl.Resources>
         <vmd:ApartmentsViewModel x:Key="ViewModel" />
 
-        <local:AvailableTimeToBrushConverter x:Key="BrushConverter" />
-
         <DataTemplate x:Key="ApartmentCodeTemplate" DataType="mdl:Apartment">
-            <TextBlock Text="{Binding Code}" />
+            <TextBlock Text="{Binding Code}" Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentBuildingTemplate" DataType="mdl:Apartment">
@@ -28,28 +27,30 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentAvailableFromTemplate" DataType="mdl:Apartment">
-            <TextBlock Text="{Binding AvailableFrom, StringFormat='dd/MM/yyyy'}" />
+            <TextBlock Text="{Binding AvailableFrom, StringFormat='dd/MM/yyyy'}"
+                       Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentAreaTemplate" DataType="mdl:Apartment">
-            <TextBlock Text="{Binding Area}" />
+            <TextBlock Text="{Binding Area}" Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentBedRoomCountTemplate" DataType="mdl:Apartment">
-            <TextBlock Text="{Binding BedRoomCount}" />
+            <TextBlock Text="{Binding BedRoomCount}" Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentHasFurnitureTemplate" DataType="mdl:Apartment">
             <CheckBox IsHitTestVisible="False" Focusable="False"
-                      IsChecked="{Binding HasFurniture}" />
+                      IsChecked="{Binding HasFurniture}"
+                      Style="{StaticResource CheckBoxStyle.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentPriceTemplate" DataType="mdl:Apartment">
-            <TextBlock Text="{Binding Price}" />
+            <TextBlock Text="{Binding Price}" Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentCommissionTemplate" DataType="mdl:Apartment">
-            <TextBlock Text="{Binding Commission}" />
+            <TextBlock Text="{Binding Commission}" Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentNoteTemplate" DataType="mdl:Apartment">
@@ -57,12 +58,13 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ApartmentUpdatedOnTemplate" DataType="mdl:Apartment">
-            <TextBlock Text="{Binding UpdatedOn, StringFormat=dd/MM/yyyy}" />
+            <TextBlock Text="{Binding UpdatedOn, StringFormat=dd/MM/yyyy}"
+                       Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <Style x:Key="ApartmentRowStyle" TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
             <Setter Property="Background"
-                    Value="{Binding Path=(mdl:Apartment.AvailableFrom), Converter={StaticResource BrushConverter}}" />
+                    Value="{Binding Path=(mdl:Apartment.AvailableFrom), Converter={StaticResource BackgroundConverter}}" />
         </Style>
     </UserControl.Resources>
 
@@ -75,49 +77,55 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
+            <Grid.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlock.RightAlign}" />
+            </Grid.Resources>
+
             <DataGrid Grid.Row="0" AutoGenerateColumns="False" CanUserSortColumns="True"
-                      ItemsSource="{Binding ItemsView}"
+                      ItemsSource="{Binding ItemsView, Mode=OneWay}"
                       SelectedItem="{Binding SelectedItem}"
                       RowStyle="{StaticResource ApartmentRowStyle}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Code" Width="70" CanUserSort="True" SortMemberPath="Code"
-                                            CellTemplate="{StaticResource ApartmentCodeTemplate}" />
+                    <DataGridTemplateColumn Header="Code" SortMemberPath="Code"
+                                            CellTemplate="{StaticResource ApartmentCodeTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}" />
 
-                    <DataGridTemplateColumn Header="Building" Width="1*" CanUserSort="True"
-                                            SortMemberPath="Building.Name"
+                    <DataGridTemplateColumn Header="Building" SortMemberPath="Building.Name"
                                             CellTemplate="{StaticResource ApartmentBuildingTemplate}" />
 
-                    <DataGridTemplateColumn Header="Owner" Width="*" CanUserSort="True" SortMemberPath="Owner.Name"
+                    <DataGridTemplateColumn Header="Owner" SortMemberPath="Owner.Name"
                                             CellTemplate="{StaticResource ApartmentOwnerTemplate}" />
 
-                    <DataGridTemplateColumn Header="Available From" Width="95" CanUserSort="True"
-                                            SortMemberPath="AvailableFrom"
-                                            CellTemplate="{StaticResource ApartmentAvailableFromTemplate}" />
+                    <DataGridTemplateColumn Header="Available From" SortMemberPath="AvailableFrom"
+                                            CellTemplate="{StaticResource ApartmentAvailableFromTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}" />
 
-                    <DataGridTemplateColumn Header="Area" Width="60" CanUserSort="True" SortMemberPath="Area"
-                                            CellTemplate="{StaticResource ApartmentAreaTemplate}" />
+                    <DataGridTemplateColumn Header="Area" SortMemberPath="Area"
+                                            CellTemplate="{StaticResource ApartmentAreaTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}" />
 
-                    <DataGridTemplateColumn Header="Bedrooms" Width="70" CanUserSort="True"
-                                            SortMemberPath="BedRoomCount"
-                                            CellTemplate="{StaticResource ApartmentBedRoomCountTemplate}" />
+                    <DataGridTemplateColumn Header="Bedrooms" SortMemberPath="BedRoomCount"
+                                            CellTemplate="{StaticResource ApartmentBedRoomCountTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}" />
 
-                    <DataGridTemplateColumn Header="Furniture?" Width="75" CanUserSort="True"
-                                            SortMemberPath="HasFurniture"
-                                            CellTemplate="{StaticResource ApartmentHasFurnitureTemplate}" />
+                    <DataGridTemplateColumn Header="Furniture?" SortMemberPath="HasFurniture"
+                                            CellTemplate="{StaticResource ApartmentHasFurnitureTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}" />
 
-                    <DataGridTemplateColumn Header="Price" Width="60" CanUserSort="True" SortMemberPath="Price"
-                                            CellTemplate="{StaticResource ApartmentPriceTemplate}" />
+                    <DataGridTemplateColumn Header="Price" SortMemberPath="Price"
+                                            CellTemplate="{StaticResource ApartmentPriceTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}" />
 
-                    <DataGridTemplateColumn Header="Commission" Width="*" CanUserSort="True"
-                                            SortMemberPath="Commission"
-                                            CellTemplate="{StaticResource ApartmentCommissionTemplate}" />
+                    <DataGridTemplateColumn Header="Commission" SortMemberPath="Commission"
+                                            CellTemplate="{StaticResource ApartmentCommissionTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}" />
 
-                    <DataGridTemplateColumn Header="Note" Width="2*" CanUserSort="True" SortMemberPath="Note"
+                    <DataGridTemplateColumn Header="Note" SortMemberPath="Note"
                                             CellTemplate="{StaticResource ApartmentNoteTemplate}" />
 
-                    <DataGridTemplateColumn Header="Updated On" Width="85" CanUserSort="True"
-                                            SortMemberPath="UpdatedOn"
-                                            CellTemplate="{StaticResource ApartmentUpdatedOnTemplate}" />
+                    <DataGridTemplateColumn Header="Updated On" SortMemberPath="UpdatedOn"
+                                            CellTemplate="{StaticResource ApartmentUpdatedOnTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}" />
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -141,38 +149,63 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0">Building:</TextBlock>
-                <ComboBox Grid.Row="0" Grid.Column="1"
-                          SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedBuilding}"
-                          ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Buildings}"
-                          DisplayMemberPath="Name" />
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox Grid.Column="0"
+                              SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedBuilding}"
+                              ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Buildings}"
+                              DisplayMemberPath="Name" />
+                    <Button Grid.Column="1" Style="{StaticResource RefreshButton}"
+                            Command="{Binding Source={StaticResource ViewModel}, Path=LoadBuildingsCommand}" />
+                </Grid>
 
                 <TextBlock Grid.Row="0" Grid.Column="2">Code:</TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="3"
                          Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock Grid.Row="0" Grid.Column="4">Available from:</TextBlock>
-                <xctk:DateTimePicker Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" FormatString="dd/MM/yyyy"
-                                     Value="{Binding AvailableFrom}" />
+                <!--<xctk:DateTimePicker Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" FormatString="dd/MM/yyyy"
+                                     Value="{Binding AvailableFrom}" />-->
+                <DatePicker Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2"
+                            SelectedDate="{Binding AvailableFrom}"
+                            SelectedDateFormat="Long" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0">Owner:</TextBlock>
-                <ComboBox Grid.Row="1" Grid.Column="1"
-                          SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedOwner}"
-                          ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Owners}"
-                          DisplayMemberPath="Name" />
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox Grid.Column="0"
+                              SelectedItem="{Binding Source={StaticResource ViewModel}, Path=SelectedOwner}"
+                              ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Owners}"
+                              DisplayMemberPath="Name" />
+                    <Button Grid.Column="1" Style="{StaticResource RefreshButton}"
+                            Command="{Binding Source={StaticResource ViewModel}, Path=LoadOwnersCommand}" />
+                </Grid>
 
                 <TextBlock Grid.Row="1" Grid.Column="2">Area:</TextBlock>
-                <xctk:DecimalUpDown Grid.Row="1" Grid.Column="3"
-                                    Value="{Binding Area}" />
+                <!--<xctk:DecimalUpDown Grid.Row="1" Grid.Column="3"
+                                    Value="{Binding Area}" />-->
+                <mah:NumericUpDown Grid.Row="1" Grid.Column="3" Minimum="0"
+                                   Value="{Binding Area}" />
 
                 <TextBlock Grid.Row="1" Grid.Column="4">Bed room count:</TextBlock>
-                <xctk:IntegerUpDown Grid.Row="1" Grid.Column="5"
-                                    Value="{Binding BedRoomCount}" />
+                <!--<xctk:IntegerUpDown Grid.Row="1" Grid.Column="5"
+                                    Value="{Binding BedRoomCount}" />-->
+                <mah:NumericUpDown Grid.Row="1" Grid.Column="5" Minimum="0" HasDecimals="False"
+                                   Value="{Binding BedRoomCount}" />
 
                 <CheckBox Grid.Row="1" Grid.Column="6" Content="Has furniture?"
                           IsChecked="{Binding HasFurniture}" />
 
                 <TextBlock Grid.Row="2" Grid.Column="0">Price:</TextBlock>
-                <xctk:DecimalUpDown Grid.Row="2" Grid.Column="1" Value="{Binding Price}" />
+                <!--<xctk:DecimalUpDown Grid.Row="2" Grid.Column="1" Value="{Binding Price}" />-->
+                <mah:NumericUpDown Grid.Row="2" Grid.Column="1" Minimum="0"
+                                   Value="{Binding Price}" />
 
                 <TextBlock Grid.Row="2" Grid.Column="2">Commission:</TextBlock>
                 <TextBox Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="4"

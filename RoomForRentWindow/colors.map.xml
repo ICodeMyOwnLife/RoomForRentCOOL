@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<AvailableTimeColorMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DaysColors>
+    <DaysColor>
+      <Color1>#66FFC8C8</Color1>
+      <Color2>#88FFC8C8</Color2>
+      <!--<Color2>#88FFE1E1</Color2>-->
+      <Days>0</Days>
+    </DaysColor>
+    <DaysColor>
+      <Color1>#66FFFFC8</Color1>
+      <Color2>#88FFFFC8</Color2>
+      <!--<Color2>#88FFFFE1</Color2>-->
+      <Days>90</Days>
+    </DaysColor>
+    <DaysColor>
+      <Color1>#66C8FFC8</Color1>
+      <Color2>#88C8FFC8</Color2>
+      <!--<Color2>#88E1FFE1</Color2>-->
+      <Days>180</Days>
+    </DaysColor>
+    <DaysColor>
+      <Color1>#66C8FFFF</Color1>
+      <Color2>#88C8FFFF</Color2>
+      <!--<Color2>#88E1FFFF</Color2>-->
+      <Days>270</Days>
+    </DaysColor>
+    <DaysColor>
+      <Color1>#66C8C8FF</Color1>
+      <Color2>#88C8C8FF</Color2>
+      <!--<Color2>#88E1E1FF</Color2>-->
+      <Days>360</Days>
+    </DaysColor>
+  </DaysColors>
+  <DefaultColor1>#66DCDCDC</DefaultColor1>
+  <DefaultColor2>#88DCDCDC</DefaultColor2>
+  <!--<DefaultColor2>#88F0F0F0</DefaultColor2>-->
+</AvailableTimeColorMap>

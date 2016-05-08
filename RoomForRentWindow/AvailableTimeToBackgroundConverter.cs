@@ -31,4 +31,27 @@ namespace RoomForRentWindow
         }
         #endregion
     }
+
+    [ValueConversion(typeof(DateTime), typeof(Brush))]
+    public class AvailableTimeToBackgroundConverter: IValueConverter
+    {
+        #region Fields
+        private static readonly AvailableTimeBrushMap _map = RoomForRentWindowConfig.GetAvailableTimeBrushMap();
+        #endregion
+
+
+        #region Methods
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is DateTime)) return DependencyProperty.UnsetValue;
+            var availableFrom = (DateTime)value;
+            return _map.GetBackground(availableFrom);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+        #endregion
+    }
 }

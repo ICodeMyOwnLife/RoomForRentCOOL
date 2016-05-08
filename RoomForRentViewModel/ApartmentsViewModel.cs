@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Windows.Input;
 using CB.Model.Common;
 using RoomForRentModels;
 
@@ -9,6 +10,9 @@ namespace RoomForRentViewModel
     {
         #region Fields
         private Building[] _buildings;
+        private ICommand _loadBuildingsCommand;
+
+        private ICommand _loadOwnersCommand;
         private Owner[] _owners;
         private readonly IRoomForRentDataAccess _roomForRentDataAccess;
         private Building _selectedBuilding;
@@ -40,6 +44,9 @@ namespace RoomForRentViewModel
             set { SetProperty(ref _buildings, value); }
         }
 
+        public ICommand LoadBuildingsCommand => GetCommand(ref _loadBuildingsCommand, _ => LoadBuildings());
+        public ICommand LoadOwnersCommand => GetCommand(ref _loadOwnersCommand, _ => LoadOwners());
+
         public Owner[] Owners
         {
             get { return _owners; }
@@ -60,6 +67,15 @@ namespace RoomForRentViewModel
         #endregion
 
 
+        #region Methods
+        public void LoadBuildings()
+            => Buildings = _roomForRentDataAccess.GetBuildings();
+
+        public void LoadOwners()
+            => Owners = _roomForRentDataAccess.GetOwners();
+        #endregion
+
+
         #region Override
         protected override bool CanSaveItem(Apartment item)
         {
@@ -68,3 +84,10 @@ namespace RoomForRentViewModel
         #endregion
     }
 }
+
+
+// TODO: Merge branch
+// TODO: Data Access: Copy after Save: Error object context disposed
+// TODO: Data Grid Header brushes
+// TODO: Reload Collections
+// TODO: Use new Data Access implementations

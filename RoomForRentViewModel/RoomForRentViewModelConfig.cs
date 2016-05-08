@@ -59,3 +59,6 @@ namespace RoomForRentViewModel
         #endregion
     }
 }
+
+
+// TODO: XAML serializer

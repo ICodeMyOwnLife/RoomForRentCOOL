@@ -1,0 +1,311 @@
+﻿<vmd:ApartmentsViewModel
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vmd="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel"
+    xmlns:mku="clr-namespace:System.Windows.Markup;assembly=System.Xaml"
+    xmlns:mdl="clr-namespace:RoomForRentModels;assembly=RoomForRentModels"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    CanEdit="True" Name="Apartment" Progress="0.54" PluralName="Apartments" State="OK">
+
+    <vmd:ApartmentsViewModel.Items>
+        <mku:Array Type="{mku:Type mdl:Apartment}">
+            <mdl:Apartment Area="78" AvailableFrom="06/15/2016" BedRoomCount="2"
+                           Code="F789324" Commission="0.9 month/year" HasFurniture="True"
+                           Id="37" Note="Very attractive" Price="45.7" UpdatedOn="04/15/2016">
+                <mdl:Apartment.Building>
+                    <mdl:Building Name="Aquarius" />
+                </mdl:Apartment.Building>
+                <mdl:Apartment.Owner>
+                    <mdl:Owner Name="Henry" />
+                </mdl:Apartment.Owner>
+            </mdl:Apartment>
+            <mdl:Apartment Area="126" AvailableFrom="12/15/2016" BedRoomCount="3"
+                           Code="R87956" Commission="1.2 month/year" HasFurniture="True"
+                           Id="31" Note="Very beautiful" Price="76.99" UpdatedOn="01/15/2016">
+                <mdl:Apartment.Building>
+                    <mdl:Building Name="Denille" />
+                </mdl:Apartment.Building>
+                <mdl:Apartment.Owner>
+                    <mdl:Owner Name="Peter" />
+                </mdl:Apartment.Owner>
+            </mdl:Apartment>
+        </mku:Array>
+    </vmd:ApartmentsViewModel.Items>
+
+    <vmd:ApartmentsViewModel.Buildings>
+        <mku:Array Type="{mku:Type mdl:Building}">
+            <mdl:Building Id="74" Number="Sed mauris curabitur adipiscing phasellus"
+                          Name="Ante quisque congue cursus vivamus" Street="Aptent duis consequat">
+                <mdl:Building.District>
+                    <mdl:District Id="60" Name="Maecenas aenean" ProvinceId="55">
+                        <mdl:District.Province>
+                            <mdl:Province Id="29" Name="Class nam vestibulum" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="32" Name="Dis cras nullam aliquam" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="56" Id="80" Name="Integer praesent auctor">
+                        <mdl:Ward.District>
+                            <mdl:District Id="40" Name="Nunc amet" ProvinceId="55" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="99" Number="Hac parturient" Name="Fermentum lectus" Street="Facilisis dictumst diam">
+                <mdl:Building.District>
+                    <mdl:District Id="64" Name="Aliquam est arcu aliquet donec" ProvinceId="67">
+                        <mdl:District.Province>
+                            <mdl:Province Id="12" Name="Convallis curae dignissim elementum accumsan" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="21" Name="Bibendum blandit" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="94" Id="94" Name="Vestibulum vestibulum adipiscing">
+                        <mdl:Ward.District>
+                            <mdl:District Id="97" Name="Dictum eleifend leo commodo" ProvinceId="56" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="89" Number="Libero conubia" Name="Himenaeos interdum adipiscing enim"
+                          Street="Habitant luctus magnis habitasse">
+                <mdl:Building.District>
+                    <mdl:District Id="45" Name="Eget vestibulum" ProvinceId="78">
+                        <mdl:District.Province>
+                            <mdl:Province Id="18" Name="Facilisi faucibus fringilla parturient etiam" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="92" Name="Ligula elit mus litora" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="37" Id="24" Name="Mattis vestibulum">
+                        <mdl:Ward.District>
+                            <mdl:District Id="91" Name="Hendrerit inceptos fusce" ProvinceId="81" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="48" Number="Nec erat adipiscing montes" Name="Adipiscing lobortis penatibus nunc"
+                          Street="Eros non nostra">
+                <mdl:Building.District>
+                    <mdl:District Id="23" Name="Vestibulum mollis vestibulum" ProvinceId="81">
+                        <mdl:District.Province>
+                            <mdl:Province Id="64" Name="Imperdiet mauris parturient" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="12" Name="Lorem cubilia parturient malesuada vestibulum" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="10" Id="53" Name="Nisi sed sem nisl platea">
+                        <mdl:Ward.District>
+                            <mdl:District Id="74" Name="Ornare nibh vestibulum per dapibus" ProvinceId="22" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="41" Number="Sit nulla" Name="Quam venenatis vulputate nascetur"
+                          Street="Nam proin tincidunt">
+                <mdl:Building.District>
+                    <mdl:District Id="63" Name="Primis euismod" ProvinceId="71">
+                        <mdl:District.Province>
+                            <mdl:Province Id="73" Name="Parturient odio morbi egestas" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="56" Name="Vestibulum orci porttitor vel" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="59" Id="91" Name="Dolor vestibulum rutrum pede ultricies">
+                        <mdl:Ward.District>
+                            <mdl:District Id="35" Name="Tristique augue" ProvinceId="13" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="31" Number="Curabitur lacinia sapien placerat" Name="Amet natoque phasellus taciti"
+                          Street="Cras duis pulvinar">
+                <mdl:Building.District>
+                    <mdl:District Id="63" Name="Felis quis gravida urna iaculis" ProvinceId="44">
+                        <mdl:District.Province>
+                            <mdl:Province Id="93" Name="Adipiscing fames pharetra feugiat" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="71" Name="Semper sociis" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="87" Id="97" Name="Justo lacus">
+                        <mdl:Ward.District>
+                            <mdl:District Id="68" Name="Ipsum laoreet nunc sagittis" ProvinceId="68" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="99" Number="Vestibulum pretium tempor convallis torquent"
+                          Name="Volutpat aenean diam magna viverra" Street="Est hac vehicula">
+                <mdl:Building.District>
+                    <mdl:District Id="73" Name="Senectus sociosqu suscipit potenti tellus" ProvinceId="36">
+                        <mdl:District.Province>
+                            <mdl:Province Id="31" Name="Parturient sed vestibulum posuere consequat" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="69" Name="Dis lorem adipiscing ultrices rhoncus" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="50" Id="91" Name="Arcu leo turpis varius">
+                        <mdl:Ward.District>
+                            <mdl:District Id="40" Name="Tempus tortor ante sodales" ProvinceId="95" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="32" Number="Elementum accumsan" Name="Nullam vivamus" Street="Enim parturient erat">
+                <mdl:Building.District>
+                    <mdl:District Id="55" Name="Maecenas integer praesent" ProvinceId="10">
+                        <mdl:District.Province>
+                            <mdl:Province Id="61" Name="Parturient vestibulum aliquam vestibulum dignissim" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="89" Name="Eget massa mus elit adipiscing" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="59" Id="31" Name="Nec quisque eros">
+                        <mdl:Ward.District>
+                            <mdl:District Id="13" Name="Metus facilisis morbi mauris" ProvinceId="20" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="80" Number="Aliquam odio orci aptent" Name="Hendrerit congue urna cursus"
+                          Street="Netus auctor per">
+                <mdl:Building.District>
+                    <mdl:District Id="74" Name="Nisi nisl nunc" ProvinceId="61">
+                        <mdl:District.Province>
+                            <mdl:Province Id="46" Name="Nibh non" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="19" Name="Neque bibendum fermentum" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="59" Id="44" Name="Habitasse aliquet quam eleifend quis">
+                        <mdl:Ward.District>
+                            <mdl:District Id="89" Name="Dictumst fringilla sed nulla pede" ProvinceId="43" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+            <mdl:Building Id="26" Number="Blandit commodo conubia vestibulum facilisi"
+                          Name="Vestibulum egestas adipiscing litora duis" Street="Libero parturient ligula risus">
+                <mdl:Building.District>
+                    <mdl:District Id="22" Name="Porta sem dictum" ProvinceId="93">
+                        <mdl:District.Province>
+                            <mdl:Province Id="36" Name="Himenaeos vestibulum imperdiet" />
+                        </mdl:District.Province>
+                    </mdl:District>
+                </mdl:Building.District>
+                <mdl:Building.Province>
+                    <mdl:Province Id="55" Name="Malesuada sit lectus adipiscing purus" />
+                </mdl:Building.Province>
+                <mdl:Building.Ward>
+                    <mdl:Ward DistrictId="53" Id="78" Name="Porttitor dapibus">
+                        <mdl:Ward.District>
+                            <mdl:District Id="24" Name="Penatibus velit cubilia vestibulum cras" ProvinceId="24" />
+                        </mdl:Ward.District>
+                    </mdl:Ward>
+                </mdl:Building.Ward>
+            </mdl:Building>
+        </mku:Array>
+    </vmd:ApartmentsViewModel.Buildings>
+
+    <vmd:ApartmentsViewModel.Owners>
+        <mku:Array Type="{mku:Type mdl:Owner}">
+            <mdl:Owner Emails="Vel faucibus euismod" Id="75" Name="Magnis sed nunc amet feugiat"
+                       Telephones="Vitae parturient luctus class nam" />
+            <mdl:Owner Emails="Curae habitant dis" Id="13" Name="Tristique interdum"
+                       Telephones="Ante mattis inceptos tincidunt est" />
+            <mdl:Owner Emails="Gravida mauris" Id="76" Name="Leo nascetur mollis"
+                       Telephones="Ultricies hac donec venenatis lobortis" />
+            <mdl:Owner Emails="Iaculis vulputate montes" Id="32" Name="Placerat nostra phasellus consequat nec"
+                       Telephones="Curabitur pharetra etiam mus" />
+            <mdl:Owner Emails="Ornare platea convallis non lacinia" Id="15" Name="Eget sed"
+                       Telephones="Pulvinar per arcu laoreet diam" />
+            <mdl:Owner Emails="Sem dignissim" Id="22" Name="Enim sagittis vestibulum" Telephones="Elit fusce sit" />
+            <mdl:Owner Emails="Natoque senectus" Id="36" Name="Eros sociosqu"
+                       Telephones="Vestibulum posuere lorem erat potenti" />
+            <mdl:Owner Emails="Nibh suscipit vel elementum" Id="98" Name="Rutrum nisi" Telephones="Primis nam" />
+            <mdl:Owner Emails="Nisl morbi" Id="91" Name="Sapien adipiscing semper" Telephones="Sed dis" />
+            <mdl:Owner Emails="Pretium nulla torquent facilisis nunc" Id="86"
+                       Name="Fringilla rhoncus vehicula sociis proin" Telephones="Fermentum ultrices odio est" />
+        </mku:Array>
+    </vmd:ApartmentsViewModel.Owners>
+
+    <vmd:ApartmentsViewModel.SelectedOwner>
+        <mdl:Owner Emails="Vestibulum tempus tortor" Id="21" Name="Adipiscing fames"
+                   Telephones="Vestibulum nec penatibus dolor non" />
+    </vmd:ApartmentsViewModel.SelectedOwner>
+
+    <vmd:ApartmentsViewModel.SelectedItem>
+        <mdl:Apartment Area="125" AvailableFrom="04/30/2016" BedRoomCount="3"
+                       BuildingId="98" Commission="1 month/year" Code="A89245"
+                       HasFurniture="True" Id="85" Note="Very beautiful" OwnerId="15"
+                       Price="76.5" UpdatedOn="05/07/2016 10:01:44">
+            <mdl:Apartment.Building>
+                <mdl:Building Id="23" Number="Adipiscing varius bibendum" Name="Parturient nam ipsum"
+                              Street="Sit vestibulum felis vestibulum adipiscing">
+                    <mdl:Building.District>
+                        <mdl:District Id="83" Name="Quam sem" ProvinceId="93" />
+                    </mdl:Building.District>
+                    <mdl:Building.Province>
+                        <mdl:Province Id="20" Name="Porttitor aenean mauris parturient integer" />
+                    </mdl:Building.Province>
+                    <mdl:Building.Ward>
+                        <mdl:Ward DistrictId="61" Id="60" Name="Quis vel dictumst" />
+                    </mdl:Building.Ward>
+                </mdl:Building>
+            </mdl:Apartment.Building>
+            <mdl:Apartment.Owner>
+                <mdl:Owner Emails="Nunc aliquam aliquet faucibus nullam" Id="86"
+                           Name="Amet habitant adipiscing auctor sed" Telephones="Vestibulum aptent" />
+            </mdl:Apartment.Owner>
+        </mdl:Apartment>
+    </vmd:ApartmentsViewModel.SelectedItem>
+
+    <vmd:ApartmentsViewModel.SelectedBuilding>
+        <mdl:Building Id="56" Number="Orci pede" Name="Malesuada parturient" Street="Leo himenaeos imperdiet praesent">
+            <mdl:Building.District>
+                <mdl:District Id="59" Name="Hac parturient sodales taciti tellus" ProvinceId="33">
+                    <mdl:District.Province>
+                        <mdl:Province Id="13" Name="Habitasse augue" />
+                    </mdl:District.Province>
+                </mdl:District>
+            </mdl:Building.District>
+            <mdl:Building.Province>
+                <mdl:Province Id="22" Name="Volutpat hendrerit maecenas" />
+            </mdl:Building.Province>
+            <mdl:Building.Ward>
+                <mdl:Ward DistrictId="51" Id="45" Name="Viverra vestibulum adipiscing tempor">
+                    <mdl:Ward.District>
+                        <mdl:District Id="45" Name="Vestibulum mus accumsan" ProvinceId="47" />
+                    </mdl:Ward.District>
+                </mdl:Ward>
+            </mdl:Building.Ward>
+        </mdl:Building>
+    </vmd:ApartmentsViewModel.SelectedBuilding>
+</vmd:ApartmentsViewModel>

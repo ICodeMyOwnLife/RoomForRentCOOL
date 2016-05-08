@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.IO;
 using System.Xml.Serialization;
+using CB.Model.Serialization;
 
 
 namespace RoomForRentWindow
@@ -8,6 +9,9 @@ namespace RoomForRentWindow
     public class RoomForRentWindowConfig
     {
         #region Methods
+        public static AvailableTimeBrushMap GetAvailableTimeBrushMap()
+            => SerializationHelpers.Load<AvailableTimeBrushMap>(GetMapFile());
+
         public static AvailableTimeColorMap GetAvailableTimeColorMap()
         {
             using (var reader = new StreamReader(GetMapFile()))
@@ -21,9 +25,7 @@ namespace RoomForRentWindow
 
         #region Implementation
         private static string GetMapFile()
-        {
-            return ConfigurationManager.AppSettings["colorMapFile"];
-        }
+            => ConfigurationManager.AppSettings["colorMapFile"];
         #endregion
     }
 }

@@ -1,0 +1,62 @@
+﻿<RoomForRentViewModel:AddressesViewModel xmlns:RoomForRentViewModel="clr-namespace:RoomForRentViewModel;assembly=RoomForRentViewModel" xmlns:RoomForRentModels="clr-namespace:RoomForRentModels;assembly=RoomForRentModels" Progress="424.68" State="Imperdiet enim malesuada">
+	<RoomForRentViewModel:AddressesViewModel.DistrictsViewModel>
+		<RoomForRentViewModel:DistrictsViewModel CanEdit="True" Name="Donec curabitur integer" Progress="625.85" PluralName="Quisque etiam vestibulum phasellus" State="Duis accumsan fusce lorem aenean">
+			<RoomForRentViewModel:DistrictsViewModel.SelectedItem>
+				<RoomForRentModels:District Id="43" Name="Convallis praesent adipiscing" ProvinceId="88">
+					<RoomForRentModels:District.Province>
+						<RoomForRentModels:Province Id="32" Name="Consequat nam cras"/>
+					</RoomForRentModels:District.Province>
+				</RoomForRentModels:District>
+			</RoomForRentViewModel:DistrictsViewModel.SelectedItem>
+			<RoomForRentViewModel:DistrictsViewModel.SelectedProvince>
+				<RoomForRentModels:Province Id="34" Name="Aliquam class maecenas curae"/>
+			</RoomForRentViewModel:DistrictsViewModel.SelectedProvince>
+		</RoomForRentViewModel:DistrictsViewModel>
+	</RoomForRentViewModel:AddressesViewModel.DistrictsViewModel>
+	<RoomForRentViewModel:AddressesViewModel.ProvincesViewModel>
+		<RoomForRentViewModel:ProvincesViewModel CanEdit="False" Name="Mauris morbi nullam dignissim" Progress="420.11" PluralName="Sed aptent parturient dis" State="Vestibulum elementum vestibulum adipiscing facilisis">
+			<RoomForRentViewModel:ProvincesViewModel.SelectedItem>
+				<RoomForRentModels:Province Id="11" Name="Nulla est nunc"/>
+			</RoomForRentViewModel:ProvincesViewModel.SelectedItem>
+		</RoomForRentViewModel:ProvincesViewModel>
+	</RoomForRentViewModel:AddressesViewModel.ProvincesViewModel>
+	<RoomForRentViewModel:AddressesViewModel.SelectedProvince>
+		<RoomForRentModels:Province Id="63" Name="Blandit vestibulum"/>
+	</RoomForRentViewModel:AddressesViewModel.SelectedProvince>
+	<RoomForRentViewModel:AddressesViewModel.SelectedWard>
+		<RoomForRentModels:Ward DistrictId="45" Id="89" Name="Proin vestibulum conubia dictumst">
+			<RoomForRentModels:Ward.District>
+				<RoomForRentModels:District Id="91" Name="Ante commodo fringilla arcu habitasse" ProvinceId="54">
+					<RoomForRentModels:District.Province>
+						<RoomForRentModels:Province Id="78" Name="Amet non"/>
+					</RoomForRentModels:District.Province>
+				</RoomForRentModels:District>
+			</RoomForRentModels:Ward.District>
+		</RoomForRentModels:Ward>
+	</RoomForRentViewModel:AddressesViewModel.SelectedWard>
+	<RoomForRentViewModel:AddressesViewModel.SelectedDistrict>
+		<RoomForRentModels:District Id="63" Name="Mus aliquam fermentum aliquet nec" ProvinceId="41">
+			<RoomForRentModels:District.Province>
+				<RoomForRentModels:Province Id="64" Name="Hac leo parturient bibendum vivamus"/>
+			</RoomForRentModels:District.Province>
+		</RoomForRentModels:District>
+	</RoomForRentViewModel:AddressesViewModel.SelectedDistrict>
+	<RoomForRentViewModel:AddressesViewModel.WardsViewModel>
+		<RoomForRentViewModel:WardsViewModel CanEdit="True" Name="Auctor adipiscing hendrerit eget" Progress="693.14" PluralName="Sed dapibus congue" State="Sem vestibulum vestibulum">
+			<RoomForRentViewModel:WardsViewModel.SelectedItem>
+				<RoomForRentModels:Ward DistrictId="94" Id="48" Name="Himenaeos euismod elit">
+					<RoomForRentModels:Ward.District>
+						<RoomForRentModels:District Id="35" Name="Egestas parturient cursus" ProvinceId="50"/>
+					</RoomForRentModels:Ward.District>
+				</RoomForRentModels:Ward>
+			</RoomForRentViewModel:WardsViewModel.SelectedItem>
+			<RoomForRentViewModel:WardsViewModel.SelectedDistrict>
+				<RoomForRentModels:District Id="16" Name="Cubilia per" ProvinceId="94">
+					<RoomForRentModels:District.Province>
+						<RoomForRentModels:Province Id="14" Name="Diam eleifend augue facilisi faucibus"/>
+					</RoomForRentModels:District.Province>
+				</RoomForRentModels:District>
+			</RoomForRentViewModel:WardsViewModel.SelectedDistrict>
+		</RoomForRentViewModel:WardsViewModel>
+	</RoomForRentViewModel:AddressesViewModel.WardsViewModel>
+</RoomForRentViewModel:AddressesViewModel>

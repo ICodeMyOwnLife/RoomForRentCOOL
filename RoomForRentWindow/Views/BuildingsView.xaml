@@ -17,7 +17,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingNumberCellTemplate" DataType="mdl:Building">
-            <TextBlock Text="{Binding Number}" />
+            <TextBlock Text="{Binding Number}" Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingStreetCellTemplate" DataType="mdl:Building">
@@ -25,11 +25,11 @@
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingWardCellTemplate" DataType="mdl:Building">
-            <TextBlock Text="{Binding Ward.Name}" />
+            <TextBlock Text="{Binding Ward.Name}" Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingDistrictCellTemplate" DataType="mdl:Building">
-            <TextBlock Text="{Binding District.Name}" />
+            <TextBlock Text="{Binding District.Name}" Style="{StaticResource TextBlock.CenterAlign}" />
         </DataTemplate>
 
         <DataTemplate x:Key="BuildingProvinceCellTemplate" DataType="mdl:Building">
@@ -44,26 +44,35 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="0" AutoGenerateColumns="False" HorizontalContentAlignment="Stretch"
-                      ItemsSource="{Binding Items}"
+            <DataGrid Grid.Row="0" AutoGenerateColumns="False"
+                      ItemsSource="{Binding ItemsView, Mode=OneWay}"
                       SelectedItem="{Binding SelectedItem}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Name" Width="2*" SortMemberPath="Name"
-                                            CellTemplate="{StaticResource BuildingNameCellTemplate}" />
-                    <DataGridTemplateColumn Header="Number" Width="60" SortMemberPath="Number"
-                                            CellTemplate="{StaticResource BuildingNumberCellTemplate}" />
-                    <DataGridTemplateColumn Header="Street" Width="3*" SortMemberPath="Street"
+                    <DataGridTemplateColumn Header="Name" SortMemberPath="Name"
+                                            CellTemplate="{StaticResource BuildingNameCellTemplate}"/>
+                    
+                    <DataGridTemplateColumn Header="Number" SortMemberPath="Number"
+                                            CellTemplate="{StaticResource BuildingNumberCellTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}"/>
+                    
+                    <DataGridTemplateColumn Header="Street" SortMemberPath="Street"
                                             CellTemplate="{StaticResource BuildingStreetCellTemplate}" />
-                    <DataGridTemplateColumn Header="Ward" Width="1.5*" SortMemberPath="Ward.Name"
-                                            CellTemplate="{StaticResource BuildingWardCellTemplate}" />
-                    <DataGridTemplateColumn Header="District" Width="2.5*" SortMemberPath="District.Name"
-                                            CellTemplate="{StaticResource BuildingDistrictCellTemplate}" />
-                    <DataGridTemplateColumn Header="Province" Width="3.5*" SortMemberPath="Province.Name"
+                    
+                    <DataGridTemplateColumn Header="Ward" SortMemberPath="Ward.Name"
+                                            CellTemplate="{StaticResource BuildingWardCellTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}"/>
+                    
+                    <DataGridTemplateColumn Header="District" SortMemberPath="District.Name"
+                                            CellTemplate="{StaticResource BuildingDistrictCellTemplate}"
+                                            HeaderStyle="{StaticResource DataGridColumnHeader.CenterAlign}"/>
+                    
+                    <DataGridTemplateColumn Header="Province" SortMemberPath="Province.Name"
                                             CellTemplate="{StaticResource BuildingProvinceCellTemplate}" />
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Grid Grid.Row="1" DataContext="{Binding Path=SelectedItem}">
+            <Grid Grid.Row="1" DataContext="{Binding Path=SelectedItem}"
+                  IsEnabled="{Binding Source={StaticResource ViewModel}, Path=CanEdit}">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />

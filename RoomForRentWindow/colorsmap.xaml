@@ -1,0 +1,58 @@
+﻿<local:AvailableTimeBrushMap xmlns:local="clr-namespace:RoomForRentWindow;assembly=RoomForRentWindow"
+                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <local:AvailableTimeBrushMap.DefaultBrush>
+        <local:DayBrush>
+            <local:DayBrush.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#66B3B3B3" Offset="0" />
+                    <GradientStop Color="#88B3B3B3" Offset="1" />
+                </LinearGradientBrush>
+            </local:DayBrush.Background>
+        </local:DayBrush>
+    </local:AvailableTimeBrushMap.DefaultBrush>
+
+    <local:DayBrush Days="0">
+        <local:DayBrush.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#66FFB3B3" Offset="0" />
+                <GradientStop Color="#88FFB3B3" Offset="1" />
+            </LinearGradientBrush>
+        </local:DayBrush.Background>
+    </local:DayBrush>
+
+    <local:DayBrush Days="90">
+        <local:DayBrush.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#66FFFFB3" Offset="0" />
+                <GradientStop Color="#88FFFFB3" Offset="1" />
+            </LinearGradientBrush>
+        </local:DayBrush.Background>
+    </local:DayBrush>
+
+    <local:DayBrush Days="180">
+        <local:DayBrush.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#66B3FFB3" Offset="0" />
+                <GradientStop Color="#88B3FFB3" Offset="1" />
+            </LinearGradientBrush>
+        </local:DayBrush.Background>
+    </local:DayBrush>
+
+    <local:DayBrush Days="270">
+        <local:DayBrush.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#66B3FFFF" Offset="0" />
+                <GradientStop Color="#88B3FFFF" Offset="1" />
+            </LinearGradientBrush>
+        </local:DayBrush.Background>
+    </local:DayBrush>
+
+    <local:DayBrush Days="360">
+        <local:DayBrush.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#66B3B3FF" Offset="0" />
+                <GradientStop Color="#88B3B3FF" Offset="1" />
+            </LinearGradientBrush>
+        </local:DayBrush.Background>
+    </local:DayBrush>
+</local:AvailableTimeBrushMap>
